@@ -96,6 +96,7 @@
 .header-v6 .navbar {
 	border: none;
 	margin-bottom: 0;
+	background: #f27549;
 }
 
 /*Navbar Brand*/
@@ -133,7 +134,7 @@
 /*Media Queries*/
 @media (max-width: 991px) {
 	.header-v6 .navbar-brand {
-		padding-top: 20px;
+		padding-top: 15px;
 	}
 
 	.header-v6 .navbar-brand img.shrink-logo {

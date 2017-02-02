@@ -27,10 +27,11 @@
         <!-- CSS Global Compulsory -->
         {!! Html::style('frontend/plugins/bootstrap/css/bootstrap.min.css') !!}
         {!! Html::style('frontend/css/app.css?'.time()) !!}
+        {!! Html::style('frontend/css/blocks.css?'.time()) !!}
         {!! Html::style('frontend/css/style.css?'.time()) !!}
 
         <!-- CSS Header and Footer -->
-        {!! Html::style('frontend/css/headers/header-v6.css') !!}
+        {!! Html::style('frontend/css/headers/header-v6.css?'.time()) !!}
         {!! Html::style('frontend/css/footers/footer-v1.css') !!}
 
         <!-- CSS Implementing Plugins -->
@@ -87,17 +88,12 @@
                         <div class="collapse navbar-collapse navbar-responsive-collapse">
                             <div class="menu-container">
                                 <ul class="nav navbar-nav">
-                                    <li ng-class="{active:isActive('/todos')}">
-                                        <a href="/todos">
-                                            List Todos
+                                    <li>
+                                        <a href="javascript:void(0);"  id="sign_in">
+                                            How It Works
                                         </a>
                                     </li>
                                     <!-- Home -->
-                                    <li class="dropdown">
-                                        <a href="javascript:void(0);">
-                                            Sign In
-                                        </a>
-                                    </li>
                                     @if (Auth::check())
                                     <li>
                                         <a href="{!! URL::to('/logout') !!}" onclick="event.preventDefault();
@@ -106,6 +102,28 @@
                                         </a>
                                     </li>
                                     @else
+                                    <li>
+                                        <a href="javascript:void(0);"  id="sign_in">
+                                            Sign In
+                                        </a>
+                                        <div class="sign-in-wrap">
+                                            <form class="form-horizontal" id="sign_in_form" role="form" method="POST" action="{{ url('/login') }}">
+                                                {{ csrf_field() }}
+                                                <div class="row">
+                                                    <div class="col-md-5" style="padding-right: 5px;">
+                                                        <input type="text" class="form-control rounded" id="username" name="username" placeholder="Username">
+                                                    </div>
+                                                    <div class="col-md-5" style="padding-left: 5px; padding-right: 5px;">
+                                                        <input type="password" class="form-control rounded" id="password" name="password" placeholder="Password">
+                                                    </div>
+                                                    <div class="col-md-2" style="padding-left: 5px;">
+                                                        <button type="submit" class="btn btn-primary rounded">Sign in</button>
+                                                    </div>
+                                                </div>
+                                                <p><span>Dont have have an account yet?</span> <a href="{!! URL::to('/register') !!}">Sign Up here for free!</a></p>
+                                            </form>
+                                        </div>
+                                    </li>
                                     <li class="dropdown">
                                         <a href="{!! URL::to('/register') !!}" class="button">
                                             <button class="btn btn-warning rounded">Sign Up</button>

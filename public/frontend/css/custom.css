@@ -20,3 +20,31 @@
     background-color: #c7422d;
     border-color: #db4d67;
 }
+.sign-in-wrap {
+    display: none;
+    position: absolute;
+    right: -120px;
+    top: 95px;
+    padding: 10px;
+    background: #f27549;
+}
+.sign-in-wrap  #sign_in_form {
+    position: relative;
+    min-width: 500px;
+}
+#sign_in_form p {
+    font-weight: 500;
+    margin-top: 5px;
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+#sign_in_form p a {
+    color: #eb4d34;
+}
+.text-alert {
+    color: #a94442;
+}
+
+.home .profile-body {
+    background: #e1e1e1;
+}

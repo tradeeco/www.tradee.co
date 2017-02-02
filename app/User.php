@@ -18,17 +18,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public static function authenticate($username, $password)
-    {
-        $user = User::where('username', $username)->first();
-        if (!Hash::check($password, $user->password)) {
-            return false;
-        }
-        return $user;
-    }
+//    public static function authenticate($username, $password)
+//    {
+//        $user = User::where('username', $username)->first();
+//        if (!Hash::check($password, $user->password)) {
+//            return false;
+//        }
+//        return $user;
+//    }
 
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = Hash::make($password);
-    }
+//    public function setPasswordAttribute($password)
+//    {
+//        $this->attributes['password'] = Hash::make($password);
+//    }
 }

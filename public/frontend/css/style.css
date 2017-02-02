@@ -8,7 +8,7 @@
 
 /*Import Global Compulsory CSS Files*/
 /*@import url(app.css);*/
-@import url(blocks.css);
+/*@import url(blocks.css);*/
 
 /*Import CSS Plugins*/
 @import url(plugins/style-switcher.css);
@@ -19,10 +19,11 @@
 
 body {
  color: #333;
- font-size: 13px;
+ font-size: 14px;
  line-height: 1.6;
  font-family: "Quicksand", Arial, sans-serif;
- font-weight: 400;
+ font-weight: 500;
+ letter-spacing: 1px;
 }
 
 body.header-fixed-space {
@@ -43,7 +44,7 @@ p,
 li,
 li a,
 label {
- color: #555;
+ color: #363636;
 }
 
 a {

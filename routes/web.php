@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Support\Facades\Auth;
+use App\S_R_relation;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +29,12 @@ Route::get('/partials/{category}/{action}/{id}', function ($category, $action = 
     return view(join('.', ['partials', $category, $action]));
 });
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
 // Catch all undefined routes. Always gotta stay at the bottom since order of routes matters.
-Route::any('{undefinedRoute}', function ($undefinedRoute) {
-    return view('layout');
-})->where('undefinedRoute', '([A-z\d-\/_.]+)?');
+//Route::any('{undefinedRoute}', function ($undefinedRoute) {
+//    return view('layout');
+//})->where('undefinedRoute', '([A-z\d-\/_.]+)?');
+

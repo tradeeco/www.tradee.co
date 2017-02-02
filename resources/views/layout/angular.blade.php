@@ -26,15 +26,14 @@
 
         <!-- CSS Global Compulsory -->
         {!! Html::style('frontend/plugins/bootstrap/css/bootstrap.min.css') !!}
-        {!! Html::style('frontend/css/app.css?'.time()) !!}
-        {!! Html::style('frontend/css/style.css?'.time()) !!}
+        {!! Html::style('frontend/css/style.css') !!}
 
         <!-- CSS Header and Footer -->
         {!! Html::style('frontend/css/headers/header-v6.css') !!}
         {!! Html::style('frontend/css/footers/footer-v1.css') !!}
 
         <!-- CSS Implementing Plugins -->
-            {!! Html::style('frontend/plugins/animate.css') !!}
+            {!! Html::style('frontend/plugins/animate.css') !!}s
         {!! Html::style('frontend/plugins/line-icons/line-icons.css') !!}
         {!! Html::style('frontend/plugins/font-awesome/css/font-awesome.min.css') !!}
         {!! Html::style('frontend/plugins/revolution-slider/rs-plugin/css/settings.css') !!}
@@ -44,13 +43,15 @@
         {!! Html::style('frontend/css/theme-colors/default.css') !!}
         {!! Html::style('frontend/css/theme-skins/dark.css') !!}
 
-        @yield('custom-styles')
-
         <!-- CSS Customization -->
-        {!! Html::style('frontend/css/custom.css?'.time()) !!}
+        {!! Html::style('frontend/css/custom.css') !!}
 
+        <!-- Angular -->
+        {!! Html::style(elixir('css/all.css')) !!}
+        {!! Html::style(elixir('css/app.css')) !!}
     @show
 
+    @yield('custom-styles')
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -98,20 +99,11 @@
                                             Sign In
                                         </a>
                                     </li>
-                                    @if (Auth::check())
-                                    <li>
-                                        <a href="{!! URL::to('/logout') !!}" onclick="event.preventDefault();
-                                                  document.getElementById('logout-form').submit();" class="button">
-                                            <button class="btn btn-warning rounded">Sign Out</button>
-                                        </a>
-                                    </li>
-                                    @else
                                     <li class="dropdown">
                                         <a href="{!! URL::to('/register') !!}" class="button">
                                             <button class="btn btn-warning rounded">Sign Up</button>
                                         </a>
                                     </li>
-                                    @endif
                                     <!-- End Home -->
                                 </ul>
                             </div>
@@ -145,7 +137,7 @@
         {!! Html::script('frontend/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js') !!}
 
         <!-- JS Customization -->
-        {!! Html::script('frontend/js/custom.js?'.time()) !!}
+        {!! Html::script('frontend/js/custom.js') !!}
 
         <!-- JS Page Level -->
         {!! Html::script('frontend/js/app.js') !!}
@@ -160,8 +152,8 @@
                 RevolutionSlider.initRSfullScreenOffset();
             });
         </script>
-        {!! Form::open(['url' => '/logout', 'id' => 'logout-form', 'style' => 'display: none;']) !!}
-        {!! Form::close() !!}
+        {!! Html::script(elixir('js/all.js')) !!}
+
     @show
     @yield('custom-scripts')
 </html>

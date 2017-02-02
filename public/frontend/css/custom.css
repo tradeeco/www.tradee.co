@@ -1,1 +1,22 @@
 /* Add here all your css styles (customizations) */
+
+.m-t-94 {
+    margin-top: 94px;
+}
+.vertical-divider{
+    position:absolute;
+    left: 45%;
+    top: 20%;
+    bottom: 20%;
+    border-left: 3px solid #d7d7d7;
+}
+.btn-primary {
+    background: #eb4d34;
+    color: #fff;
+    border-color: #db4d67;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #c7422d;
+    border-color: #db4d67;
+}

@@ -26,9 +26,18 @@ hr.hr-lg {
 
 /*Headings
 ------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+    color: #f27549;
+    margin-top: 5px;
+    text-shadow: none;
+    font-weight: normal;
+    font-family: "Quicksand", Arial, sans-serif;
+}
+
 h1 {
-    font-size: 28px;
-    line-height: 35px;
+    font-size: 38px;
+    line-height: 45px;
+    font-weight: 500;
 }
 
 h2 {
@@ -57,13 +66,7 @@ h6 {
     font-family: "Quicksand", Arial, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: #555;
-    margin-top: 5px;
-    text-shadow: none;
-    font-weight: normal;
-    font-family: "Quicksand", Arial, sans-serif;
-}
+
 
 h1 i, h2 i, h3 i, h4 i, h5 i, h6 i {
     margin-right: 5px;

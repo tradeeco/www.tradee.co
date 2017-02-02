@@ -2,7 +2,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', '
   function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: '/partials/index',
+        templateUrl: '/home',
         controller: 'MainController'
       })
       .when('/:category/:action?/:id?', {

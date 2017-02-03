@@ -107,7 +107,7 @@
                                             Sign In
                                         </a>
                                         <div class="sign-in-wrap">
-                                            <form class="form-horizontal" id="sign_in_form" role="form" method="POST" action="{{ url('/login') }}">
+                                            <form class="form-horizontal" id="sign_in_form" role="form" method="POST" action="{{ url('/api/login') }}">
                                                 {{ csrf_field() }}
                                                 <div class="row">
                                                     <div class="col-md-5" style="padding-right: 5px;">

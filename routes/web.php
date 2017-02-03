@@ -33,6 +33,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::post('/api/login', 'auth\LoginController@ajaxLogin');
+
 // Catch all undefined routes. Always gotta stay at the bottom since order of routes matters.
 //Route::any('{undefinedRoute}', function ($undefinedRoute) {
 //    return view('layout');

@@ -52,7 +52,7 @@
                                         <label>Add Photos</label>
                                     </div>
                                     <div class="form-group text-right">
-                                        <button type="button" class="btn btn-primary rounded">Post</button>
+                                        <button type="button" class="btn btn-primary rounded btn-lg">Post</button>
                                     </div>
 
                                 </form>

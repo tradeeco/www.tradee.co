@@ -18,4 +18,3 @@ use Illuminate\Http\Request;
 //
 //Route::resource('/todo', 'TodoController');
 //Route::resource('/user', 'UserController');
-

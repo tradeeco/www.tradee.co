@@ -939,7 +939,7 @@
 	}
 
 	.header-fixed .header-v6.header-fixed-shrink .navbar {
-		background: #fff;
+		background: #f27549;
 	}
 
 	/*Navbar*/
@@ -1424,6 +1424,12 @@
 	}
 
 	/*Navbar*/
+	.header-fixed .header-v6.header-classic-white.header-fixed-shrink .navbar-brand a {
+		font-size: 32px;
+	}
+	.header-fixed .header-v6.header-classic-white.header-fixed-shrink .navbar-nav a {
+		font-size: 20px;
+	}
 	.header-fixed .header-v6.header-classic-white .navbar-nav > li > a {
 		color: #fff;
 		font-weight: 500;
@@ -1441,6 +1447,18 @@
 		text-transform: uppercase;
 		letter-spacing: 2px;
 	}
+	.header-fixed .header-v6.header-classic-white.header-fixed-shrink .navbar-nav > li > a {
+		padding: 20px;
+	}
+	.header-fixed .header-v6.header-classic-white.header-fixed-shrink .navbar-nav > li > a.button {
+		padding: 10px;
+	}
+
+	.header-fixed .header-v6.header-classic-white.header-fixed-shrink .navbar-nav > li > a.button button {
+		padding: 10px 12px;
+		font-size: 20px;
+	}
+
 	.header-fixed .header-v6.header-classic-white .navbar-nav > li > a.button button:hover {
 		background: #c7422d;
 	}

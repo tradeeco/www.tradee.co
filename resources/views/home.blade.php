@@ -15,35 +15,35 @@
                         </ul>
                         <div class="tab-content">
                             <div id="post_job" class="panel-body tab-pane fade active in">
-                                <form >
-                                    <div class="form-group">
-                                        <label>Job Title:</label>
-                                        <input type="text" class="form-control input-lg rounded" name="">
+                                {!! Form::open(['url' => route('jobs.store'), 'class' => 'create-job', 'data-parsley-validate', 'id' => 'create_job']) !!}
+                                <div class="form-group">
+                                    {{ Form::label('title', 'Job Title') }}
+                                    {{ Form::text('title', null, array('class' => 'input-lg form-control rounded', 'id' => 'title', 'required' => 'true')) }}
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                    <div class="col-md-4">
+                                        {{ Form::label('category', 'Category') }}
+                                        <select class="form-control rounded input-lg">
+                                            <option>Category</option>
+                                            <option>Loerm Posum</option>
+                                            <option>Loerm Posum</option>
+                                            <option>Loerm Posum</option>
+                                            <option>Loerm Posum</option>
+                                        </select>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                        <div class="col-md-4">
-                                            <label>Category</label>
-                                            <select class="form-control rounded input-lg">
-                                                <option>Category</option>
-                                                <option>Loerm Posum</option>
-                                                <option>Loerm Posum</option>
-                                                <option>Loerm Posum</option>
-                                                <option>Loerm Posum</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label>Area / Suburb</label>
-                                            <select class="form-control rounded input-lg">
-                                                <option>Area / Suburb</option>
-                                                <option>Loerm Posum</option>
-                                                <option>Loerm Posum</option>
-                                                <option>Loerm Posum</option>
-                                                <option>Loerm Posum</option>
-                                            </select>
-                                        </div>
-                                        </div>
+                                    <div class="col-md-4">
+                                        <label>Area / Suburb</label>
+                                        <select class="form-control rounded input-lg">
+                                            <option>Area / Suburb</option>
+                                            <option>Loerm Posum</option>
+                                            <option>Loerm Posum</option>
+                                            <option>Loerm Posum</option>
+                                            <option>Loerm Posum</option>
+                                        </select>
                                     </div>
+                                    </div>
+                                </div>
                                     <div class="form-group">
                                         <label>Short Description:</label>
                                         <textarea type="text" class="form-control input-lg rounded" name="" ></textarea>

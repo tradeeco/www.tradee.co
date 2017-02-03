@@ -14,6 +14,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        app('view')->composer('layout.admin', function ($view) {
+            $action = app('request')->route()->getAction();
+            if (array_key_exists('controller', $action)) {
+                $controller = class_basename($action['controller']);
+                list($controller, $action) = explode('@', $controller);
+            } else $controller = 'unknown';
+
+            $view->with(compact('controller', 'action'));
+        });
     }
 
     /**
@@ -24,5 +33,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        if ($this->app->environment() == 'local') {
+            $this->app->register('Hesto\MultiAuth\MultiAuthServiceProvider');
+        }
     }
 }

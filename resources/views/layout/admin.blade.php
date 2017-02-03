@@ -1,334 +1,112 @@
-@extends('layout.main')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Meta, title, CSS, favicons, etc. -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="shortcut icon" href="/favicon.png">
+
+	<!-- CSRF Token -->
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+
+	@yield('meta-common')
+	@yield('meta-custom')
+	<title>
+		{{ config('app.name', 'Trade Admin') }}: Admin
+	</title>
+
+@yield('head-scripts')
+
+{{--{!! Html::style('/assets/metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css') !!}--}}
 
 @section('styles')
-	{!! Html::style('//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all') !!}
-	{!! Html::style('/assets/metronic/assets/global/plugins/select2/select2.css') !!}
+	{!! Html::style('http://fonts.googleapis.com/css?family=Quicksand:400,300,500,700&amp;subset=cyrillic,latin') !!}
 
-	{!! Html::style('/assets/metronic/assets/admin/layout/css/layout.css') !!}
-	{!! Html::style('/assets/metronic/assets/admin/layout/css/themes/blue.css') !!}
-	{!! Html::style('/assets/metronic/assets/admin/layout/css/custom.css') !!}
-    {!! Html::style('/assets/css/style_bootstrap.css') !!}
+	{!! Html::style('backend/css/bootstrap.min.css') !!}
+	{!! Html::style('backend/font-awesome/css/font-awesome.css?'.time()) !!}
 
-    {!! Html::style('/assets/css/style_bootstrap.css') !!}
-    {!! Html::style('/assets/css/style_common.css') !!}
 
-    {!! Html::style('/assets/css/style_admin.css') !!}
-    {!! Html::style('/assets/js/typehead/typeaheadjs.css') !!}
-    @yield('custom_styles')
-@stop
+	@yield('custom-styles')
 
-@section('header')
-    <header class="header">
-		<div class="page-header navbar navbar-fixed-top">
-			<!-- BEGIN HEADER INNER -->
-			<div class="page-header-inner">
-				<!-- BEGIN LOGO -->
-				<div class="page-logo" style="padding-top: 10px;">
-					<a href="{!! URL::route('admin.dashboard') !!}">
-					    <span class="admin-logo-title">{!! SITE_NAME !!}</span>
-					</a>
-				</div>
-				<!-- END LOGO -->
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-				<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-				</a>
-				<!-- END RESPONSIVE MENU TOGGLER -->
-				<!-- BEGIN TOP NAVIGATION MENU -->
-				<div class="top-menu">
-				    <?php if (Session::has('admin_id')) {?>
-		    			<ul class="nav navbar-nav pull-right">
-		    				<li class="dropdown dropdown-quick-sidebar-toggler">
-		    					<a href="{!! URL::route('admin.auth.doLogout') !!}" class="dropdown-toggle">
-		    					    <i class="icon-logout"></i> Logout
-		    					</a>
-		    				</li>
-		    			</ul>
-					<?php }?>
-				</div>
-				<!-- END TOP NAVIGATION MENU -->
-			</div>
-			<!-- END HEADER INNER -->
-		</div>
+	{!! Html::style('backend/css/animate.css?'.time()) !!}
+	{!! Html::style('backend/css/style.css?'.time()) !!}
 
-		<div class="clearfix"></div>
+	{!! Html::style('frontend/css/custom.css?'.time()) !!}
+@show
 
-    </header>
-@stop
 
-@section('body')
-    <div class="page-container">
-
-        <?php if (!isset($pageNo)) { $pageNo = 0; } ?>
-		<div class="page-sidebar-wrapper">
-			<div class="page-sidebar navbar-collapse collapse">
-				<ul class="page-sidebar-menu" data-auto-scroll="true" data-slide-speed="200">
-					<li class="sidebar-toggler-wrapper">
-						<div class="sidebar-toggler"></div>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	{!! Html::style('//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js') !!}
+	{!! Html::style('//oss.maxcdn.com/respond/1.4.2/respond.min.js') !!}
+	<![endif]-->
+</head>
+<body class="{{ isset($controller) && ($controller == 'LoginController') ? 'gray-bg' : '' }}">
+<div id="wrapper">
+	@section('left-menu')
+	@if (!Auth::guest())
+		<nav class="navbar-default navbar-static-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav metismenu" id="side-menu">
+					<li class="nav-header">
+						<div class="dropdown profile-element"> <span>
+                        <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                         </span>
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
+                         </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+							<ul class="dropdown-menu animated fadeInRight m-t-xs">
+								<li><a href="profile.html">Profile</a></li>
+								<li><a href="contacts.html">Contacts</a></li>
+								<li><a href="mailbox.html">Mailbox</a></li>
+								<li class="divider"></li>
+								<li><a href="login.html">Logout</a></li>
+							</ul>
+						</div>
+						<div class="logo-element">
+							TRA
+						</div>
+					</li>
+					<li class="active">
+						<a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li class="active"><a href="index.html">Dashboard v.1</a></li>
+							<li><a href="dashboard_2.html">Dashboard v.2</a></li>
+							<li><a href="dashboard_3.html">Dashboard v.3</a></li>
+							<li><a href="dashboard_4_1.html">Dashboard v.4</a></li>
+							<li><a href="dashboard_5.html">Dashboard v.5 </a></li>
+						</ul>
 					</li>
 
-					<li class="start <?php echo ($pageNo == 0) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.dashboard') !!}">
-						    <i class="icon-bar-chart"></i>
-						    <span class="title">Dashboard</span>
-						</a>
+					<li class="special_link">
+						<a href="package.html"><i class="fa fa-database"></i> <span class="nav-label">Package</span></a>
 					</li>
-
-					<li class="<?php echo ($pageNo == 23) ? "active" : "";?>">
-                        <a href="{!! URL::route('admin.job.news') !!}">
-                            <i class="fa fa-rocket"></i>
-                            <span class="title">Today's New Jobs(Activated)</span>
-                        </a>
-                    </li>
-
-					<li class="<?php echo ($pageNo == 26) ? "active" : "";?>">
-                        <a href="{!! URL::route('admin.job.newsPending') !!}">
-                            <i class="fa fa-rocket"></i>
-                            <span class="title">Today's New Jobs(Pending)</span>
-                        </a>
-                    </li>
-
-					<li class="<?php echo ($pageNo == 25) ? "active" : "";?>">
-                        <a href="{!! URL::route('admin.ads') !!}">
-                            <i class="fa fa-adn"></i>
-                            <span class="title">ADS Management</span>
-                        </a>
-                    </li>
-
-
-					<li class="<?php echo ($pageNo == 21) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.user') !!}">
-						    <i class="icon-users"></i>
-						    <span class="title">User Management</span>
-						</a>
-					</li>
-
-                    <li class="<?php echo ($pageNo == 22) ? "active" : "";?>">
-                        <a href="{!! URL::route('admin.user.collected') !!}">
-                            <i class="fa fa-child"></i>
-                            <span class="title">Collected User</span>
-                        </a>
-                    </li>
-
-
-					<li class="<?php echo ($pageNo == 10) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.company') !!}">
-						    <i class="fa fa-building"></i>
-						    <span class="title">Company Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 11) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.job') !!}">
-						    <i class="icon-diamond"></i>
-						    <span class="title">Job Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 6) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.category') !!}">
-						    <i class="fa fa-tag"></i>
-						    <span class="title">Job Category Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 27) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.jobTitle') !!}">
-						    <i class="fa fa-tag"></i>
-						    <span class="title">Job Title Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 18) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.compCategory') !!}">
-						    <i class="fa fa-tag"></i>
-						    <span class="title">Company Category Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 1) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.country') !!}">
-						    <i class="fa fa-globe"></i>
-						    <span class="title">Country Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 28) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.region') !!}">
-						    <i class="fa fa-globe"></i>
-						    <span class="title">Region Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 2) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.city') !!}">
-						    <i class="fa fa-map-marker"></i>
-						    <span class="title">City Management</span>
-						</a>
-					</li>
-
-					<li class="{!! ($pageNo == 14) ? 'active' : '' !!}">
-						<a href="{!! URL::route('admin.email') !!}">
-						    <i class="fa fa-envelope-o"></i>
-						    <span class="title">Email Management</span>
-						</a>
-					</li>
-
-					<li class="{!! ($pageNo == 15) ? 'active' : '' !!}">
-						<a href="{!! URL::route('admin.setting') !!}">
-						    <i class="fa fa-gear"></i>
-						    <span class="title">Setting Management</span>
-						</a>
-					</li>
-
-					<li class="{!! ($pageNo == 17) ? 'active' : '' !!}">
-						<a href="{!! URL::route('admin.label') !!}">
-						    <i class="fa fa-bookmark"></i>
-						    <span class="title">Label Management</span>
-						</a>
-					</li>
-
-					<li class="{!! ($pageNo == 16) ? 'active' : '' !!}">
-						<a href="{!! URL::route('admin.group') !!}">
-						    <i class="fa fa-sitemap"></i>
-						    <span class="title">Group Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 4) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.teamsize') !!}">
-						    <i class="fa fa-users"></i>
-						    <span class="title">Teamsize Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 5) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.language') !!}">
-						    <i class="fa fa-language"></i>
-						    <span class="title">Language Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 7) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.level') !!}">
-						    <i class="fa fa-signal"></i>
-						    <span class="title">Level Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 8) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.type') !!}">
-						    <i class="fa fa-star"></i>
-						    <span class="title">Type Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 9) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.presence') !!}">
-						    <i class="fa fa-tags"></i>
-						    <span class="title">Presence Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 12) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.pattern') !!}">
-						    <i class="fa fa-rocket"></i>
-						    <span class="title">Pattern Management</span>
-						</a>
-					</li>
-
-                    <li class="<?php echo ($pageNo == 13) ? "active" : "";?>">
-                        <a href="{!! URL::route('admin.skill') !!}">
-                            <i class="fa fa-cubes"></i>
-                            <span class="title">Skill Management</span>
-                        </a>
-                    </li>
-
-					<li class="<?php echo ($pageNo == 29) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.coverPhoto') !!}">
-						    <i class="fa fa-suitcase"></i>
-						    <span class="title">Cover Photo Management</span>
-						</a>
-					</li>
-
-					<li class="<?php echo ($pageNo == 30) ? "active" : "";?>">
-						<a href="{!! URL::route('admin.slider') !!}">
-						    <i class="fa fa-picture-o"></i>
-						    <span class="title">Slider Management</span>
-						</a>
-					</li>
-
-					<li class="{!! ($pageNo == 31) ? "active" : "" !!}">
-						<a href="{!! URL::route('admin.rss') !!}">
-						    <i class="fa fa-rss"></i>
-						    <span class="title">RSS Feeds Management</span>
-						</a>
-					</li>
-
-					<li class="{!! ($pageNo == 32) ? "active" : "" !!}">
-						<a href="{!! URL::route('admin.crawling') !!}">
-						    <i class="fa fa-star-o"></i>
-						    <span class="title">Crawling Site Management</span>
-						</a>
-					</li>
-
-					<li class="{!! ($pageNo == 34) ? "active" : "" !!}">
-						<a href="{!! URL::route('admin.crawlingSkip') !!}">
-						    <i class="fa fa-star-o"></i>
-						    <span class="title">Crawling Skip Management</span>
-						</a>
-					</li>
-
-					<li class="{!! ($pageNo == 33) ? "active" : "" !!}">
-						<a href="{!! URL::route('admin.saler') !!}">
-						    <i class="fa fa-user"></i>
-						    <span class="title">Saler Management</span>
-						</a>
-					</li>
-
 				</ul>
-				<!-- END SIDEBAR MENU -->
+
 			</div>
-		</div>
-        <div class="page-content-wrapper">
-        	<div class="page-content" style="min-height: 554px;">
-	            <div class="pull-right top-buttons">
-	                @yield('top-buttons')
-	            </div>
-	            <div class="clearfix"></div>
-
-	            @yield('content')
-        	</div>
-        </div>
-    </div>
-@stop
-
-@section('footer')
-	<div class="page-footer">
-		<div class="page-footer-inner">
-			 &copy; Copyright 2015 | All Rights Reserved | Powered by Finternet-Group
-		</div>
-		<div class="page-footer-tools">
-			<span class="go-top">
-			<i class="fa fa-angle-up"></i>
-			</span>
-		</div>
+		</nav>
+	@endif
+	@show
+	<div id="page-wrapper" class="gray-bg">
+		@include('admin/partial/topbar')
+		@yield('content')
 	</div>
-@stop
-
+	@yield('footer')
+</div>
 @section('scripts')
-	{!! Html::script('/assets/metronic/assets/global/plugins/select2/select2.min.js') !!}
+	<form id="logout-form" action="{{ url('/admin/logout') }}" method="POST" style="display: none;">
+		{{ csrf_field() }}
+	</form>
+	{!! Html::script('backend/js/jquery-2.1.1.js') !!}
+	{!! Html::script('backend/js/bootstrap.min.js') !!}
+	{!! Html::script('backend/js/plugins/metisMenu/jquery.metisMenu.js') !!}
+	{!! Html::script('backend/js/plugins/slimscroll/jquery.slimscroll.min.js') !!}
 
-	{!! Html::script('/assets/metronic/assets/global/scripts/metronic.js') !!}
-	{!! Html::script('/assets/metronic/assets/admin/layout/scripts/layout.js') !!}
-	{!! Html::script('/assets/metronic/assets/admin/layout/scripts/quick-sidebar.js') !!}
-    {!! Html::script('/assets/js/typehead/typeahead.js') !!}
-	<script>
-	jQuery(document).ready(function() {
-	    Metronic.init();
-	    Layout.init();
-	    QuickSidebar.init();
-	});
-	</script>
-
-	@yield('custom_scripts')
-@stop
+	<!-- Custom and plugin javascript -->
+	{!! Html::script('backend/js/inspinia.js?'.time()) !!}
+	{!! Html::script('backend/js/plugins/pace/pace.min.js') !!}
+@show
+@yield('custom-scripts')
+</body>
+</html>

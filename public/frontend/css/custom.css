@@ -56,3 +56,10 @@
 .home .profile-body {
     background: #e1e1e1;
 }
+.color-main {
+    color: #f27549 !important;
+    letter-spacing: 1px;
+}
+.decoration {
+    text-decoration: underline;
+}

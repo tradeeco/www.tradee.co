@@ -1,6 +1,6 @@
 @extends('layout.admin')
 
-@section('body')
+@section('content')
 <div class="loginColumns animated fadeInDown">
     <div class="row">
         <div class="col-md-6">

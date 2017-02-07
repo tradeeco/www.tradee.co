@@ -10,3 +10,7 @@ Route::get('/home', function () {
     return view('admin.home');
 })->name('home');
 
+Route::get('/', 'Admin\DashboardController@index');
+Route::resource('/categories', 'Admin\CategoryController');
+Route::resource('/locations', 'Admin\LocationController');
+Route::resource('/dashboards', 'Admin\DashboardController');

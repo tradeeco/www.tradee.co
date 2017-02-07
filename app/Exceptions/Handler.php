@@ -64,6 +64,28 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        return redirect()->guest('login');
+        $middleware = request()->route()->gatherMiddleware();
+        $guard = config('auth.defaults.guard');
+        foreach($middleware as $m) {
+            if(preg_match("/auth:/",$m)) {
+                list($mid, $guard) = explode(":",$m);
+            }
+        }
+
+        switch($guard) {
+            case 'admin': //depends which guard you failed to auth
+                $login = 'admin/login';
+                break;
+            case 'user':
+                $login = 'login';
+                break;
+            default:
+                $login = '/';
+                break;
+        }
+
+        return redirect()->guest($login);
+
+//        return redirect()->guest('login');
     }
 }

@@ -63,3 +63,17 @@
 .decoration {
     text-decoration: underline;
 }
+
+/* admin */
+.new-category-form .input-wrap, .new-location-form .input-wrap {
+    position: relative;
+}
+#delete_cat_btn {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    display: none;
+}
+.input-wrap:hover #delete_cat_btn{
+    display: block;
+}

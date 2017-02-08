@@ -56,7 +56,7 @@ class CategoryController extends Controller
     {
         //
         $validator = Validator::make($request->all(), [
-            'name.*' => 'required|string|min:2',
+            'name.*' => 'required|string|min:2|max:25',
         ], $this->messages($request));
 
         if ($validator->fails()) {
@@ -141,6 +141,8 @@ class CategoryController extends Controller
         if (isset($request)) {
             foreach ($request->get('name') as $key => $val) {
                 $messages['name.' . $key . '.required'] = 'This field is required.';
+                $messages['name.' . $key . '.min'] = 'This field should be more than 2 characters.';
+                $messages['name.' . $key . '.max'] = 'This field should be less than 25 characters.';
             }
         }
         return $messages;

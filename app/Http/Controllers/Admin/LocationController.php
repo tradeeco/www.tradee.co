@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
+use App\AreaSuburb;
 
 class LocationController extends Controller
 {
@@ -21,14 +27,14 @@ class LocationController extends Controller
     public function index()
     {
         //
-        $categories = Category::all();
+        $locations = AreaSuburb::all();
 
         if ($alert = Session::get('alert')) {
             $data['alert'] = $alert;
         }
 
-        $data['categories'] = $categories;
-        return view('admin.category.index', $data);
+        $data['locations'] = $locations;
+        return view('admin.location.index', $data);
     }
 
     /**
@@ -52,7 +58,7 @@ class LocationController extends Controller
     {
         //
         $validator = Validator::make($request->all(), [
-            'name.*' => 'required|string|min:2',
+            'name.*' => 'required|string|min:2|max:25',
         ], $this->messages($request));
 
         if ($validator->fails()) {
@@ -60,20 +66,20 @@ class LocationController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } else {
-            foreach($request->get('name') as $key => $category_name)
+            foreach($request->get('name') as $key => $location_name)
             {
                 // Check if task exists and update task
                 // Add new task
-                $category = new Category;
-                $category->name = $category_name;
-                $category->admin_id = Auth::user()->id;
-                $category->save();
+                $location = new AreaSuburb;
+                $location->name = $location_name;
+                $location->admin_id = Auth::user()->id;
+                $location->save();
             };
 
-            $alert['msg'] = 'Category(s) has been added successfully';
+            $alert['msg'] = 'Location(s) has been added successfully';
             $alert['type'] = 'success';
 
-            return Redirect::route('admin.categories.index')->with('alert', $alert);
+            return Redirect::route('admin.locations.index')->with('alert', $alert);
         }
     }
 
@@ -120,9 +126,9 @@ class LocationController extends Controller
     public function destroy($id)
     {
         //
-        Category::find($id)->delete();
+        AreaSuburb::find($id)->delete();
 
-        $alert['msg'] = 'Category has been deleted successfully';
+        $alert['msg'] = 'Location has been deleted successfully';
         $alert['type'] = 'success';
 
         return Response::json(
@@ -137,6 +143,8 @@ class LocationController extends Controller
         if (isset($request)) {
             foreach ($request->get('name') as $key => $val) {
                 $messages['name.' . $key . '.required'] = 'This field is required.';
+                $messages['name.' . $key . '.min'] = 'This field should be more than 2 characters.';
+                $messages['name.' . $key . '.max'] = 'This field should be less than 25 characters.';
             }
         }
         return $messages;

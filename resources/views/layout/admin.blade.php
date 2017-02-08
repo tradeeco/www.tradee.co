@@ -72,10 +72,10 @@
 						<a href="{!! URL::route('admin.dashboards.index') !!}"><i class="fa fa-th-large"></i> Dashboards</a>
 					</li>
 					<li class="{{active_class($controller, 'CategoryController')}}">
-						<a href="{!! URL::route('admin.categories.index') !!}"><i class="fa fa-th-large"></i> Category</a>
+						<a href="{!! URL::route('admin.categories.index') !!}"><i class="fa fa-tags"></i> Category</a>
 					</li>
 					<li class="{{active_class($controller, 'LocationController')}}">
-						<a href="#"><i class="fa fa-th-large"></i> Area / Suburb</a>
+						<a href="{!! URL::route('admin.locations.index') !!}"><i class="fa fa-location-arrow"></i> Area / Suburb</a>
 					</li>
 				</ul>
 
@@ -103,6 +103,7 @@
 	<!-- Custom and plugin javascript -->
 	{!! Html::script('backend/js/inspinia.js?'.time()) !!}
 	{!! Html::script('backend/js/plugins/pace/pace.min.js') !!}
+	{!! Html::script('backend/js/trade-admin.js?'.time()) !!}
 @show
 @yield('custom-scripts')
 </body>

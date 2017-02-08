@@ -6,13 +6,13 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Category</h2>
+            <h2>Location</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{URL::route('admin.home')}}">Home</a>
                 </li>
                 <li class="active">
-                    <a href="#">Category</a>
+                    <a href="#">Location</a>
                 </li>
             </ol>
         </div>
@@ -23,7 +23,7 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>ADD NEW CATEGORY</h5>
+                <h5>ADD NEW Location</h5>
             </div>
             <div class="ibox-content">
 
@@ -39,7 +39,7 @@
                 </div>
                 <?php } ?>
 
-                {{ Form::open(array('url' => 'admin/categories', 'class' => 'new-category-form')) }}
+                {{ Form::open(array('url' => 'admin/locations', 'class' => 'new-location-form')) }}
                     <div class="row m-b categories">
                         @if(Form::old('name'))
                             @foreach(old('name') as $key => $val)
@@ -60,7 +60,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a class="color-main decoration" href="#" id="add_cat_btn">add another category</a>
+                            <a class="color-main decoration" href="#" id="add_cat_btn">add another location</a>
                         </div>
                     </div>
                 {{ Form::close() }}
@@ -68,7 +68,7 @@
         </div>
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h3>CURRENT CATEGORIES</h3>
+                <h3>CURRENT LOCATIONS</h3>
             </div>
             <div class="ibox-content">
                 <table class="table">
@@ -80,12 +80,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                   @foreach ($categories as $category)
+                   @foreach ($locations as $location)
                     <tr>
-                        <td>{{$category->name}}</td>
-                        <td>{{$category->created_at}}</td>
+                        <td>{{$location->name}}</td>
+                        <td>{{$location->created_at}}</td>
                         <td>
-                            <a href="{!! URL::route('admin.categories.destroy', $category->id)  !!}" class="btn btn-xs btn-danger" id="delete_btn">
+                            <a href="{!! URL::route('admin.locations.destroy', $location->id)  !!}" class="btn btn-xs btn-danger" id="delete_btn">
                                 <i class="fa fa-trash"> Delete</i>
                             </a>
                         </td>

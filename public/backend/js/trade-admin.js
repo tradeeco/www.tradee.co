@@ -3,7 +3,7 @@ var TradeAdmin = {
     addInputBtn: $('#add_cat_btn'),
     completeInputBtn: $('.Input-complete-btn'),
     InputTemplate: '<div class="col-sm-4 m-b input-wrap"> \
-                            <input type="text" class="form-control rounded input-lg" name="name[]"> \
+                            <input type="text" class="form-control rounded input-lg" name="name[]" maxlength=25> \
                             <a href="#" id="delete_cat_btn" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a> \
                        </div>',
 

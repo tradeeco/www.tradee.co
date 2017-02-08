@@ -2,7 +2,7 @@
 ------------------------------------*/
 .footer-v1 .footer {
 	padding: 40px 0;	
-	background: #272727;
+	background: #f27549;
 }
 
 .footer-v1 .footer p {
@@ -12,14 +12,19 @@
 .footer-v1 .footer h2 {
 	color: #eee;
 	font-size: 18px;
-	font-weight: 200;
+	font-weight: 500;
 }
 
 /*Link List*/
 .footer-v1 .link-list li {
-	border-top: solid 1px #353535;
+	/*border-top: solid 1px #353535;*/
+	border: none;
 }
-
+.footer-v1 .link-list a {
+	font-size: 14px;
+	font-weight: 300;
+	text-transform: capitalize;
+}
 .footer-v1 address,
 .footer-v1 .link-list a,
 .footer-v1 .link-list i {
@@ -43,7 +48,7 @@
 .footer-v1 .footer .dl-horizontal a:hover {
  color: #5fb611 !important;
 }
-
+.footer-v1 .footer li a { }
 /*Copyright*/
 .footer-v1 .copyright {
 	background: #222;

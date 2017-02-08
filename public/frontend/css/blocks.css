@@ -5490,16 +5490,16 @@
 .tab-v1 .nav-tabs > .active > a,
 .tab-v1 .nav-tabs > .active > a:hover,
 .tab-v1 .nav-tabs > .active > a:focus {
-	color: #f27549;
+	color: #fff;
 	border: none;
-	background: transparent;
+	background: #f27549;
 }
 
 .tab-v1 .nav-tabs > li > a {
 	border: none;
-    background: #f27549;
+    background: #e1e1e1;
     font-weight: 500;
-    color: #fff
+    color: #f27549;
 
 }
 .tab-v1 .nav-tabs > li > a:hover {

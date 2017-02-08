@@ -54,7 +54,7 @@
 }
 
 .home .profile-body {
-    background: #e1e1e1;
+    background: #f27549;
 }
 .color-main {
     color: #f27549 !important;
@@ -77,3 +77,8 @@
 .input-wrap:hover #delete_cat_btn{
     display: block;
 }
+.color-white {
+    color: white;
+}
+.margin-top-40 { margin-top: 40px; }
+.circle { border-radius: 50%; }

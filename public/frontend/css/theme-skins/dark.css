@@ -802,7 +802,8 @@ body.dark .sidebar-nav-v1 ul li.active a {
 /*Bootstrap Features
 ------------------------------------*/
 label {
-	color: #999;
+	/*color: #999;*/
+	color: #252525;
 }
 
 body.dark strong {

@@ -44,7 +44,7 @@
                         @if(Form::old('name'))
                             @foreach(old('name') as $key => $val)
                                 <div class="col-sm-4 m-b input-wrap {!! $errors->first('name.'.$key, 'has-error') !!}">
-                                    {!! Form::text('name['.$key.']', old('name.'.$key), array('class'=>'form-control input-lg')) !!}
+                                    {!! Form::text('name['.$key.']', old('name.'.$key), array('class'=>'form-control input-lg', 'maxlength' => 25)) !!}
                                     <span class="help-block">
                                         <strong>{!! $errors->first('name.'.$key, '<p>:message</p>') !!}</strong>
                                     </span>
@@ -53,7 +53,7 @@
                             @endforeach
                         @else
                         <div class="col-sm-4 m-b input-wrap">
-                            <input type="text" class="form-control rounded input-lg" name="name[]">
+                            <input type="text" class="form-control rounded input-lg" name="name[]" autofocus maxlength="25">
                         </div>
                         @endif
                         <div class="col-sm-2"><button class="btn btn-lg btn-primary" type="submit">ADD</button></div>

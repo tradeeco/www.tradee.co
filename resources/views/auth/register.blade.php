@@ -1,8 +1,6 @@
 @extends('layout.frontend')
 
 @section('custom-styles')
-    {!! Html::style('frontend/plugins/brand-buttons/brand-buttons.css') !!}
-    {!! Html::style('frontend/plugins/brand-buttons/brand-buttons-inversed.css') !!}
 @stop
 @section('body')
 <div class="container m-t-94">

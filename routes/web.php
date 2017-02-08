@@ -13,9 +13,7 @@ use App\S_R_relation;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@index')->name('root');
 
 Route::get('/partials/index', function () {
     return view('partials.index');

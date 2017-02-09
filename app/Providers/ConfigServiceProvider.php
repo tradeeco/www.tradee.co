@@ -17,6 +17,7 @@ class ConfigServiceProvider extends ServiceProvider {
 	{
 		config([
 			//
+            'config/frontend.php',
 		]);
 	}
 

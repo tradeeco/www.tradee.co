@@ -1,6 +1,7 @@
 @extends('layout.frontend')
 @section('custom-styles')
-
+    {!! Html::style('backend/css/plugins/dropzone/basic.css?'.time()) !!}
+    {!! Html::style('backend/css/plugins/dropzone/dropzone.css?'.time()) !!}
 @stop
 @section('body')
     <div class="container m-t-94 home content">
@@ -17,31 +18,47 @@
                             <div id="post_job" class="panel-body tab-pane fade active in">
                                 @if (Auth::check())
                                 {!! Form::open(['url' => route('jobs.store'), 'class' => 'create-job', 'data-parsley-validate', 'id' => 'create_job']) !!}
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                     {{ Form::label('title', 'Job Title') }}
                                     {{ Form::text('title', null, array('class' => 'input-lg form-control rounded', 'id' => 'title', 'required' => 'true')) }}
+                                    @if ($errors->has('title'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('title') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                    <div class="col-md-4">
-                                        {{ Form::label('category', 'Category') }}
-                                        {{ Form::select('category_id', $categories, null, ['class' => 'form-control input-lg rounded']) }}
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Area / Suburb</label>
-                                        {{ Form::select('area_suburb_id', $locations, null, ['class' => 'form-control input-lg rounded']) }}
-                                    </div>
+                                        <div class="col-md-4">
+                                            {{ Form::label('category', 'Category') }}
+                                            {{ Form::select('category_id', $categories, null, ['class' => 'form-control input-lg rounded']) }}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Area / Suburb</label>
+                                            {{ Form::select('area_suburb_id', $locations, null, ['class' => 'form-control input-lg rounded']) }}
+                                        </div>
                                     </div>
                                 </div>
-                                    <div class="form-group">
-                                        <label>Short Description:</label>
-                                        <textarea type="text" class="form-control input-lg rounded" name="" ></textarea>
+                                    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                                        {{ Form::label('description', 'Short Description') }}
+                                        <textarea type="text" class="form-control input-lg rounded" name="description" ></textarea>
+                                        @if ($errors->has('description'))
+                                            <span class="help-block">
+                                            <strong>{{ $errors->first('description') }}</strong>
+                                        </span>
+                                        @endif
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group{{ $errors->has('photo_ids') ? ' has-error' : '' }}">
                                         <label>Add Photos</label>
+                                        <div class="dropzone-previews dropzone" id="dropzone_preview" data-url="{{ URL::route('jobs.upload_photo') }}"></div>
+                                        @if ($errors->has('description'))
+                                            <span class="help-block">
+                                            <strong>{{ $errors->first('photo_ids') }}</strong>
+                                        </span>
+                                        @endif
                                     </div>
                                     <div class="form-group text-right">
-                                        <button type="button" class="btn btn-primary rounded btn-lg">Post</button>
+                                        <button type="submit" class="btn btn-primary rounded btn-lg">Post</button>
                                     </div>
 
                                 </form>
@@ -58,8 +75,8 @@
 
                                                     @if ($errors->has('username'))
                                                         <span class="help-block">
-                                                    <strong>{{ $errors->first('username') }}</strong>
-                                                </span>
+                                                            <strong>{{ $errors->first('username') }}</strong>
+                                                        </span>
                                                     @endif
                                                 </div>
 
@@ -68,8 +85,8 @@
 
                                                     @if ($errors->has('password'))
                                                         <span class="help-block">
-                                                    <strong>{{ $errors->first('password') }}</strong>
-                                                </span>
+                                                            <strong>{{ $errors->first('password') }}</strong>
+                                                        </span>
                                                     @endif
                                                 </div>
 
@@ -184,4 +201,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('custom-scripts')
+    {!! Html::script('backend/js/plugins/dropzone/dropzone.js') !!}
+    {!! Html::script('frontend/js/pages/home.js?'.time()) !!}
+    <script>
+        Home.init();
+    </script>
 @endsection

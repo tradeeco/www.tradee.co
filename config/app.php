@@ -182,7 +182,8 @@ return [
          * Your Service Providers...
          */
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-         Collective\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -234,6 +235,8 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Form' => Collective\Html\FormFacade::class,
+        'Image'     => Intervention\Image\Facades\Image::class,
     ],
+
 
 ];

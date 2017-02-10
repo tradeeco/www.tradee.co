@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -21,7 +22,9 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    use RegistersUsers{
+        register as traitRegister;
+    }
 
     /**
      * Where to redirect users after login / registration.
@@ -38,6 +41,14 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('admin.guest');
+    }
+
+    public function register(Request $request)
+    {
+        //Set session as 'register'
+        Session::put('last_auth_attempt', 'register');
+        //The trait is not a class. You can't access its members directly.
+        return $this->traitRegister($request);
     }
 
     /**

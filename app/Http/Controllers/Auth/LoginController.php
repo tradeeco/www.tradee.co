@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request, Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -21,7 +22,9 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers{
+        login as traitLogin;
+    }
 
     /**
      * Where to redirect users after login.
@@ -38,6 +41,15 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    // Override trait function and call it from the overriden function
+    public function login(Request $request)
+    {
+        //Set session as 'login'
+        Session::put('last_auth_attempt', 'login');
+        //The trait is not a class. You can't access its members directly.
+        return $this->traitLogin($request);
     }
 
     public function username()

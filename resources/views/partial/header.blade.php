@@ -32,6 +32,11 @@
                         <!-- Home -->
                         @if (Auth::check())
                             <li>
+                                <a href="{!! URL::route('jobs.index') !!}">
+                                    Job
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{!! URL::to('/logout') !!}" onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();" class="button">
                                     <button class="btn btn-warning rounded">Sign Out</button>

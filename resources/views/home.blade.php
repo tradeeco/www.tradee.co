@@ -1,10 +1,12 @@
 @extends('layout.frontend')
 @section('custom-styles')
+    @if (Auth::check())
     {!! Html::style('backend/css/plugins/dropzone/basic.css?'.time()) !!}
     {!! Html::style('backend/css/plugins/dropzone/dropzone.css?'.time()) !!}
+    @endif
 @stop
 @section('body')
-    <div class="container m-t-94 home content">
+    <div class="container home content">
         <h1 class="text-center margin-bottom-35">FIND OR POST A JOB</h1>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -104,9 +106,11 @@
 @endsection
 
 @section('custom-scripts')
+    @if (Auth::check())
     {!! Html::script('backend/js/plugins/dropzone/dropzone.js') !!}
     {!! Html::script('frontend/js/pages/home.js?'.time()) !!}
     <script>
         Home.init();
     </script>
+    @endif
 @endsection

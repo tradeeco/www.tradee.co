@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Job;
 use App\Models\JobPhoto;
 use App\Logic\JobPhotoRepository;
+use Illuminate\Support\Facades\DB;
 
 class JobController extends Controller
 {
@@ -19,10 +20,43 @@ class JobController extends Controller
 
     public function __construct(JobPhotoRepository $jobPhotoRepository)
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['index']]);
         $this->image = $jobPhotoRepository;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $data['categories'] = DB::table('categories')->orderBy('name')->pluck('name', 'id');
+        $data['locations'] = DB::table('area_suburbs')->orderBy('name')->pluck('name', 'id');
+
+        $jobs = Job::paginate(1);
+
+        if (isset($request)) {
+          if ($request->has('category') && !$request->has('location')) {
+              $jobs = Job::categories($request->get('category'))->paginate(1);
+          }
+          if ($request->has('location') && !$request->has('category')) {
+              $jobs = Job::locations($request->get('location'))->paginate(1);
+          }
+
+          if ($request->has('location') && !$request->has('category')) {
+              $jobs = Job::categories($request->get('category'))->locations($request->get('location'))->paginate(1);
+          }
+        }
+
+//
+//        if ($alert = Session::get('alert')) {
+//            $data['alert'] = $alert;
+//        }
+//
+        $data['jobs'] = $jobs;
+        return view('job.index', $data);
+    }
 
     public function store(Request $request)
     {

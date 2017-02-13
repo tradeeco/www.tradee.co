@@ -45,7 +45,7 @@
 <body class="{{ isset($controller) && ($controller == 'LoginController') ? 'gray-bg' : '' }}">
 <div id="wrapper">
 	@section('left-menu')
-	@if (!Auth::guest())
+	@if (Auth::guard('admin')->check())
 		<nav class="navbar-default navbar-static-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav metismenu" id="side-menu">
@@ -84,8 +84,8 @@
 	@endif
 	@show
 	<div id="{{ isset($controller) && ($controller == 'LoginController') ? '' : 'page-wrapper' }}" class="gray-bg">
-		@if (!Auth::guest())
-		@include('admin/partial/topbar')
+		@if (Auth::guard('admin')->check())
+			@include('admin/partial/topbar')
 		@endif
 		@yield('content')
 	</div>

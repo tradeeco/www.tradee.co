@@ -27,7 +27,7 @@
                                 {{ Form::select('category_id', [null=>'Please Select'] + $categories, null, ['class' => 'form-control input-lg rounded']) }}
                             </div>
                             <div class="col-md-6">
-                                {{ Form::select('category_id', $categories, null, ['class' => 'form-control input-lg rounded']) }}
+                                {{ Form::select('length_id', $lengths, null, ['class' => 'form-control input-lg rounded']) }}
                             </div>
                         </div>
                     </div>

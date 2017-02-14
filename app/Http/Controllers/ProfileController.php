@@ -68,6 +68,12 @@ class ProfileController extends Controller
         //
         $data['user'] = Auth::user();
         $data['categories'] = DB::table('categories')->orderBy('name')->pluck('name', 'id')->all();
+        $data['lengths'] = [
+            '' => '',
+            '1' => '1 year',
+            '2' => '2 years',
+        ];
+
         return view('profile.edit', $data);
     }
 

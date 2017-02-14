@@ -58,7 +58,6 @@ var Home = {
         $('form#create_job').unbind('submit').on('submit', function() {
             $(this).find('input[name=doc_ids]').remove();
             $(this).append("<input type='hidden' name='photo_ids' value='" + Home.PHOTO_IDS + "'>");
-            alert($(this).find('input[name=photo_ids]').val());
             Home.PHOTO_IDS = [];
         });
     },

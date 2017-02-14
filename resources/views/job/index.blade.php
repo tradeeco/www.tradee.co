@@ -99,7 +99,7 @@
                                     </li>
                                 </ul>
                                 <span><a href="#">info@example.com</a></span>
-                                <span><a href="#">www.htmlstream.com</a></span>
+                                <span><a href="#">www.trade.co</a></span>
                             </td>
                         </tr>
                       @endforeach

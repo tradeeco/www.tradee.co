@@ -27,7 +27,7 @@ class LocationController extends Controller
     public function index()
     {
         //
-        $locations = AreaSuburb::all();
+        $locations = AreaSuburb::paginate(10);
 
         if ($alert = Session::get('alert')) {
             $data['alert'] = $alert;

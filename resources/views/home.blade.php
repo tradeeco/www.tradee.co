@@ -41,73 +41,73 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                                        {{ Form::label('description', 'Short Description') }}
-                                        <textarea type="text" class="form-control input-lg rounded" name="description" ></textarea>
-                                        @if ($errors->has('description'))
-                                            <span class="help-block">
-                                            <strong>{{ $errors->first('description') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group{{ $errors->has('photo_ids') ? ' has-error' : '' }}">
-                                        <label>Add Photos</label>
-                                        <div class="dropzone-previews dropzone" id="dropzone_preview" data-url="{{ URL::route('jobs.upload_photo') }}"></div>
-                                        @if ($errors->has('description'))
-                                            <span class="help-block">
-                                            <strong>{{ $errors->first('photo_ids') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group text-right">
-                                        <button type="submit" class="btn btn-primary rounded btn-lg">Post</button>
-                                    </div>
+                                <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                                    {{ Form::label('description', 'Short Description') }}
+                                    <textarea type="text" class="form-control input-lg rounded" name="description" ></textarea>
+                                    @if ($errors->has('description'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('photo_ids') ? ' has-error' : '' }}">
+                                    <label>Add Photos</label>
+                                    <div class="dropzone-previews dropzone" id="dropzone_preview" data-url="{{ URL::route('jobs.upload_photo') }}"></div>
+                                    @if ($errors->has('description'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('photo_ids') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <div class="form-group text-right">
+                                    <button type="submit" class="btn btn-primary rounded btn-lg">Post</button>
+                                </div>
 
-                                </form>
-                                @else
-                                    <h2 class="text-center color-white margin-bottom-15">Oops, you are not logged in!</h2>
-                                    <h3 class="text-center color-white margin-bottom-20"><b>Sign In below!</b></h3>
-                                    <div class="row">
-                                        <div class="col-md-8 col-md-offset-2">
-                                            @include('partial/login_form')
+                                {!! Form::close() !!}
+                                    @else
+                                        <h2 class="text-center color-white margin-bottom-15">Oops, you are not logged in!</h2>
+                                        <h3 class="text-center color-white margin-bottom-20"><b>Sign In below!</b></h3>
+                                        <div class="row">
+                                            <div class="col-md-8 col-md-offset-2">
+                                                @include('partial/login_form')
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h3 class="text-center color-white">Dont have an account? Its <b>FREE!</b></h3>
-                                    <h3 class="text-center color-white margin-bottom-20"><b>Sign Up below!</b></h3>
-                                    <div class="row">
-                                        <div class="col-md-10 col-md-offset-1">
-                                            @include('partial/register_form')
+                                        <h3 class="text-center color-white">Dont have an account? Its <b>FREE!</b></h3>
+                                        <h3 class="text-center color-white margin-bottom-20"><b>Sign Up below!</b></h3>
+                                        <div class="row">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                @include('partial/register_form')
+                                            </div>
                                         </div>
-                                    </div>
-                                @endif
-                            </div>
+                                    @endif
+                                </div>
 
-                            <div id="passwordTab" class="panel-body tab-pane fade">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            {{ Form::select('category_id', $categories, null, ['class' => 'form-control input-lg rounded']) }}
+                                <div id="passwordTab" class="panel-body tab-pane fade">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                {{ Form::select('category_id', $categories, null, ['class' => 'form-control input-lg rounded']) }}
+                                            </div>
+                                            <div class="col-md-4">
+                                                {{ Form::select('area_suburb_id', $locations, null, ['class' => 'form-control input-lg rounded']) }}
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn btn-primary rounded btn-lg">Search</button>
+                                            </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            {{ Form::select('area_suburb_id', $locations, null, ['class' => 'form-control input-lg rounded']) }}
-                                        </div>
-                                        <div class="col-md-2">
-                                            <button type="button" class="btn btn-primary rounded btn-lg">Search</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
 
-@section('custom-scripts')
-    @if (Auth::check())
-    {!! Html::script('backend/js/plugins/dropzone/dropzone.js') !!}
+    @section('custom-scripts')
+        @if (Auth::check())
+        {!! Html::script('backend/js/plugins/dropzone/dropzone.js') !!}
     {!! Html::script('frontend/js/pages/home.js?'.time()) !!}
     <script>
         Home.init();

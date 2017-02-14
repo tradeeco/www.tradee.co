@@ -18,6 +18,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function userProfile()
+    {
+        return $this->hasOne('App\Models\UserProfile');
+    }
+
+    public function userExperiences()
+    {
+        return $this->hasMany('App\Models\UserExperience');
+    }
+
 //    public static function authenticate($username, $password)
 //    {
 //        $user = User::where('username', $username)->first();
@@ -31,4 +41,13 @@ class User extends Authenticatable
 //    {
 //        $this->attributes['password'] = Hash::make($password);
 //    }
+    public static $accountRules = [
+        'title' => 'required|string|min:2|max:20',
+        'description' => 'required|min:10|max:500',
+        'photo_ids' => 'required'
+    ];
+
+    public static $accountMessages = [
+        'photo_ids.required' => 'The photo field is required'
+    ];
 }

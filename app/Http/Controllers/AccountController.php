@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\User;
 
-
-class ProfileController extends Controller
+class AccountController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,17 +24,9 @@ class ProfileController extends Controller
     public function index()
     {
         //
+        return view('account.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -44,7 +36,13 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach ($request->get('category_id') as $key => $category_id) {
+            if ($request->has('experience_id') && $request->get('experience_id')[$key]) {
+
+            } else {
+
+            }
+        }
     }
 
     /**
@@ -61,13 +59,22 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit()
     {
         //
-
+        $data['user'] = Auth::user();
+        $data['categories'] = DB::table('categories')->orderBy('name')->pluck('name', 'id')->all();
+        $data['lengths'] = [
+            '' => '',
+            '1' => '1 year',
+            '2' => '2 years',
+        ];
+        $user = Auth::user();
+        $data['userProfile'] = $user->userProfile();
+        $data['userExperiences'] = $user->userExperiences();
+        return view('account.edit', $data);
     }
 
     /**

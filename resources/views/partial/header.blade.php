@@ -47,7 +47,7 @@
                                                 <div class="row equal-height">
                                                     <div class="col-md-6 equal-height-in">
                                                         <ul class="list-unstyled equal-height-list">
-                                                            <li><a href="#" class="mega-menu-title">View My Account</a></li>
+                                                            <li><a href="{{ URL::route('account.index') }}" class="mega-menu-title">View My Account</a></li>
 
                                                             <li><h3>TRADEE</h3></li>
                                                             <li><a href="#">Watching</a></li>
@@ -70,11 +70,11 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="{!! URL::route('profile.edit') !!}">
-                                    Profile
-                                </a>
-                            </li>
+                            {{--<li>--}}
+                                {{--<a href="{!! URL::route('profile.edit') !!}">--}}
+                                    {{--Profile--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
                             <li>
                                 <a href="{!! URL::to('/logout') !!}" onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();" class="button">

@@ -36,6 +36,45 @@
                                     Job
                                 </a>
                             </li>
+                            <li class="dropdown mega-menu">
+                                <a href="{!! URL::route('jobs.index') !!}">
+                                    My Account
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="mega-menu-content disable-icons">
+                                            <div class="account-container container">
+                                                <div class="row equal-height">
+                                                    <div class="col-md-6 equal-height-in">
+                                                        <ul class="list-unstyled equal-height-list">
+                                                            <li><a href="#" class="mega-menu-title">View My Account</a></li>
+
+                                                            <li><h3>TRADEE</h3></li>
+                                                            <li><a href="#">Watching</a></li>
+                                                            <li><a href="#">Instered</a></li>
+                                                            <li><a href="#">Shortlisted</a></li>
+                                                            <li><a href="#">Previous Jobs</a></li>
+                                                            <li><h3>Account Balance</h3></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-6 equal-height-in">
+                                                        <ul class="list-unstyled equal-height-list">
+                                                            <li><h3>TRADER</h3></li>
+                                                            <li><a href="#">My Jobs</a></li>
+                                                            <li><a href="#">Previous Jobs</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="{!! URL::route('profile.edit') !!}">
+                                    Profile
+                                </a>
+                            </li>
                             <li>
                                 <a href="{!! URL::to('/logout') !!}" onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();" class="button">

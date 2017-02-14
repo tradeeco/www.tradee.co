@@ -574,13 +574,13 @@
 		padding: 15px 0;
 		min-width: 230px;
 		border-radius: 0;
-		background: #fff;
+		background: #f27549;
 		z-index: 9999 !important;
-		border-top: solid 3px #72c02c;
+		/*border-top: solid 3px #72c02c;*/
 	}
 
 	.header-v6 .dropdown-menu li a {
-		color: #777;
+		color: #fff;
 		font-size: 13px;
 		font-weight: 400;
 		padding: 6px 25px;
@@ -703,6 +703,7 @@
 
 .header-v6 .mega-menu .dropdown-menu {
   	left: auto;
+	right: 0;
 }
 
 .header-v6 .mega-menu .dropdown-menu > li {
@@ -772,11 +773,11 @@
 
 /*Mega Menu Style Effect*/
 .header-v6 .mega-menu .equal-height-list h3 {
-	color: #555;
-	font-size: 15px;
-	font-weight: 400;
+	color: #fff;
+	font-size: 17px;
+	font-weight: 500;
 	padding: 0 10px 0 13px;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 }
 
 /*Space for only Big Resolution*/
@@ -789,7 +790,7 @@
 /*Mega Menu Content*/
 @media (min-width: 992px) {
     .header-v6 .mega-menu .equal-height-in {
-        padding: 20px 0;
+        /*padding: 20px 0;*/
         border-left: 1px solid #bbb;
     }
 
@@ -808,7 +809,13 @@
         border-bottom: none;
         padding: 5px 10px 5px 15px;
     }
-
+	.header-v6.header-classic-white.header-fixed-shrink .navbar-nav .mega-menu .dropdown-menu a {
+		font-size: 15px;
+	}
+	.header-v6 .mega-menu .equal-height-list li a.mega-menu-title {
+		font-size: 20px;
+		text-decoration: underline;
+	}
     .header-v6 .mega-menu .equal-height-list a:hover {
     	text-decoration: none;
     }

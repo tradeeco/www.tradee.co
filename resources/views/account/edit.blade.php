@@ -68,20 +68,17 @@
                                 {!! Form::text('experience_id[]', $userExp->id, ['class' => 'hide', 'id' => 'experience_ids'])  !!}
                             </div>
                         @endforeach
-                        @if ($userExperiences->count() == 0)
-                        <div class="row margin-bottom-20">
-                            <div class="col-md-5">
-                                {{ Form::select('category_id[]', [null=>''] + $categories, null, ['class' => 'form-control input-lg rounded']) }}
-                            </div>
-                            <div class="col-md-5">
-                                {{ Form::select('length_id[]', $lengths, null, ['class' => 'form-control input-lg rounded']) }}
-                            </div>
-                            <div class="col-md-2">
-                                <a href="#" id="delete_exp_btn" class="btn btn-danger btn-sm rounded"><i class="fa fa-trash"></i></a>
-                            </div>
+                            @if ($userExperiences->count() == 0)
+                            <div class="row margin-bottom-20">
+                                <div class="col-md-5">
+                                    {{ Form::select('category_id[]', [null=>''] + $categories, null, ['class' => 'form-control input-lg rounded']) }}
+                                </div>
+                                <div class="col-md-5">
+                                    {{ Form::select('length_id[]', $lengths, null, ['class' => 'form-control input-lg rounded']) }}
+                                </div>
 
-                        </div>
-                        @endif
+                            </div>
+                            @endif
                         @endif
                         <a href="#" class="color-main" id="add_exp_btn">add more experience</a>
                     </div>
@@ -116,16 +113,13 @@
                                     {{ Form::text('user_interested_location_id[]', $inLocation->id, ['class' => 'hide', 'id' => 'interested_ids']) }}
                                 </div>
                             @endforeach
-                            @if ($userJobInterestedLocations->count() == 0)
-                            <div class="row margin-bottom-20">
-                                <div class="col-md-7">
-                                    {{ Form::select('area_suburb_id[]', [null=>''] + $locations, null, ['class' => 'form-control input-lg rounded']) }}
+                                @if ($userJobInterestedLocations->count() == 0)
+                                <div class="row margin-bottom-20">
+                                    <div class="col-md-7">
+                                        {{ Form::select('area_suburb_id[]', [null=>''] + $locations, null, ['class' => 'form-control input-lg rounded']) }}
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <a href="#" id="delete_interested_btn" class="btn btn-danger btn-sm rounded"><i class="fa fa-trash"></i></a>
-                                </div>
-                            </div>
-                            @endif
+                                @endif
                             @endif
                             <a href="#" class="color-main" id="add_interested_btn">add more interested</a>
                         </div>

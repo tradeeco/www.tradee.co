@@ -90,7 +90,7 @@
                                 @foreach(old('area_suburb_id') as $key => $val)
                                     <div class="row margin-bottom-20">
                                         <div class="col-md-7 {!! $errors->first('area_suburb_id.'.$key, 'has-error') !!}">
-                                            {{ Form::select('area_suburb_id['.$key.']', [null=>''] + $categories, old('area_suburb_id.'.$key), array('class'=>'form-control input-lg rounded')) }}
+                                            {{ Form::select('area_suburb_id['.$key.']', [null=>''] + $locations, old('area_suburb_id.'.$key), array('class'=>'form-control input-lg rounded')) }}
                                             <span class="help-block">
                                                 <strong>{!! $errors->first('area_suburb_id.'.$key, ':message') !!}</strong>
                                             </span>

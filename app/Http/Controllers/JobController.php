@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
@@ -31,21 +32,25 @@ class JobController extends Controller
      */
     public function index(Request $request)
     {
-        $data['categories'] = DB::table('categories')->orderBy('name')->pluck('name', 'id');
-        $data['locations'] = DB::table('area_suburbs')->orderBy('name')->pluck('name', 'id');
+        $data['categories'] = DB::table('categories')->orderBy('name')->pluck('name', 'name');
+        $data['locations'] = DB::table('area_suburbs')->orderBy('name')->pluck('name', 'name');
 
-        $jobs = Job::paginate(1);
+        $jobs = Job::paginate(Config::get('frontend.job_per_page'));
+        $getParams = [];
 
         if (isset($request)) {
           if ($request->has('category') && !$request->has('location')) {
-              $jobs = Job::categories($request->get('category'))->paginate(1);
+              $jobs = Job::categories($request->get('category'))->paginate(Config::get('frontend.job_per_page'));
+              $getParams['category'] = $request->get('category');
           }
           if ($request->has('location') && !$request->has('category')) {
-              $jobs = Job::locations($request->get('location'))->paginate(1);
+              $jobs = Job::locations($request->get('location'))->paginate(Config::get('frontend.job_per_page'));
+              $getParams['location'] = $request->get('location');
           }
 
-          if ($request->has('location') && !$request->has('category')) {
-              $jobs = Job::categories($request->get('category'))->locations($request->get('location'))->paginate(1);
+          if ($request->has('location') && $request->has('category')) {
+              $jobs = Job::categories($request->get('category'))->locations($request->get('location'))->paginate(Config::get('frontend.job_per_page'));
+              $getParams['location'] = $request->get('location'); $getParams['category'] = $request->get('category');
           }
         }
 
@@ -55,6 +60,7 @@ class JobController extends Controller
 //        }
 //
         $data['jobs'] = $jobs;
+        $data['getParams'] = $getParams;
         return view('job.index', $data);
     }
 
@@ -89,6 +95,10 @@ class JobController extends Controller
         }
     }
 
+    public function show($slug) {
+        $data['job'] = Job::where('slug', $slug)->first();
+        return view('job.show', $data);
+    }
     public function upload_photo(Request $request)
     {
         $photo = $request->all();

@@ -184,6 +184,8 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
     ],
 
     /*

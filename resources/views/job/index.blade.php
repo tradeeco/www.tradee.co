@@ -24,82 +24,61 @@
             <h2>SEARCH FOR JOBS</h2>
         </div>
         <div class="job-img-inputs">
+            {!! Form::open(['url' => route('jobs.index'), 'id' => 'search_job', 'method' => 'GET']) !!}
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4 md-margin-bottom-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-tag"></i></span>
-                            {{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}
+                            {{ Form::select('category', $categories, null, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="col-sm-4 md-margin-bottom-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                            {{ Form::select('area_suburb_id', $locations, null, ['class' => 'form-control']) }}
+                            {{ Form::select('location', $locations, null, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <button type="button" class="btn-u btn-block btn-u-dark"> Search Job</button>
+                        <button type="submit" class="btn-u btn-block btn-u-dark"> Search Job</button>
                     </div>
                 </div>
             </div>
+            {!! Form::close() !!}
         </div>
     </div>
 
     <div class="container">
         <div class="table-search-v2 panel panel-dark">
             <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-globe"></i> Table Search Results</h3>
+                <h3 class="panel-title"><i class="fa fa-globe"></i> Job Search Results</h3>
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>User Image</th>
-                        <th class="hidden-sm">About</th>
+                        <th>User Info</th>
+                        <th class="hidden-sm">Job content</th>
                         <th>Status</th>
-                        <th>Contacts</th>
                     </tr>
                     </thead>
                     <tbody>
                       @foreach ($jobs as $job)
                         <tr>
                             <td>
-                                <img class="rounded-x" src="assets/img/testimonials/img1.jpg" alt="">
+                                <img class="rounded-x" src="{{ userImage($job->user) }}" alt="">
+                                <span class="text-center">{{ $job->user->username }}</span>
                             </td>
                             <td class="td-width">
-                                <h3><a href="#">Sed nec elit arcu</a></h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non malesuada ante. Donec vel arcu.</p>
-                                <small class="hex">Joined February 28, 2014</small>
+                                <h3><a href="{{ URL::route('jobs.show', $job->slug) }}">{{ $job->title }}</a></h3>
+                                <p>{{ $job->category->name }}</p>
+                                <p>{{ $job->areaSuburb->name }}</p>
+                                <p>{{ str_limit($job->description, 50) }}</p>
                             </td>
                             <td>
-                                <span class="label label-success">Success</span>
-                            </td>
-                            <td>
-                                <ul class="list-inline s-icons">
-                                    <li>
-                                        <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Facebook" href="#">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Twitter" href="#">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Dropbox" href="#">
-                                            <i class="fa fa-dropbox"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Linkedin" href="#">
-                                            <i class="fa fa-linkedin"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <span><a href="#">info@example.com</a></span>
-                                <span><a href="#">www.trade.co</a></span>
+                                <h3 class="color-main">Views: XXX</h3>
+                                <h3 class="color-main">Date Posted: {{ date('F d, Y', strtotime($job->created_at)) }}</h3>
+                                {{--Carbon\Carbon::parse($job->created_at)->format('d-m-Y i')--}}
                             </td>
                         </tr>
                       @endforeach
@@ -108,15 +87,13 @@
             </div>
         </div>
         <div class="pull-right">
-            {{ $jobs->links() }}
+            {{ $jobs->appends($getParams)->links() }}
         </div>
     </div>
 
 @endsection
 
 @section('custom-scripts')
-    {!! Html::script('frontend/js/pages/home.js?'.time()) !!}
     <script>
-        Home.init();
     </script>
 @endsection

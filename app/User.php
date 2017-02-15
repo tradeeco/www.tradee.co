@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
+use App\Models\UserProfile;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,15 @@ class User extends Authenticatable
     public function userProfile()
     {
         return $this->hasOne('App\Models\UserProfile');
+    }
+
+    protected static function boot()
+    {
+        static::created(function ($model) {
+            UserProfile::create(['user_id'=> $model->id]);
+
+            return true;
+        });
     }
 
     public function userExperiences()

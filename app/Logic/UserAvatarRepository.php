@@ -67,7 +67,7 @@ class UserAvatarRepository
 
     public function createUniqueFilename( $filename, $extension )
     {
-        $full_size_dir = 'uploads/user_avatars/' . Config::get('frontend.full_size');
+        $full_size_dir =  Config::get('frontend.user_avatar_path') . Config::get('frontend.full_size');
         $full_image_path = $full_size_dir . $filename . '.' . $extension;
 
         if ( File::exists( $full_image_path ) )
@@ -86,7 +86,7 @@ class UserAvatarRepository
     public function original( $photo, $filename )
     {
         $manager = new ImageManager();
-        $full_path = 'uploads/user_avatars/';
+        $full_path =  Config::get('frontend.user_avatar_path');
         $image = $manager->make( $photo )->save($full_path . Config::get('frontend.full_size') . $filename );
 
         return $image;
@@ -98,7 +98,7 @@ class UserAvatarRepository
     public function icon( $photo, $filename )
     {
         $manager = new ImageManager();
-        $full_path = 'uploads/user_avatars/';
+        $full_path =  Config::get('frontend.user_avatar_path');
         $image = $manager->make( $photo )->resize(200, null, function ($constraint) {
             $constraint->aspectRatio();
         })
@@ -113,8 +113,8 @@ class UserAvatarRepository
     public function delete( $fileId)
     {
 
-        $full_size_dir = 'uploads/user_avatars/' . Config::get('frontend.full_size');
-        $icon_size_dir = 'uploads/user_avatars/' . Config::get('frontend.icon_size');
+        $full_size_dir =  Config::get('frontend.user_avatar_path') . Config::get('frontend.full_size');
+        $icon_size_dir =  Config::get('frontend.user_avatar_path') . Config::get('frontend.icon_size');
 
         $sessionImage = UserProfile::where('id', $fileId)->first();
 
@@ -150,6 +150,25 @@ class UserAvatarRepository
             'error' => false,
             'code'  => 200
         ], 200);
+    }
+
+    public function removeFile($sessionImage)
+    {
+        $full_size_dir =  Config::get('frontend.user_avatar_path') . Config::get('frontend.full_size');
+        $icon_size_dir =  Config::get('frontend.user_avatar_path') . Config::get('frontend.icon_size');
+
+        $full_path1 = $full_size_dir . $sessionImage->file_name;
+        $full_path2 = $icon_size_dir . $sessionImage->file_name;
+
+        if ( File::exists( $full_path1 ) )
+        {
+            File::delete( $full_path1 );
+        }
+
+        if ( File::exists( $full_path2 ) )
+        {
+            File::delete( $full_path2 );
+        }
     }
 
     function sanitize($string, $force_lowercase = true, $anal = false)

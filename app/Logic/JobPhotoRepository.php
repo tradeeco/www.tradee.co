@@ -64,7 +64,7 @@ class JobPhotoRepository
 
     public function createUniqueFilename( $filename, $extension )
     {
-        $full_size_dir = Config::get('frontend.full_size');
+        $full_size_dir = Config::get('frontend.job_photo_path') . Config::get('frontend.full_size');
         $full_image_path = $full_size_dir . $filename . '.' . $extension;
 
         if ( File::exists( $full_image_path ) )
@@ -83,7 +83,8 @@ class JobPhotoRepository
     public function original( $photo, $filename )
     {
         $manager = new ImageManager();
-        $full_path = 'uploads/job_photos/';
+        $full_path = Config::get('frontend.job_photo_path');
+
         $image = $manager->make( $photo )->save($full_path . Config::get('frontend.full_size') . $filename );
 
         return $image;
@@ -95,7 +96,7 @@ class JobPhotoRepository
     public function icon( $photo, $filename )
     {
         $manager = new ImageManager();
-        $full_path = 'uploads/job_photos/';
+        $full_path = Config::get('frontend.job_photo_path');
         $image = $manager->make( $photo )->resize(200, null, function ($constraint) {
             $constraint->aspectRatio();
         })
@@ -110,8 +111,8 @@ class JobPhotoRepository
     public function delete( $fileId)
     {
 
-        $full_size_dir = 'uploads/job_photos/' . Config::get('frontend.full_size');
-        $icon_size_dir = 'uploads/job_photos/' . Config::get('frontend.icon_size');
+        $full_size_dir = Config::get('frontend.job_photo_path') . Config::get('frontend.full_size');
+        $icon_size_dir = Config::get('frontend.job_photo_path') . Config::get('frontend.icon_size');
 
         $sessionImage = JobPhoto::where('id', $fileId)->first();
 

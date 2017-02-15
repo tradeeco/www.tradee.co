@@ -3,9 +3,26 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Job extends Model
 {
+    use Sluggable;
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
 
     public function scopeCategories($query, $name='')
     {
@@ -30,6 +47,11 @@ class Job extends Model
     public function areaSuburb()
     {
         return $this->belongsTo('App\Models\AreaSuburb');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
     public static $rules = [

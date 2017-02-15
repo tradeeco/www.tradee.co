@@ -43,7 +43,7 @@ body.header-fixed-space-v2 {
 p,
 li,
 li a,
-label {
+label, .label-color {
  color: #363636;
 }
 

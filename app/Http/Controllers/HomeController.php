@@ -25,8 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['categories'] = DB::table('categories')->orderBy('name')->pluck('name', 'id');
-        $data['locations'] = DB::table('area_suburbs')->orderBy('name')->pluck('name', 'id');
+        $data['categories'] = DB::table('categories')->orderBy('name')->pluck('name', 'name');
+        $data['locations'] = DB::table('area_suburbs')->orderBy('name')->pluck('name', 'name');
         return view('home', $data);
     }
 }

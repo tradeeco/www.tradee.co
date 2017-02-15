@@ -63,46 +63,46 @@
                                     <button type="submit" class="btn btn-primary rounded btn-lg">POST</button>
                                 </div>
 
-                                {!! Form::close() !!}
-                                    @else
-                                        <h2 class="text-center color-white margin-bottom-15">Oops, you are not logged in!</h2>
-                                        <h3 class="text-center color-white margin-bottom-20"><b>Sign In below!</b></h3>
-                                        <div class="row">
-                                            <div class="col-md-8 col-md-offset-2">
-                                                @include('partial/login_form')
-                                            </div>
+                            {!! Form::close() !!}
+                                @else
+                                    <h2 class="text-center color-white margin-bottom-15">Oops, you are not logged in!</h2>
+                                    <h3 class="text-center color-white margin-bottom-20"><b>Sign In below!</b></h3>
+                                    <div class="row">
+                                        <div class="col-md-8 col-md-offset-2">
+                                            @include('partial/login_form')
                                         </div>
-                                        <h3 class="text-center color-white">Dont have an account? Its <b>FREE!</b></h3>
-                                        <h3 class="text-center color-white margin-bottom-20"><b>Sign Up below!</b></h3>
-                                        <div class="row">
-                                            <div class="col-md-10 col-md-offset-1">
-                                                @include('partial/register_form')
-                                            </div>
+                                    </div>
+                                    <h3 class="text-center color-white">Dont have an account? Its <b>FREE!</b></h3>
+                                    <h3 class="text-center color-white margin-bottom-20"><b>Sign Up below!</b></h3>
+                                    <div class="row">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            @include('partial/register_form')
                                         </div>
-                                    @endif
-                                </div>
+                                    </div>
+                                @endif
+                            </div>
 
-                                <div id="passwordTab" class="panel-body tab-pane fade">
-                                    <form class="form-horizontal">
-                                        <div class="form-group">
-                                            <div class="col-md-4">
-                                                {{ Form::select('category_id', $categories, null, ['class' => 'form-control input-lg rounded']) }}
-                                            </div>
-                                            <div class="col-md-4">
-                                                {{ Form::select('area_suburb_id', $locations, null, ['class' => 'form-control input-lg rounded']) }}
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button type="button" class="btn btn-primary rounded btn-lg">Search</button>
-                                            </div>
+                            <div id="passwordTab" class="panel-body tab-pane fade">
+                                {!! Form::open(['url' => route('jobs.index'), 'id' => 'search_job', 'method' => 'GET']) !!}
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            {{ Form::select('category', $categories, null, ['class' => 'form-control input-lg rounded']) }}
                                         </div>
-                                    </form>
-                                </div>
+                                        <div class="col-md-4">
+                                            {{ Form::select('location', $locations, null, ['class' => 'form-control input-lg rounded']) }}
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="submit" class="btn btn-primary rounded btn-lg">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     @endsection
 
     @section('custom-scripts')

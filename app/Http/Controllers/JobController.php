@@ -91,12 +91,17 @@ class JobController extends Controller
                 $this->image->delete( $photo->id );
             }
 
-            return Redirect::route('home.index')->with('alert', $alert);
+            return Redirect::route('job.show', $job->slug)->with('alert', $alert);
         }
     }
 
     public function show($slug) {
         $data['job'] = Job::where('slug', $slug)->first();
+
+        if ($alert = Session::get('alert')) {
+            $data['alert'] = $alert;
+        }
+
         return view('job.show', $data);
     }
     public function upload_photo(Request $request)

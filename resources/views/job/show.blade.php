@@ -6,6 +6,18 @@
 @stop
 @section('body')
     <div class="container content">
+        <?php if (isset($alert)) { ?>
+        <div class="alert alert-<?php echo $alert['type'];?> alert-dismissibl fade in">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <p>
+                <?php echo $alert['msg'];?>
+            </p>
+        </div>
+        <?php } ?>
+            
         <div class="row">
             <div class="col-md-6" id="slider">
                 <div class="row">

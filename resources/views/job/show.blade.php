@@ -58,8 +58,8 @@
             </div>
             <div class="col-md-6">
                 <h2 class="label-color">{{ $job->title }}</h2>
-                <h2 class="label-color">{{ $job->category->name }}</h2>
-                <h2 class="label-color">{{ $job->areaSuburb->name }}</h2>
+                <h3 class="label-color">{{ $job->category->name }}</h3>
+                <h3 class="label-color">{{ $job->areaSuburb->name }}</h3>
                 <p>{{ $job->description }}</p>
             </div>
         </div>

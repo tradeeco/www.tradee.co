@@ -63,6 +63,7 @@
                 <p>{{ $job->description }}</p>
             </div>
         </div>
+        @if ($job->user->id != Auth::user()->id)
         <div class="col-md-12 margin-bottom-40">
             <div class="job-user profile">
                 <h2 class="label-color margin-bottom-30">Job by:</h2>
@@ -74,6 +75,30 @@
                 </div>
             </div>
         </div>
+        @else
+        <div class="tab-v2">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="false">(##) Interested</a></li>
+                <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="false">(##) Shortlisted</a></li>
+                <li class=""><a href="#messages-1" data-toggle="tab" aria-expanded="false">(##) Selected</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="home-1">
+                    <h4>Heading Sample 1</h4>
+                    <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum <strong>ivamus imperdiet</strong> condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque <strong>fermentum vivamus</strong> imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac felis consectetur id. Donec eget orci metusvivamus imperdiet.</p>
+                </div>
+                <div class="tab-pane fade in" id="profile-1">
+                    <img alt="" class="pull-left lft-img-margin img-width-200" src="assets/img/main/img17.jpg">
+                    <h4>Heading Sample 2</h4>
+                    <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, <strong>ac adipiscing nunc.</strong> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac <strong>interdum ullamcorper.</strong></p>
+                </div>
+                <div class="tab-pane fade in" id="messages-1">
+                    <h4>Heading Sample 3</h4>
+                    <p><img alt="" class="pull-right rgt-img-margin img-width-200" src="assets/img/main/img21.jpg"> <strong>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id.</strong> Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
+                </div>
+            </div>
+        </div>
+        @endif
         <div class="row margin-bottom-20">
             <div class="col-md-6">
                 <h4 class="label-color">Posted: {{ Carbon\Carbon::parse($job->created_at)->format('d/m/Y') }}</h4>

@@ -30,13 +30,13 @@
                     <div class="col-sm-4 md-margin-bottom-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-tag"></i></span>
-                            {{ Form::select('category', $categories, null, ['class' => 'form-control']) }}
+                            {{ Form::select('category', $categories, isset($getParams['category']) ? $getParams['category'] : null, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="col-sm-4 md-margin-bottom-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                            {{ Form::select('location', $locations, null, ['class' => 'form-control']) }}
+                            {{ Form::select('location', $locations, isset($getParams['location']) ? $getParams['location'] : null, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="col-sm-4">

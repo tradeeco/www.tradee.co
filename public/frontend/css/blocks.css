@@ -5535,6 +5535,7 @@
     border-top-right-radius: 4px;
     color: #fff;
     font-size: 16px;
+    margin-right: 8px;
 }
 
 .tab-v2 .nav-tabs li.active a {

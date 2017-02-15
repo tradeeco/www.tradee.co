@@ -28,6 +28,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserExperience');
     }
 
+    public function userJobInterestedLocations()
+    {
+        return $this->hasMany('App\Models\UserJobInterestedLocation');
+    }
 //    public static function authenticate($username, $password)
 //    {
 //        $user = User::where('username', $username)->first();
@@ -42,12 +46,33 @@ class User extends Authenticatable
 //        $this->attributes['password'] = Hash::make($password);
 //    }
     public static $accountRules = [
-        'title' => 'required|string|min:2|max:20',
-        'description' => 'required|min:10|max:500',
-        'photo_ids' => 'required'
+        'file' => 'mimes:png,gif,jpeg,jpg,bmp',
+        'short_bio.*' => 'max:1000',
+        'category_id.*' => 'required',
+        'length_id.*' => 'required',
+        'area_suburb_id.*' => 'required',
     ];
 
     public static $accountMessages = [
         'photo_ids.required' => 'The photo field is required'
     ];
+
+    public static function initAccountValidation($request)
+    {
+        $messages = [];
+        if (isset($request)) {
+            foreach ($request->get('category_id') as $key => $val) {
+                $messages['category_id.' . $key . '.required'] = 'This field is required.';
+                $messages['length_id.' . $key . '.required'] = 'This field is required.';
+            }
+
+            foreach ($request->get('area_suburb_id') as $key => $val) {
+                $messages['area_suburb_id.' . $key . '.required'] = 'This field is required.';
+            }
+        }
+
+
+        User::$accountMessages = array_merge(User::$accountMessages, $messages);
+
+    }
 }

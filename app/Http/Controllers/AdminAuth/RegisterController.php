@@ -22,9 +22,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers{
-        register as traitRegister;
-    }
+    use RegistersUsers;
 
     /**
      * Where to redirect users after login / registration.
@@ -41,14 +39,6 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('admin.guest');
-    }
-
-    public function register(Request $request)
-    {
-        //Set session as 'register'
-        Session::put('last_auth_attempt', 'register');
-        //The trait is not a class. You can't access its members directly.
-        return $this->traitRegister($request);
     }
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserProfilesTable extends Migration
+class CreateUserJobInterestedLocations extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,10 @@ class CreateUserProfilesTable extends Migration
     public function up()
     {
         //
-        Schema::create('user_profiles', function(Blueprint $table)
+        Schema::create('user_job_interested_locations', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->text('short_bio')->nullable();
-            $table->string('origin_image_name')->nullable();;
-            $table->string('image_name')->nullable();
+            $table->integer('area_suburb_id')->unsigned()->index();
             $table->integer('user_id')->unisigned()->index();
             $table->timestamps();
         });
@@ -33,6 +31,5 @@ class CreateUserProfilesTable extends Migration
     public function down()
     {
         //
-        Schema::drop('user_profiles');
     }
 }

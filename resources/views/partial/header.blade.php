@@ -37,7 +37,7 @@
                                 </a>
                             </li>
                             <li class="dropdown mega-menu">
-                                <a href="{!! URL::route('jobs.index') !!}">
+                                <a href="javascript:void(0);">
                                     My Account
                                 </a>
                                 <ul class="dropdown-menu">

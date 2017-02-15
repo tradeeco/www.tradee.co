@@ -28,3 +28,22 @@ $(function() {
         });
     });
 });
+
+var Common = {
+
+    read_image: function(input, wrapClass) {
+        var ext, reader;
+        if (input.files && input.files[0]) {
+            ext = $(input).val().split('.').pop().toLowerCase();
+            if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) === -1) {
+                alert('invalid extension!');
+                return false;
+            }
+            reader = new FileReader();
+            reader.onload = function(e) {
+                return $('div.' + wrapClass + ' img').attr('src', e.target.result);
+            };
+            return reader.readAsDataURL(input.files[0]);
+        }
+    }
+};

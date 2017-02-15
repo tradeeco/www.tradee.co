@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserExperience extends Model
 {
+    protected $fillable = ['category_id', 'user_id', 'length_id'];
     //
     public static $rules = [
         'category_id' => 'required',

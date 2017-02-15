@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -21,8 +23,9 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
-
+    use RegistersUsers{
+        register as traitRegister;
+    }
     /**
      * Where to redirect users after registration.
      *
@@ -49,10 +52,18 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required|max:25|unique:users',
+            'username' => 'required|alpha_dash|max:25|unique:users',
             'email' => 'required|email|max:25|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        //Set session as 'register'
+        Session::put('last_auth_attempt', 'register');
+        //The trait is not a class. You can't access its members directly.
+        return $this->traitRegister($request);
     }
 
     /**

@@ -17,7 +17,7 @@
             </p>
         </div>
         <?php } ?>
-            
+
         <div class="row">
             <div class="col-md-6" id="slider">
                 <div class="row">

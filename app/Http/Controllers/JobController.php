@@ -91,7 +91,7 @@ class JobController extends Controller
                 $this->image->delete( $photo->id );
             }
 
-            return Redirect::route('job.show', $job->slug)->with('alert', $alert);
+            return Redirect::route('jobs.show', $job->slug)->with('alert', $alert);
         }
     }
 

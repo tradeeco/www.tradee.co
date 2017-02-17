@@ -122,7 +122,7 @@
     position: relative;
 }
 
-.home-container:after, .how-works-container:after, .payment-container:after {
+.how-works-container:after, .payment-container:after {
     margin-left: -150px;
     left: 50%;
     width: 300px;
@@ -134,4 +134,7 @@
 }
 .payment-container .image-block img {
     width: 120px;
+}
+.home-section {
+    background: url('../../img/home-bg.png') no-repeat top center;
 }

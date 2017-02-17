@@ -160,18 +160,26 @@ class AccountController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        $user->first_name = $request->get('first_name');
-        $user->last_name = $request->get('last_name');
-        $user->address = $request->get('address');
-        $user->area_suburb_id = $request->get('area_suburb_id');
-        $user->post_code = $request->get('phone');
-        $user->save();
+        $validator = Validator::make($request->all(), User::$contactRules, User::$contactMessages);
 
-        $alert['msg'] = 'Contact Details been updated successfully';
-        $alert['type'] = 'success';
+        if ($validator->fails()) {
+            return Redirect::back()
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $user->first_name = $request->get('first_name');
+            $user->last_name = $request->get('last_name');
+            $user->address = $request->get('address');
+            $user->area_suburb_id = $request->get('area_suburb_id');
+            $user->post_code = $request->get('phone');
+            $user->save();
+
+            $alert['msg'] = 'Contact Details been updated successfully';
+            $alert['type'] = 'success';
 
 
-        return Redirect::route('account.edit')->with('alert', $alert);
+            return Redirect::route('account.edit')->with('alert', $alert);
+        }
     }
 
     /**

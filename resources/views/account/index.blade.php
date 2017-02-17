@@ -21,7 +21,7 @@
                     <li><a href="#">my jobs</a></li>
                     <li><a href="#">previous jobs</a></li>
                 </ul>
-                <a href="{{ URL::route('account.edit') }}" class="btn-u btn-u-default">edit my account</a>
+                <a href="{{ URL::route('account.edit_contact') }}" class="btn-u btn-u-default">edit my account</a>
             </div>
         </div>
     </div>
@@ -31,6 +31,5 @@
 @section('custom-scripts')
     {!! Html::script('frontend/js/pages/account.js?'.time()) !!}
     <script>
-        Profile.init();
     </script>
 @endsection

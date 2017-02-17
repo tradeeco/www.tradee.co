@@ -137,7 +137,7 @@
         <div class="row margin-bottom-20">
             <div class="col-md-5 col-md-offset-1 text-center">
                 <div class="image-block margin-bottom-20">
-                    <img src="img/pricing-trader.png" style="width: 120px;"/>
+                    <img src="img/pricing-trader.png" />
                 </div>
                 <h2 class="text-uppercase margin-bottom-25">TRADER</h2>
                 <p>To post a job on TRADEE is <br/> <b>completely free.</b></p>
@@ -145,7 +145,7 @@
             <div class="vertical-divider" style="left: 50%; bottom: 0"></div>
             <div class="col-md-5 text-center">
                 <div class="image-block margin-bottom-20">
-                    <img src="img/pricing-tradee.png" style="width: 120px;"/>
+                    <img src="img/pricing-tradee.png" />
                 </div>
                 <h2 class="text-uppercase margin-bottom-25">TRADEE</h2>
                 <p>To search or view is free. You are only <br/> <b>charged per lead</b><br/> you get when you are interested in a job.</p>

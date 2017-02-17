@@ -4,20 +4,36 @@
     {!! Html::style('backend/css/plugins/dropzone/basic.css?'.time()) !!}
     {!! Html::style('backend/css/plugins/dropzone/dropzone.css?'.time()) !!}
     @endif
+    {!! Html::style('frontend/css/pages/page_pricing.css?'.time()) !!}
 @stop
 @section('body')
-    <div class="container home content">
+    <div class="container home-container content">
         <h1 class="text-center margin-bottom-35">FIND OR POST A JOB</h1>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="profile-body margin-bottom-20">
                     <div class="tab-v1">
                         <ul class="nav nav-justified nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#post_job" aria-expanded="true">POST JOBS</a></li>
-                            <li class=""><a data-toggle="tab" href="#passwordTab" aria-expanded="false">SEARCH JOBS</a></li>
+                            <li class="active"><a data-toggle="tab" href="#search_job" aria-expanded="false">SEARCH JOBS</a></li>
+                            <li><a data-toggle="tab" href="#post_job" aria-expanded="true">POST JOBS</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div id="post_job" class="panel-body tab-pane fade active in">
+                            <div id="search_job" class="panel-body tab-pane fade active in">
+                                {!! Form::open(['url' => route('jobs.index'), 'id' => 'search_job', 'method' => 'GET']) !!}
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        {{ Form::select('category', $categories, null, ['class' => 'form-control input-lg rounded']) }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ Form::select('location', $locations, null, ['class' => 'form-control input-lg rounded']) }}
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary rounded btn-lg">Search</button>
+                                    </div>
+                                </div>
+                                {!! Form::close() !!}
+                            </div>
+                            <div id="post_job" class="panel-body tab-pane fade in">
                                 @if (Auth::check())
                                 {!! Form::open(['url' => route('jobs.store'), 'class' => 'create-job', 'data-parsley-validate', 'id' => 'create_job']) !!}
                                 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -81,26 +97,110 @@
                                     </div>
                                 @endif
                             </div>
-
-                            <div id="passwordTab" class="panel-body tab-pane fade">
-                                {!! Form::open(['url' => route('jobs.index'), 'id' => 'search_job', 'method' => 'GET']) !!}
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            {{ Form::select('category', $categories, null, ['class' => 'form-control input-lg rounded']) }}
-                                        </div>
-                                        <div class="col-md-4">
-                                            {{ Form::select('location', $locations, null, ['class' => 'form-control input-lg rounded']) }}
-                                        </div>
-                                        <div class="col-md-2">
-                                            <button type="submit" class="btn btn-primary rounded btn-lg">Search</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!--=== Service Block ===-->
+    <div class="container content-sm how-works-container">
+        <h2 class="text-center">How TRADEE works</h2>
+        <div class="row">
+            <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">
+                <div class="image-block">
+                <img src="img/post-job.png" class="full-width"/>
+                </div>
+                <h2 class="text-uppercase margin-bottom-10">POST A JOB</h2>
+                <p>TRADERS post and describe a job <br/>they need help with <br/> using the TRADEE.platform for FREE..</p>
+            </div>
+            <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">
+                <div class="image-block">
+                <img src="img/find-job.png" class="full-width" style="width: 160px;"/>
+                </div>
+                <h2 class="text-uppercase margin-bottom-10">FIND A JOB</h2>
+                <p>TRADEE’s are notified of jobs in their area or may search for jobs. TRADEE’s may express interest in a job for FREE.</p>
+            </div>
+            <div class="col-md-4 content-boxes-v6">
+                <div class="image-block">
+                <img src="img/get-done.png" class="full-width"  style="width: 160px;"/>
+                </div>
+                <h2 class="text-uppercase margin-bottom-10">GET IT DONE</h2>
+                <p>TRADERS can view all the TRADEE’s that are interested, and may shortlist a selection and share contact details.</p>
+            </div>
+        </div><!--/row-->
+    </div><!--/container-->
+
+    <div class="container content-sm payment-container">
+        <h2 class="text-center text-uppercase">Payment</h2>
+        <div class="row margin-bottom-20">
+            <div class="col-md-5 col-md-offset-1 text-center">
+                <div class="image-block margin-bottom-20">
+                    <img src="img/pricing-trader.png" style="width: 120px;"/>
+                </div>
+                <h2 class="text-uppercase margin-bottom-25">TRADER</h2>
+                <p>To post a job on TRADEE is <br/> <b>completely free.</b></p>
+            </div>
+            <div class="vertical-divider" style="left: 50%; bottom: 0"></div>
+            <div class="col-md-5 text-center">
+                <div class="image-block margin-bottom-20">
+                    <img src="img/pricing-tradee.png" style="width: 120px;"/>
+                </div>
+                <h2 class="text-uppercase margin-bottom-25">TRADEE</h2>
+                <p>To search or view is free. You are only <br/> <b>charged per lead</b><br/> you get when you are interested in a job.</p>
+            </div>
+        </div><!--/row-->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a href="#" class="btn btn-primary rounded btn-lg">Know more</a>
+            </div>
+        </div>
+    </div><!--/container-->
+
+    <div class="container content why-trade-container">
+        <h2 class="text-center text-uppercase">WHY TRADEE</h2>
+        <div class="row">
+            <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">
+                <h2 class="text-uppercase margin-bottom-10">Save Your Time</h2>
+                <p>Post a job and those who can help will come to you and not vice versa.</p>
+            </div>
+            <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">
+                <h2 class="text-uppercase margin-bottom-10">Easy To Find Help</h2>
+                <p>One platform that is simple and easyto use for all your TRADEE jobs.</p>
+            </div>
+            <div class="col-md-4 content-boxes-v6">
+                <h2 class="text-uppercase margin-bottom-10">Transparency</h2>
+                <p>Safety and security is key. Know exactly who is working on your job.</p>
+            </div>
+        </div><!--/row-->
+    </div>
+    <div class="bg-color-main margin-bottom-5">
+        <div class="container content reviews-container">
+            <h2 class="text-center text-uppercase color-white">REVIEWS</h2>
+            <div class="row">
+                <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">
+                    <div class="image-block">
+                        <img src="img/home-review1.png" class="full-width"/>
+                    </div>
+                    <h3 class="margin-bottom-10 color-white">John Doe</h3>
+                    <p class="color-white">"Review remarks are great"</p>
+                </div>
+                <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">
+                    <div class="image-block">
+                        <img src="img/home-review1.png" class="full-width"/>
+                    </div>
+                    <h3 class="margin-bottom-10 color-white">John Doe</h3>
+                    <p class="color-white">"Review remarks are great"</p>
+                </div>
+                <div class="col-md-4 content-boxes-v6">
+                    <div class="image-block">
+                        <img src="img/home-review1.png" class="full-width"/>
+                    </div>
+                    <h3 class="margin-bottom-10 color-white">John Doe</h3>
+                    <p class="color-white">"Review remarks are great"</p>
+                </div>
+            </div><!--/row-->
         </div>
     </div>
     @endsection

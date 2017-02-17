@@ -61,6 +61,7 @@ class AccountController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } else {
+            // User Experience save process
             foreach ($request->get('category_id') as $key => $category_id) {
                 $lengthId = $request->get('length_id')[$key];
                 if ($request->has('experience_id') && isset($request->get('experience_id')[$key])) {
@@ -74,7 +75,7 @@ class AccountController extends Controller
                     $userExperience->save();
                 }
             }
-
+            // user job interested area save process
             foreach ($request->get('area_suburb_id') as $key => $area_suburb_id) {
                 if ($request->has('user_interested_location_id') && isset($request->get('user_interested_location_id')[$key])) {
                     $inlocation = UserJobInterestedLocation::find($request->get('user_interested_location_id')[$key]);
@@ -87,16 +88,19 @@ class AccountController extends Controller
                 }
             }
 
+            // profile image file upload
             if ($request->hasFile('file')) {
                 $photo = $request->all();
                 $response = $this->image->upload($photo);
             }
 
+            // this part may not be needed
             if (count($user->userProfile))
                 $sessionUserProfile = $user->userProfile;
             else
                 $sessionUserProfile = new UserProfile(['user_id' => $user->id]);
 
+            // user profile short bio save
             $sessionUserProfile->short_bio = $request->get('short_bio');
             $sessionUserProfile->save();
 
@@ -120,7 +124,7 @@ class AccountController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * edit account page
      *
      * @return \Illuminate\Http\Response
      */
@@ -148,15 +152,26 @@ class AccountController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the account contact details
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user = Auth::user();
+        $user->first_name = $request->get('first_name');
+        $user->last_name = $request->get('last_name');
+        $user->address = $request->get('address');
+        $user->area_suburb_id = $request->get('area_suburb_id');
+        $user->post_code = $request->get('phone');
+        $user->save();
+
+        $alert['msg'] = 'Contact Details been updated successfully';
+        $alert['type'] = 'success';
+
+
+        return Redirect::route('account.edit')->with('alert', $alert);
     }
 
     /**
@@ -170,4 +185,15 @@ class AccountController extends Controller
         //
     }
 
+    /**
+     * edit contact detail page
+     */
+    public function edit_contact()
+    {
+        $user = Auth::user();
+        $data['user'] = $user;
+        $data['locations'] = DB::table('area_suburbs')->orderBy('name')->pluck('name', 'id')->all();
+
+        return view('account.edit_contact', $data);
+    }
 }

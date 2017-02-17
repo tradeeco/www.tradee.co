@@ -41,6 +41,8 @@ Route::post('/jobs/delete_photo', 'JobController@delete_photo')->name('jobs.dele
 //Route::get('/profile', 'ProfileController@edit')->name('profile.edit');
 Route::resource('/account', 'AccountController', ['only' => ['index', 'store']]);
 Route::get('/account/edit', 'AccountController@edit')->name('account.edit');
+Route::get('/account/contact_details', 'AccountController@edit_contact')->name('account.edit_contact');
+Route::post('/account/update_contact_details', 'AccountController@update')->name('account.update');
 // Catch all undefined routes. Always gotta stay at the bottom since order of routes matters.
 //Route::any('{undefinedRoute}', function ($undefinedRoute) {
 //    return view('layout');

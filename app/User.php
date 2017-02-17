@@ -85,4 +85,16 @@ class User extends Authenticatable
         User::$accountMessages = array_merge(User::$accountMessages, $messages);
 
     }
+
+    public static $contactRules = [
+        'first_name' => 'max:25',
+        'last_name' => 'max:25',
+        'address' => 'max:25',
+        'phone' => 'max:25',
+        'post_code' => 'max:25',
+    ];
+
+    public static $contactMessages = [
+        'photo_ids.required' => 'The photo field is required'
+    ];
 }

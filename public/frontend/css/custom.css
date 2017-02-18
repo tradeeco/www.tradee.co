@@ -137,4 +137,9 @@
 }
 .home-section {
     background: url('../../img/home-bg.png') no-repeat top center;
+    min-height: 800px;
+}
+.vertical-center {
+    display: flex;
+    align-items: center;
 }

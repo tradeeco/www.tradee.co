@@ -6,9 +6,9 @@
     @endif
 @stop
 @section('body')
-    <section class="home-section">
+    <section class="home-section vertical-center">
         <div class="container home-container content-sm">
-            <h1 class="text-center margin-bottom-35 color-white">FIND OR POST A JOB</h1>
+            <h1 class="text-center margin-bottom-100 color-white">FIND OR POST A JOB</h1>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="profile-body margin-bottom-20">

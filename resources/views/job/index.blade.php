@@ -6,18 +6,18 @@
 @stop
 @section('body')
     {{--<div class="container m-t-94 home content">--}}
-        {{--<h1 class="text-center margin-bottom-35">SEARCH FOR JOBS</h1>--}}
-        {{--<form class="form-inline" role="form">--}}
-            {{--<div class="form-group">--}}
-                {{--<label class="sr-only" for="exampleInputEmail2">Email address</label>--}}
-                {{--<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">--}}
-            {{--</div>--}}
-            {{--<div class="form-group">--}}
-                {{--<label class="sr-only" for="exampleInputPassword2">Password</label>--}}
-                {{--<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">--}}
-            {{--</div>--}}
-            {{--<button type="submit" class="btn-u btn-u-default">Sign in</button>--}}
-        {{--</form>--}}
+    {{--<h1 class="text-center margin-bottom-35">SEARCH FOR JOBS</h1>--}}
+    {{--<form class="form-inline" role="form">--}}
+    {{--<div class="form-group">--}}
+    {{--<label class="sr-only" for="exampleInputEmail2">Email address</label>--}}
+    {{--<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">--}}
+    {{--</div>--}}
+    {{--<div class="form-group">--}}
+    {{--<label class="sr-only" for="exampleInputPassword2">Password</label>--}}
+    {{--<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">--}}
+    {{--</div>--}}
+    {{--<button type="submit" class="btn-u btn-u-default">Sign in</button>--}}
+    {{--</form>--}}
     {{--</div>--}}
     <div class="job-img margin-bottom-30">
         <div class="job-banner">
@@ -66,8 +66,10 @@
                       @foreach ($jobs as $job)
                         <tr>
                             <td>
+                                <a href="{{ URL::route('users.profile', $job->user->slug) }}">
                                 <img class="rounded-x" src="{{ userImage($job->user) }}" alt="">
-                                <span class="text-center">{{ $job->user->username }}</span>
+                                <span class="text-center">{{ $job->user->first_name }}</span>
+                                </a>
                             </td>
                             <td class="td-width">
                                 <h3><a href="{{ URL::route('jobs.show', $job->slug) }}">{{ $job->title }}</a></h3>

@@ -16,4 +16,9 @@ class UserExperience extends Model
     public static $messages = [
         'photo_ids.required' => 'The photo field is required'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
 }

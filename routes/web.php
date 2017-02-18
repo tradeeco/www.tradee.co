@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Auth;
 use App\S_R_relation;
 
+Route::pattern('slug',           '[a-zA-Z0-9-]+');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +48,8 @@ Route::post('/account/update_contact_details', 'AccountController@update')->name
 //Route::any('{undefinedRoute}', function ($undefinedRoute) {
 //    return view('layout');
 //})->where('undefinedRoute', '([A-z\d-\/_.]+)?');
+
+Route::get('users/{slug}', 'UserController@profile')->name('users.profile');
 
 
 Route::group(['prefix' => 'admin'], function () {

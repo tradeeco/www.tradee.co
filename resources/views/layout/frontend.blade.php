@@ -84,26 +84,36 @@
         <!-- JS Implementing Plugins -->
         {!! Html::script('frontend/plugins/back-to-top.js') !!}
         {!! Html::script('frontend/plugins/smoothScroll.js') !!}
-        {!! Html::script('frontend/plugins/jquery.parallax.js') !!}
+        {!! Html::script('frontend/plugins/jquery.easing.min.js') !!}
+        {{--{!! Html::script('frontend/plugins/jquery.parallax.js') !!}--}}
         {!! Html::script('frontend/plugins/counter/waypoints.min.js') !!}
-        {!! Html::script('frontend/plugins/counter/jquery.counterup.min.js') !!}
-        {!! Html::script('frontend/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js') !!}
-        {!! Html::script('frontend/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js') !!}
+        {{--{!! Html::script('frontend/plugins/counter/jquery.counterup.min.js') !!}--}}
 
         <!-- JS Customization -->
         {!! Html::script('frontend/js/custom.js?'.time()) !!}
 
         <!-- JS Page Level -->
         {!! Html::script('frontend/js/app.js') !!}
-        {!! Html::script('frontend/js/plugins/style-switcher.js') !!}
-        {!! Html::script('frontend/js/plugins/revolution-slider.js') !!}
+        {{--{!! Html::script('frontend/js/plugins/style-switcher.js') !!}--}}
+        {{--{!! Html::script('frontend/js/plugins/revolution-slider.js') !!}--}}
         <script type="text/javascript">
             jQuery(document).ready(function() {
                 App.init();
-                App.initCounter();
-                App.initParallaxBg();
-                StyleSwitcher.initStyleSwitcher();
-                RevolutionSlider.initRSfullScreenOffset();
+//                App.initCounter();
+//                App.initParallaxBg();
+//                StyleSwitcher.initStyleSwitcher();
+//                RevolutionSlider.initRSfullScreenOffset();
+
+                //jQuery for page scrolling feature - requires jQuery Easing plugin
+                $(function() {
+                    $('.page-scroll a').bind('click', function(event) {
+                        var $anchor = $(this);
+                        $('html, body').stop().animate({
+                            scrollTop: $($anchor.attr('href')).offset().top
+                        }, 1000, 'easeInOutExpo');
+                        event.preventDefault();
+                    });
+                });
             });
         </script>
         {!! Form::open(['url' => '/logout', 'id' => 'logout-form', 'style' => 'display: none;']) !!}

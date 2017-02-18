@@ -4,7 +4,6 @@
     {!! Html::style('backend/css/plugins/dropzone/basic.css?'.time()) !!}
     {!! Html::style('backend/css/plugins/dropzone/dropzone.css?'.time()) !!}
     @endif
-    {!! Html::style('frontend/css/pages/page_pricing.css?'.time()) !!}
 @stop
 @section('body')
     <section class="home-section">
@@ -106,7 +105,7 @@
         </div>
     </section>
     <!--=== Service Block ===-->
-    <div class="container content-sm how-works-container">
+    <div class="container content-sm how-works-container" id="how_works">
         <h2 class="text-center">How TRADEE works</h2>
         <div class="row">
             <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">

@@ -24,8 +24,8 @@
             <div class="collapse navbar-collapse navbar-responsive-collapse">
                 <div class="menu-container">
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a href="javascript:void(0);"  id="sign_in">
+                        <li  class="page-scroll">
+                            <a href="#how_works">
                                 How It Works
                             </a>
                         </li>

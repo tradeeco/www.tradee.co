@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class RegisterController extends Controller
 {
@@ -85,11 +86,8 @@ class RegisterController extends Controller
         return $user;
     }
 
-//    protected function redirectTo()
-//    {
-//        if (Auth::user()->role == 'Admin')
-//          return '/admin';
-//        else if (Auth::user()->role == 'Cashier')
-//          return '/cashier';
-//    }
+    protected function redirectTo()
+    {
+          return '/account/contact_details';
+    }
 }

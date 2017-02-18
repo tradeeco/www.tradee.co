@@ -63,19 +63,7 @@
                 <p>{{ $job->description }}</p>
             </div>
         </div>
-        @if ($job->user->id != Auth::user()->id)
-        <div class="col-md-12 margin-bottom-40">
-            <div class="job-user profile">
-                <h2 class="label-color margin-bottom-30">Job by:</h2>
-                <img src="{{ userImageSmall($job->user) }}" class="rounded-x pull-left margin-right-20">
-                <div class="name-location">
-                    <h3 class="margin-bottom-15">{{ $job->user->first_name . ' ' . $job->user->last_name }}</h3>
-                    <h3 class="label-color margin-bottom-15">Rating - X X X X </h3>
-                    <p>{{ $job->user->userProfile->short_bio }}</p>
-                </div>
-            </div>
-        </div>
-        @else
+        @if (Auth::check() && $job->user->id == Auth::user()->id)
         <div class="tab-v2">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="false">(##) Interested</a></li>
@@ -95,6 +83,18 @@
                 <div class="tab-pane fade in" id="messages-1">
                     <h4>Heading Sample 3</h4>
                     <p><img alt="" class="pull-right rgt-img-margin img-width-200" src="assets/img/main/img21.jpg"> <strong>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id.</strong> Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
+                </div>
+            </div>
+        </div>
+        @else
+        <div class="col-md-12 margin-bottom-40">
+            <div class="job-user profile">
+                <h2 class="label-color margin-bottom-30">Job by:</h2>
+                <img src="{{ userImageSmall($job->user) }}" class="rounded-x pull-left margin-right-20">
+                <div class="name-location">
+                    <h3 class="margin-bottom-15">{{ $job->user->first_name }}</h3>
+                    <h3 class="label-color margin-bottom-15">Rating - X X X X </h3>
+                    <p>{{ $job->user->userProfile->short_bio }}</p>
                 </div>
             </div>
         </div>

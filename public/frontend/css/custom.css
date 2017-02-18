@@ -109,7 +109,7 @@
     line-height: 200px;
 }
 .how-works-container .content-boxes-v6 img {
-    width: 170px;
+    width: 140px;
 }
 .payment-container .row{
     position: relative;
@@ -119,19 +119,19 @@
 }
 
 .home-container, .how-works-container, .payment-container, .why-trade-container{
-    position: relative;
+    /*position: relative;*/
 }
 
-.how-works-container:after, .payment-container:after {
-    margin-left: -150px;
-    left: 50%;
-    width: 300px;
-    height: 2px;
-    content: " ";
-    bottom: 0;
-    background: #555;
-    position: absolute;
-}
+/*.how-works-container:after, .payment-container:after {*/
+    /*margin-left: -150px;*/
+    /*left: 50%;*/
+    /*width: 300px;*/
+    /*height: 2px;*/
+    /*content: " ";*/
+    /*bottom: 0;*/
+    /*background: #555;*/
+    /*position: absolute;*/
+/*}*/
 .payment-container .image-block img {
     width: 120px;
 }

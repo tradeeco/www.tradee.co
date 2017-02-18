@@ -20,15 +20,15 @@
                             <div class="tab-content">
                                 <div id="search_job" class="panel-body tab-pane fade active in">
                                     {!! Form::open(['url' => route('jobs.index'), 'id' => 'search_job', 'method' => 'GET']) !!}
-                                    <div class="form-group">
-                                        <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-md-5">
                                             {{ Form::select('category', $categories, null, ['class' => 'form-control input-lg rounded']) }}
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-5 padding-left-5">
                                             {{ Form::select('location', $locations, null, ['class' => 'form-control input-lg rounded']) }}
                                         </div>
-                                        <div class="col-md-2">
-                                            <button type="submit" class="btn btn-primary rounded btn-lg">Search</button>
+                                        <div class="col-md-2" style="padding-left: 0">
+                                            <button type="submit" class="btn btn-primary rounded btn-lg btn-block">Search</button>
                                         </div>
                                     </div>
                                     {!! Form::close() !!}
@@ -49,11 +49,11 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 {{ Form::label('category', 'Category') }}
-                                                {{ Form::select('category_id', $categories, null, ['class' => 'form-control input-lg rounded']) }}
+                                                {{ Form::select('category_id', $categories1, null, ['class' => 'form-control input-lg rounded']) }}
                                             </div>
                                             <div class="col-md-4">
                                                 <label>Area / Suburb</label>
-                                                {{ Form::select('area_suburb_id', $locations, null, ['class' => 'form-control input-lg rounded']) }}
+                                                {{ Form::select('area_suburb_id', $locations1, null, ['class' => 'form-control input-lg rounded']) }}
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                         <button type="submit" class="btn btn-primary rounded btn-lg">POST</button>
                                     </div>
 
-                                {!! Form::close() !!}
+                                    {!! Form::close() !!}
                                     @else
                                         <h2 class="text-center color-white margin-bottom-15">Oops, you are not logged in!</h2>
                                         <h3 class="text-center color-white margin-bottom-20"><b>Sign In below!</b></h3>
@@ -106,25 +106,25 @@
     </section>
     <!--=== Service Block ===-->
     <div class="container content-sm how-works-container" id="how_works">
-        <h2 class="text-center">How TRADEE works</h2>
+        <h2 class="text-center text-uppercase">How TRADEE works</h2>
         <div class="row">
             <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">
                 <div class="image-block">
                 <img src="img/post-job.png" class="full-width"/>
                 </div>
                 <h2 class="text-uppercase margin-bottom-10">POST A JOB</h2>
-                <p>TRADERS post and describe a job <br/>they need help with <br/> using the TRADEE.platform for FREE..</p>
+                <p>TRADERS post and describe a job <br/>they need help with  using the <br/> TRADEE platform for FREE.</p>
             </div>
             <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">
                 <div class="image-block">
-                <img src="img/find-job.png" class="full-width" style="width: 160px;"/>
+                <img src="img/find-job.png" class="full-width" style="width: 120px;"/>
                 </div>
                 <h2 class="text-uppercase margin-bottom-10">FIND A JOB</h2>
                 <p>TRADEE’s are notified of jobs in their area or may search for jobs. TRADEE’s may express interest in a job for FREE.</p>
             </div>
             <div class="col-md-4 content-boxes-v6">
                 <div class="image-block">
-                <img src="img/get-done.png" class="full-width"  style="width: 160px;"/>
+                <img src="img/get-done.png" class="full-width"  style="width: 120px;"/>
                 </div>
                 <h2 class="text-uppercase margin-bottom-10">GET IT DONE</h2>
                 <p>TRADERS can view all the TRADEE’s that are interested, and may shortlist a selection and share contact details.</p>
@@ -134,7 +134,7 @@
 
     <div class="container content-sm payment-container">
         <h2 class="text-center text-uppercase">Payment</h2>
-        <div class="row margin-bottom-20">
+        <div class="row margin-bottom-40">
             <div class="col-md-5 col-md-offset-1 text-center">
                 <div class="image-block margin-bottom-20">
                     <img src="img/pricing-trader.png" />
@@ -153,25 +153,25 @@
         </div><!--/row-->
         <div class="row">
             <div class="col-md-12 text-center">
-                <a href="#" class="btn btn-primary rounded btn-lg">Know more</a>
+                <a href="#" class="btn btn-primary rounded btn-lg" style="font-size: 16px;">Know more</a>
             </div>
         </div>
     </div><!--/container-->
 
-    <div class="container content why-trade-container">
+    <div class="container-fluid content why-trade-container space-lg-hor">
         <h2 class="text-center text-uppercase">WHY TRADEE</h2>
         <div class="row">
             <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">
                 <h2 class="text-uppercase margin-bottom-10">Save Your Time</h2>
-                <p>Post a job and those who can help will come to you and not vice versa.</p>
+                <p>Post a job and those who <br/> can help will come to you and <br/> not vice versa.</p>
             </div>
             <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">
                 <h2 class="text-uppercase margin-bottom-10">Easy To Find Help</h2>
-                <p>One platform that is simple and easyto use for all your TRADEE jobs.</p>
+                <p>One platform that is simple <br/> and easy  to use for all <br/> your <b>TRADEE</b> jobs.</p>
             </div>
             <div class="col-md-4 content-boxes-v6">
                 <h2 class="text-uppercase margin-bottom-10">Transparency</h2>
-                <p>Safety and security is key. Know exactly who is working on your job.</p>
+                <p>Safety and security is key. <br/> Know exactly who is working <br/> on your job.</p>
             </div>
         </div><!--/row-->
     </div>

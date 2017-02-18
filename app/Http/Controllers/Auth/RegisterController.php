@@ -62,6 +62,7 @@ class RegisterController extends Controller
     {
         //Set session as 'register'
         Session::put('last_auth_attempt', 'register');
+        $request->request->add(['area_suburb_id' => 0]);
         //The trait is not a class. You can't access its members directly.
         return $this->traitRegister($request);
     }
@@ -78,6 +79,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'username' => $data['username'],
             'password' => bcrypt($data['password']),
+            'area_suburb_id' => $data['area_suburb_id']
         ]);
     }
 

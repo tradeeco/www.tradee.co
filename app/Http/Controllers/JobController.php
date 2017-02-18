@@ -21,7 +21,7 @@ class JobController extends Controller
 
     public function __construct(JobPhotoRepository $jobPhotoRepository)
     {
-        $this->middleware('auth', ['except' => ['index']]);
+        $this->middleware('auth', ['except' => ['index', 'show']]);
         $this->image = $jobPhotoRepository;
     }
 

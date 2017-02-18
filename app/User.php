@@ -6,14 +6,30 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use App\Models\UserProfile;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use Sluggable;
 
     protected $fillable = [
-        'username', 'email', 'password', 'first_name', 'last_name', 'phone', 'address', 'post_code',
+        'username', 'email', 'password', 'first_name', 'last_name', 'phone', 'address', 'post_code', 'area_suburb_id', 'slug'
     ];
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'username'
+            ]
+        ];
+    }
 
     protected $hidden = [
         'password', 'remember_token',
@@ -24,14 +40,14 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\UserProfile');
     }
 
-    protected static function boot()
-    {
-        static::created(function ($model) {
-            UserProfile::create(['user_id'=> $model->id]);
-
-            return true;
-        });
-    }
+//    protected static function boot()
+//    {
+//        static::created(function ($model) {
+//            UserProfile::create(['user_id'=> $model->id]);
+//
+//            return true;
+//        });
+//    }
 
     public function userExperiences()
     {
@@ -87,7 +103,7 @@ class User extends Authenticatable
     }
 
     public static $contactRules = [
-        'first_name' => 'max:25',
+        'first_name' => 'required:max:25',
         'last_name' => 'max:25',
         'address' => 'max:25',
         'phone' => 'max:25',

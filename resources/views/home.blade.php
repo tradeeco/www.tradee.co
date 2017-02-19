@@ -108,21 +108,21 @@
     <div class="container content-sm how-works-container" id="how_works">
         <h2 class="text-center text-uppercase">How TRADEE works</h2>
         <div class="row">
-            <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">
+            <div class="col-md-4 content-boxes-v6 md-margin-bottom-50 padding-top-15">
                 <div class="image-block">
                 <img src="img/post-job.png" class="full-width"/>
                 </div>
                 <h2 class="text-uppercase margin-bottom-10">POST A JOB</h2>
                 <p>TRADERS post and describe a job <br/>they need help with  using the <br/> TRADEE platform for FREE.</p>
             </div>
-            <div class="col-md-4 content-boxes-v6 md-margin-bottom-50">
+            <div class="col-md-4 content-boxes-v6 md-margin-bottom-50 padding-top-15">
                 <div class="image-block">
                 <img src="img/find-job.png" class="full-width" style="width: 120px;"/>
                 </div>
                 <h2 class="text-uppercase margin-bottom-10">FIND A JOB</h2>
                 <p>TRADEE’s are notified of jobs in their area or may search for jobs. TRADEE’s may express interest in a job for FREE.</p>
             </div>
-            <div class="col-md-4 content-boxes-v6">
+            <div class="col-md-4 content-boxes-v6 padding-top-15">
                 <div class="image-block">
                 <img src="img/get-done.png" class="full-width"  style="width: 120px;"/>
                 </div>
@@ -135,7 +135,7 @@
     <div class="container content-sm payment-container">
         <h2 class="text-center text-uppercase">Payment</h2>
         <div class="row margin-bottom-40">
-            <div class="col-md-5 col-md-offset-1 text-center">
+            <div class="col-md-4 col-md-offset-2 text-center">
                 <div class="image-block margin-bottom-20">
                     <img src="img/pricing-trader.png" />
                 </div>
@@ -143,7 +143,7 @@
                 <p>To post a job on TRADEE is <br/> <b>completely free.</b></p>
             </div>
             <div class="vertical-divider" style="left: 50%; bottom: 0"></div>
-            <div class="col-md-5 text-center">
+            <div class="col-md-4 text-center">
                 <div class="image-block margin-bottom-20">
                     <img src="img/pricing-tradee.png" />
                 </div>

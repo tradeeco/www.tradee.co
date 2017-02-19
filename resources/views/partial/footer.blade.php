@@ -14,7 +14,7 @@
                         <div><h2>TRADEE</h2></div>
                         <ul class="list-unstyled link-list">
                             <li>
-                                <a href="#">About Us</a>
+                                <a href="{{ URL::route('pages.about_us') }}">About Us</a>
                             </li>
                             <li>
                                 <a href="#">Team</a>
@@ -56,58 +56,58 @@
         </div>
     </div><!--/footer-->
 
-    <div class="copyright">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>
-                        2015 &copy; All Rights Reserved.
-                        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-                    </p>
-                </div>
+    {{--<div class="copyright">--}}
+        {{--<div class="container">--}}
+            {{--<div class="row">--}}
+                {{--<div class="col-md-6">--}}
+                    {{--<p>--}}
+                        {{--2015 &copy; All Rights Reserved.--}}
+                        {{--<a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>--}}
+                    {{--</p>--}}
+                {{--</div>--}}
 
-                <!-- Social Links -->
-                <div class="col-md-6">
-                    <ul class="footer-socials list-inline">
-                        <li>
-                            <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype">
-                                <i class="fa fa-skype"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin">
-                                <i class="fa fa-linkedin"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest">
-                                <i class="fa fa-pinterest"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dribbble">
-                                <i class="fa fa-dribbble"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- End Social Links -->
-            </div>
-        </div>
-    </div><!--/copyright-->
+                {{--<!-- Social Links -->--}}
+                {{--<div class="col-md-6">--}}
+                    {{--<ul class="footer-socials list-inline">--}}
+                        {{--<li>--}}
+                            {{--<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">--}}
+                                {{--<i class="fa fa-facebook"></i>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype">--}}
+                                {{--<i class="fa fa-skype"></i>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus">--}}
+                                {{--<i class="fa fa-google-plus"></i>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin">--}}
+                                {{--<i class="fa fa-linkedin"></i>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest">--}}
+                                {{--<i class="fa fa-pinterest"></i>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter">--}}
+                                {{--<i class="fa fa-twitter"></i>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dribbble">--}}
+                                {{--<i class="fa fa-dribbble"></i>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
+                {{--<!-- End Social Links -->--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div><!--/copyright-->--}}
 </div>

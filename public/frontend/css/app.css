@@ -2682,7 +2682,9 @@ img.image-md {
 .padding-top-5 {
     padding-top: 5px;
 }
-
+.padding-top-15 {
+    padding-top: 15px;
+}
 .padding-left-5 {
     padding-left: 5px;
 }

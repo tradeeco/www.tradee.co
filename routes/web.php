@@ -16,17 +16,16 @@ Route::pattern('slug',           '[a-zA-Z0-9-]+');
 
 Route::get('/', 'HomeController@index')->name('root');
 
-Route::get('/partials/index', function () {
-    return view('partials.index');
-});
-
-Route::get('/partials/{category}/{action?}', function ($category, $action = 'index') {
-    return view(join('.', ['partials', $category, $action]));
-});
-
-Route::get('/partials/{category}/{action}/{id}', function ($category, $action = 'index', $id) {
-    return view(join('.', ['partials', $category, $action]));
-});
+Route::get('/contact_us', 'WelcomeController@contactUs')->name('pages.contact_us');
+Route::get('/story', 'WelcomeController@story')->name('pages.story');
+Route::get('/about_us', 'WelcomeController@aboutUs')->name('pages.about_us');
+//Route::get('/partials/{category}/{action?}', function ($category, $action = 'index') {
+//    return view(join('.', ['partials', $category, $action]));
+//});
+//
+//Route::get('/partials/{category}/{action}/{id}', function ($category, $action = 'index', $id) {
+//    return view(join('.', ['partials', $category, $action]));
+//});
 
 
 Auth::routes();

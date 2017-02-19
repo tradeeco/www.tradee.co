@@ -105,8 +105,8 @@
     filter: alpha(opacity=0);
 }
 .how-works-container .content-boxes-v6 .image-block {
-    height: 200px;
-    line-height: 200px;
+    height: 150px;
+    line-height: 150px;
 }
 .how-works-container .content-boxes-v6 img {
     width: 140px;
@@ -121,7 +121,9 @@
 .home-container, .how-works-container, .payment-container, .why-trade-container{
     /*position: relative;*/
 }
-
+.font-weight-400 {
+    font-weight: 400;
+}
 /*.how-works-container:after, .payment-container:after {*/
     /*margin-left: -150px;*/
     /*left: 50%;*/
@@ -143,4 +145,10 @@
 .vertical-center {
     display: flex;
     align-items: center;
+}
+.content-boxes-v6.padding-top-15 {
+    padding-top: 15px;
+}
+.about-container .image-block {
+    height: 130px;
 }

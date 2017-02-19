@@ -1,4 +1,8 @@
-<?php namespace Todo\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
 
 class WelcomeController extends Controller {
 
@@ -28,9 +32,19 @@ class WelcomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function contactUs()
 	{
-		return view('welcome');
+		return view('pages.contact_us');
 	}
+
+	public function story()
+    {
+        return view('pages.story');
+    }
+    public function aboutUs()
+    {
+        return view('pages.about_us');
+    }
+
 
 }

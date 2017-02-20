@@ -106,12 +106,11 @@
 @endsection
 
 @section('custom-scripts')
-    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCDSb3wORiw36c9kGhpSVqjkTYtJpVp4l4&amp;callback=initMap" async defer></script>
     {!! Html::script('frontend/js/plugins/google-map.js?'.time()) !!}
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCDSb3wORiw36c9kGhpSVqjkTYtJpVp4l4&amp;callback=initMap" async defer></script>
     <script>
-        window.onload.initMap = function(){
+        function initMap() {
             GoogleMap.initGoogleMap();
-        };
-
+        }
     </script>
 @endsection

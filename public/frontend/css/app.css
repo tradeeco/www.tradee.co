@@ -2662,7 +2662,10 @@ img.image-md {
 .margin-left-10 {
     margin-left: 10px;
 }
-
+.margin-right-15{
+    margin-right: 15px;
+}
+.margin-left-20 { margin-left: 20px; }
 .margin-right-5 {
     margin-right: 5px;
 }

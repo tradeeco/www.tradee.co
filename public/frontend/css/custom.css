@@ -152,3 +152,6 @@
 .about-container .image-block {
     height: 130px;
 }
+.bg-color-main h2, .bg-color-main h1, .bg-color-main h3, .bg-color-main h4, .bg-color-main h5, .bg-color-main p {
+    color: white;
+}

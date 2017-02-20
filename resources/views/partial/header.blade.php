@@ -82,6 +82,11 @@
                                 </a>
                             </li>
                         @else
+                            <li class="dropdown">
+                                <a href="{!! URL::to('/contact') !!}">
+                                    Contact
+                                </a>
+                            </li>
                             <li>
                                 <a href="javascript:void(0);"  id="sign_in">
                                     Sign In

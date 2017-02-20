@@ -109,8 +109,9 @@
     <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCDSb3wORiw36c9kGhpSVqjkTYtJpVp4l4&amp;callback=initMap" async defer></script>
     {!! Html::script('frontend/js/plugins/google-map.js?'.time()) !!}
     <script>
-        function initMap() {
+        window.initMap = function(){
             GoogleMap.initGoogleMap();
-        }
+        };
+
     </script>
 @endsection

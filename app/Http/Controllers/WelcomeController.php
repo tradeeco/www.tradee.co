@@ -38,7 +38,7 @@ class WelcomeController extends Controller {
 	 */
 	public function contact()
 	{
-        Mail::to('sokomheng89@gmail.com')->send(new Contact());
+//        Mail::to('sokomheng89@gmail.com')->send(new Contact());
 		return view('pages.contact');
 	}
 

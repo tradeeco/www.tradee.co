@@ -13,8 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::post('/user/login', 'UserController@login');
-//Route::get('/user/getByToken', 'UserController@getByToken');
+Route::post('/user/login', 'Api\UserController@login');
+Route::post('/user/register', 'Api\UserController@register');
 //
 //Route::resource('/todo', 'TodoController');
 //Route::resource('/user', 'UserController');

@@ -26,10 +26,11 @@ class UserController extends Controller
                     Auth::user()
                 , 200);
         }
-//        return Response::json(
-//            [
-//                'username' => Lang::get('auth.failed'),
-//            ], 422);
+        return Response::json(
+            [
+                'username' => Lang::get('auth.failed'),
+            ]
+            , 422);
     }
 
     public function register(Request $request)
@@ -49,7 +50,6 @@ class UserController extends Controller
             ]);
             $user->userProfile()->create([]);
             return Response::json(
-
                     $user,
                 200);
         }

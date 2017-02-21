@@ -202,4 +202,12 @@ class AccountController extends Controller
 
         return view('account.edit_contact', $data);
     }
+
+    /*
+     * add funds
+     */
+    public  function addFunds1()
+    {
+
+    }
 }

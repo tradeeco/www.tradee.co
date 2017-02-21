@@ -11,7 +11,7 @@ return [
      |
      */
     'supportsCredentials' => true,
-    'allowedOrigins' => [$_SERVER['HTTP_ORIGIN']],
+    'allowedOrigins' => ['*'],
     'allowedHeaders' => ['Content-Type', 'Accept'],
     'allowedMethods' => ['GET', 'POST', 'PUT',  'DELETE'],
     'exposedHeaders' => [],

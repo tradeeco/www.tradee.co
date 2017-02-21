@@ -2,9 +2,16 @@ var Home = {
     DropzoneElement: '#dropzone_preview',
     PHOTO_IDS: [],
     init: function() {
+        this.initUI();
+    },
+    initAfter: function() {
         this.bindUIActions();
     },
+    initUI: function() {
+        $('.chosen-select').chosen({width: "100%"});
+    },
     bindUIActions: function() {
+
         var mediaDropzone;
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 

@@ -32,8 +32,8 @@ class JobController extends Controller
      */
     public function index(Request $request)
     {
-        $data['categories'] = DB::table('categories')->orderBy('name')->pluck('name', 'name');
-        $data['locations'] = DB::table('area_suburbs')->orderBy('name')->pluck('name', 'name');
+        $data['categories'] = DB::table('categories')->orderBy('name')->pluck('name', 'name')->all();
+        $data['locations'] = DB::table('area_suburbs')->orderBy('name')->pluck('name', 'name')->all();
 
         $jobs = Job::paginate(Config::get('frontend.job_per_page'));
         $getParams = [];

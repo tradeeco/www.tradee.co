@@ -39,6 +39,9 @@ Route::resource('/jobs', 'JobController');
 Route::post('/jobs/upload_photo', 'JobController@upload_photo')->name('jobs.upload_photo');
 Route::post('/jobs/delete_photo', 'JobController@delete_photo')->name('jobs.delete_photo');
 
+Route::resource('/job_questions', 'JobQuestionController', ['only' => ['store', 'show']]);
+Route::resource('/job_questions.answers', 'JobAnswerController', ['only' => ['index', 'store']]);
+
 //Route::get('/profile', 'ProfileController@edit')->name('profile.edit');
 Route::resource('/account', 'AccountController', ['only' => ['index', 'store']]);
 Route::get('/account/edit', 'AccountController@edit')->name('account.edit');

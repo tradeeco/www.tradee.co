@@ -58,6 +58,11 @@ class Job extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function jobQuestions()
+    {
+        return $this->hasMany('App\Models\JobQuestion')->orderBy('created_at', 'DESC');
+    }
+
     public static $rules = [
         'title' => 'required|string|min:2|max:20',
         'description' => 'required|min:10|max:500',

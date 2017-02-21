@@ -177,7 +177,7 @@ var GoogleMap = function () {
 
               // Create a map object, and include the MapTypeId to add
               // to the map type control.
-          var fenway = {lat: 40.748866, lng: -73.988366};
+          var fenway = {lat: 36.7259, lng: 174.6983};
 
           var map = new google.maps.Map(document.getElementById('map'), {
               center: fenway,

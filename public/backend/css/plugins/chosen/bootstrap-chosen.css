@@ -131,6 +131,12 @@
     display: block;
     height: 100%;
     width: 100%; }
+.input-lg + .chosen-container-single .chosen-single div b {
+    background: url("chosen-sprite.png") no-repeat 0 14px;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
 .chosen-container-single .chosen-default {
     color: #777777; }
 .chosen-container-single .chosen-search {
@@ -255,6 +261,8 @@
 .chosen-container-active.chosen-with-drop .chosen-single div {
     background: transparent;
     border-left: none; }
+.input-lg + .chosen-container-active.chosen-with-drop .chosen-single div b {
+    background-position: -18px 14px; }
 .chosen-container-active.chosen-with-drop .chosen-single div b {
     background-position: -18px 7px; }
 .chosen-container-active .chosen-choices {

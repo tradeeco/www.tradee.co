@@ -61,7 +61,7 @@
     {!! Html::style('//oss.maxcdn.com/respond/1.4.2/respond.min.js') !!}
 <![endif]-->
 </head>
-<body class="header-fixed header-fixed-space" ng-app="tradeeApp" ng-controller="MainController" ng-init="getAuthenticatedUser()">
+<body class="header-fixed header-fixed-space frontend" ng-app="tradeeApp" ng-controller="MainController" ng-init="getAuthenticatedUser()">
     <div class="wrapper">
         @section('header')
             @include('partial/header')

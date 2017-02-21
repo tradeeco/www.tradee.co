@@ -155,3 +155,25 @@
 .bg-color-main h2, .bg-color-main h1, .bg-color-main h3, .bg-color-main h4, .bg-color-main h5, .bg-color-main p {
     color: white;
 }
+
+/* frontend homepage custom css for chosen */
+.frontend .chosen-container-single .chosen-single {
+    line-height: 30px;
+}
+.frontend .home-container .chosen-container-single .chosen-single {
+    height: 46px;
+    line-height: 46px;
+    font-size: 18px;
+    padding-left: 15px;
+}
+.frontend .chosen-container .chosen-results li.highlighted {
+    background-color: #f27549;
+    background-image: none;
+    color: white; }
+.frontend .chosen-container-active.chosen-with-drop .chosen-single {
+    border: 1px solid #f27549;
+}
+/* job page detail*/
+.answer-form {
+    display: none;
+}

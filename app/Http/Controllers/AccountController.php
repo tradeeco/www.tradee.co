@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 use App\User;
 use App\Models\UserExperience;
 use App\Models\UserJobInterestedLocation;
@@ -134,11 +135,7 @@ class AccountController extends Controller
         $data['user'] = Auth::user();
         $data['categories'] = DB::table('categories')->orderBy('name')->pluck('name', 'id')->all();
         $data['locations'] = DB::table('area_suburbs')->orderBy('name')->pluck('name', 'id')->all();
-        $data['lengths'] = [
-            '' => '',
-            '1' => '1 year',
-            '2' => '2 years',
-        ];
+        $data['lengths'] = Config::get('frontend.lengths');
         $user = Auth::user();
         $data['userProfile'] = $user->userProfile()->get();
         $data['userExperiences'] = $user->userExperiences()->get();

@@ -4,6 +4,7 @@
     {!! Html::style('backend/css/plugins/dropzone/basic.css?'.time()) !!}
     {!! Html::style('backend/css/plugins/dropzone/dropzone.css?'.time()) !!}
     @endif
+    {!! Html::style('backend/css/plugins/chosen/bootstrap-chosen.css?'.time()) !!}
 @stop
 @section('body')
     <section class="home-section vertical-center">
@@ -25,7 +26,7 @@
                                             {{ Form::select('category', $categories, null, ['class' => 'form-control input-lg rounded']) }}
                                         </div>
                                         <div class="col-md-5 padding-left-5">
-                                            {{ Form::select('location', $locations, null, ['class' => 'form-control input-lg rounded']) }}
+                                            {{ Form::select('location', $locations, null, ['class' => 'form-control input-lg rounded chosen-select']) }}
                                         </div>
                                         <div class="col-md-2" style="padding-left: 0">
                                             <button type="submit" class="btn btn-primary rounded btn-lg btn-block">Search</button>
@@ -205,12 +206,16 @@
     </div>
     @endsection
 
-    @section('custom-scripts')
-        @if (Auth::check())
-        {!! Html::script('backend/js/plugins/dropzone/dropzone.js') !!}
+@section('custom-scripts')
+    {!! Html::script('backend/js/plugins/chosen/chosen.jquery.js?'.time())  !!}
     {!! Html::script('frontend/js/pages/home.js?'.time()) !!}
+    @if (Auth::check())
+        {!! Html::script('backend/js/plugins/dropzone/dropzone.js') !!}
+        <script>
+            Home.initAfter();
+        </script>
+    @endif
     <script>
         Home.init();
     </script>
-    @endif
 @endsection

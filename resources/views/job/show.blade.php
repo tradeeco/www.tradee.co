@@ -51,6 +51,7 @@
                 <h3 class="label-color">{{ $job->category->name }}</h3>
                 <h3 class="label-color">{{ $job->areaSuburb->name }}</h3>
                 <p>{{ $job->description }}</p>
+                <a href="javascript:void(0)" class="btn btn-primary btn-lg rounded">Move to Watching</a>
             </div>
         </div>
         @if (Auth::check() && $job->user->id == Auth::user()->id)
@@ -77,10 +78,12 @@
             </div>
         </div>
         @else
-        <div class="col-md-12 margin-bottom-40">
+        <div class="col-md-12">
+            <h2 class="label-color margin-bottom-30">Job by:</h2>
+        </div>
+        <div class="col-md-6 margin-bottom-40">
             <div class="job-user profile">
-                <h2 class="label-color margin-bottom-30">Job by:</h2>
-                <img src="{{ userImageSmall($job->user) }}" class="rounded-x pull-left margin-right-20">
+                <img src="{{ userImageSmall($job->user) }}" class="rounded-x pull-left margin-right-20" style="width: 150px; height: 150px;">
                 <div class="name-location">
                     <h3 class="margin-bottom-15">{{ $job->user->first_name }}</h3>
                     <h3 class="label-color margin-bottom-15">Rating - X X X X </h3>
@@ -88,6 +91,9 @@
                 </div>
             </div>
         </div>
+            <div class="col-md-6">
+                <a href="javascript:void(0)" class="btn btn-primary btn-lg rounded-x pull-right text-uppercase" style="width: 150px; height: 150px; font-size: 25px; padding: 45px 15px; line-height: 27px;"> Express<br/>Interest</a>
+            </div>
         @endif
         <div class="row margin-bottom-20">
             <div class="col-md-6">
@@ -110,56 +116,7 @@
         </div>
         <div class="profile job-questions">
             @foreach ($job->jobQuestions as $jobQuestion)
-            <div class="media media-v2 margin-bottom-20">
-                <a class="pull-left" href="#">
-                    <img class="media-object rounded-x" src="{{ userImageSmall($jobQuestion->user) }}" alt="">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        <strong><a href="#">{{ $jobQuestion->user->first_name }}</a></strong>
-                        <small>{{ $jobQuestion->created_at->diffForHumans() }}</small>
-                    </h4>
-                    <p>{{ $jobQuestion->content }}</p>
-                    {{--<ul class="list-inline results-list pull-left">--}}
-                        {{--<li><a href="#">5 Likes</a></li>--}}
-                        {{--<li><a href="#">1 Share</a></li>--}}
-                    {{--</ul>--}}
-                    <ul class="list-inline pull-right">
-                        <li><a href="javascript:void(0)" id="reply_question"><i class="expand-list rounded-x fa fa-reply"></i></a></li>
-                        {{--<li><a href="#"><i class="expand-list rounded-x fa fa-heart"></i></a></li>--}}
-                        {{--<li><a href="#"><i class="expand-list rounded-x fa fa-retweet"></i></a></li>--}}
-                    </ul>
-
-                    <div class="clearfix"></div>
-                    <div class="row">
-                    {!! Form::open(['url' => route('job_questions.answers.store', $jobQuestion->id), 'class' => 'answer-form fade in', 'id' => 'answer_form', 'data-question_id' => $jobQuestion->id]) !!}
-                        <div class="col-md-5">
-                            {{ Form::text('content', old('content'), ['class' => 'form-control rounded', 'placeholder' => 'Answer']) }}
-                        </div>
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary rounded">Submit</button>
-                            <a href="javascript:void(0)" class="btn btn-default rounded" id="reply_cancel">Cancel</a>
-                        </div>
-                    {!! Form::close() !!}
-                    </div>
-                    <div class="job-answers">
-                    @foreach ($jobQuestion->jobAnswers as $jobAnswer)
-                    <div class="media media-v2">
-                        <a class="pull-left" href="#">
-                            <img class="media-object rounded-x" src="{{ userImageSmall($jobAnswer->user) }}" alt="">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading">
-                                <strong><a href="#">{{ $jobAnswer->user->first_name }}</a></strong>
-                                <small>{{ $jobAnswer->created_at->diffForHumans() }}</small>
-                            </h4>
-                            <p>{{ $jobAnswer->content }}</p>
-                        </div>
-                    </div>
-                    @endforeach
-                    </div>
-                </div>
-            </div><!--/end media media v2-->
+                @include('job/question_answer/question_partial', ['jobQuestion' => $jobQuestion])
             @endforeach
         </div>
     </div>

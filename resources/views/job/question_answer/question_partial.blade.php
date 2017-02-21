@@ -30,6 +30,10 @@
             </div>
             {!! Form::close() !!}
         </div>
-        <div class="job-answers"></div>
+        <div class="job-answers">
+            @foreach ($jobQuestion->jobAnswers as $jobAnswer)
+                @include('job/question_answer/answer_partial', ['jobAnswer' => $jobAnswer])
+            @endforeach
+        </div>
     </div>
 </div><!--/end media media v2-->

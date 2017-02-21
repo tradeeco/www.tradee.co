@@ -186,6 +186,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
 
         Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
     ],
 
     /*

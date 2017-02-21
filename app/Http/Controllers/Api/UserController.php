@@ -13,18 +13,23 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+//        $this->middleware('cors');
+    }
+
     public function login(Request $request)
     {
+        Log::debug($request);
         if (Auth::attempt(['username' => $request->get('username'), 'password' => $request->get('password')])) {
             return Response::json(
-                [
                     Auth::user()
-                ], 200);
+                , 200);
         }
-        return Response::json(
-            [
-                'username' => Lang::get('auth.failed'),
-            ], 422);
+//        return Response::json(
+//            [
+//                'username' => Lang::get('auth.failed'),
+//            ], 422);
     }
 
     public function register(Request $request)

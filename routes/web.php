@@ -35,6 +35,8 @@ Route::get('/home', 'HomeController@index')->name('home.index');
 
 Route::post('/api/login', 'Auth\LoginController@ajaxLogin');
 
+Route::get('/jobs/watching', 'JobController@watching')->name('jobs.watching');
+
 Route::resource('/jobs', 'JobController');
 Route::post('/jobs/upload_photo', 'JobController@upload_photo')->name('jobs.upload_photo');
 Route::post('/jobs/delete_photo', 'JobController@delete_photo')->name('jobs.delete_photo');

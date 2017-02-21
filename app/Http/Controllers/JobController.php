@@ -94,7 +94,9 @@ class JobController extends Controller
             return Redirect::route('jobs.show', $job->slug)->with('alert', $alert);
         }
     }
-
+    /*
+     * Job Detail page by slug
+     */
     public function show($slug) {
         $data['job'] = Job::where('slug', $slug)->first();
 
@@ -104,13 +106,19 @@ class JobController extends Controller
 
         return view('job.show', $data);
     }
+
+    /*
+     * upload photo when post job(before process)
+     */
     public function upload_photo(Request $request)
     {
         $photo = $request->all();
         $response = $this->image->upload($photo);
         return $response;
     }
-
+    /*
+     * delete job photo by id
+     */
     public function delete_photo(Request $request)
     {
         $fileId = $request->get('id');
@@ -124,5 +132,12 @@ class JobController extends Controller
 
         return $response;
     }
-
+    /*
+     * job watching page
+     */
+    public function watching()
+    {
+        $data['user'] = Auth::user();
+        return view('job.watching', $data);
+    }
 }

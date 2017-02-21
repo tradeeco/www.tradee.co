@@ -50,7 +50,7 @@
                                                             <li><a href="{{ URL::route('account.index') }}" class="mega-menu-title">View My Account</a></li>
 
                                                             <li><h3>TRADEE</h3></li>
-                                                            <li><a href="#">Watching</a></li>
+                                                            <li><a href="{{ URL::route('jobs.watching') }}">Watching</a></li>
                                                             <li><a href="#">Instered</a></li>
                                                             <li><a href="#">Shortlisted</a></li>
                                                             <li><a href="#">Previous Jobs</a></li>

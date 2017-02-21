@@ -168,7 +168,8 @@ class AccountController extends Controller
             $user->last_name = $request->get('last_name');
             $user->address = $request->get('address');
             $user->area_suburb_id = $request->get('area_suburb_id');
-            $user->post_code = $request->get('phone');
+            $user->phone = $request->get('phone');
+            $user->post_code = $request->get('post_code');
             $user->save();
 
             $alert['msg'] = 'Contact Details been updated successfully';

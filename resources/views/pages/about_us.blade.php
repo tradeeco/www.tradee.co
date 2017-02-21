@@ -25,7 +25,7 @@
             <div class="row">
                 <h1 class="color-white margin-bottom-30">TRADEE</h1>
                 <h3 class="color-white margin-bottom-50">Our mission is to support every community in <br/> New Zealand in working together.</h3>
-                <h2 class="color-white text-center text-uppercase ">VALUES</h2>
+                <h2 class="color-white text-center text-uppercase margin-top-15">VALUES</h2>
                 <div class="row">
                     <div class="col-md-4 content-boxes-v6 md-margin-bottom-50 padding-top-15">
                         <div class="image-block">
@@ -79,7 +79,7 @@
                     <h2 style="color: #363636;" class="text-right">Read our </h2>
                     <h2 class="title-v2 color-main text-right margin-bottom-50">Story</h2>
                     <p class="margin-bottom-30 text-right">Founded in late 2016, Tradee’s roots <br/> fall deep within the ....</p>
-                    <a href="{{ URL::route('pages.story') }}" class="btn btn-primary btn-lg rounded">coming soon</a>
+                    <a href="{{ URL::route('pages.story') }}" class="btn btn-primary btn-lg rounded">read story</a>
                 </div>
             </div>
         </div>

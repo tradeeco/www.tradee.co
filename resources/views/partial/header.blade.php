@@ -31,11 +31,6 @@
                         </li>
                         <!-- Home -->
                         @if (Auth::check())
-                            <li>
-                                <a href="{!! URL::route('jobs.index') !!}">
-                                    Job
-                                </a>
-                            </li>
                             <li class="dropdown mega-menu">
                                 <a href="javascript:void(0);">
                                     My Account

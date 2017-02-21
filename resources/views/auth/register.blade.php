@@ -13,7 +13,7 @@
     <div class="container content" >
         <div class="row">
             <div class="col-md-8 col-md-offset-2 margin-top-20 text-center">
-                <h1 class="text-center margin-bottom-25">Sign up for FREE</h1>
+                <h1 class="text-center margin-bottom-25 color-white">Sign up for <span class="color-main">FREE</span></h1>
                 @include('partial/register_form')
             </div>
         </div>

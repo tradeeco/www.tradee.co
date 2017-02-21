@@ -79,10 +79,16 @@
                             @if (Form::old('area_suburb_id'))
                                 @foreach(old('area_suburb_id') as $key => $val)
                                     <div class="row margin-bottom-20">
-                                        <div class="col-md-7 {!! $errors->first('area_suburb_id.'.$key, 'has-error') !!}">
+                                        <div class="col-md-5 {!! $errors->first('area_suburb_id.'.$key, 'has-error') !!}">
                                             {{ Form::select('area_suburb_id['.$key.']', [null=>''] + $locations, old('area_suburb_id.'.$key), array('class'=>'form-control input-lg rounded')) }}
                                             <span class="help-block">
                                                 <strong>{!! $errors->first('area_suburb_id.'.$key, ':message') !!}</strong>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-5 {!! $errors->first('sec_category_id.'.$key, 'has-error') !!}">
+                                            {{ Form::select('sec_category_id['.$key.']', [null=>''] + $categories, old('sec_category_id.'.$key), array('class'=>'form-control input-lg rounded')) }}
+                                            <span class="help-block">
+                                                <strong>{!! $errors->first('sec_category_id.'.$key, ':message') !!}</strong>
                                             </span>
                                         </div>
                                         <div class="col-md-2">
@@ -93,8 +99,11 @@
                             @else
                             @foreach ($userJobInterestedLocations as $inLocation)
                                 <div class="row margin-bottom-20">
-                                    <div class="col-md-7">
+                                    <div class="col-md-5">
                                         {{ Form::select('area_suburb_id[]', [null=>''] + $locations, $inLocation->area_suburb_id, ['class' => 'form-control input-lg rounded']) }}
+                                    </div>
+                                    <div class="col-md-5">
+                                        {{ Form::select('sec_category_id[]', [null=>''] + $categories, $inLocation->category_id, ['class' => 'form-control input-lg rounded']) }}
                                     </div>
                                     <div class="col-md-2">
                                         <a href="#" id="delete_interested_btn" class="btn btn-danger btn-sm rounded"><i class="fa fa-trash"></i></a>
@@ -105,8 +114,11 @@
                             @endforeach
                                 @if ($userJobInterestedLocations->count() == 0)
                                 <div class="row margin-bottom-20">
-                                    <div class="col-md-7">
+                                    <div class="col-md-5">
                                         {{ Form::select('area_suburb_id[]', [null=>''] + $locations, null, ['class' => 'form-control input-lg rounded']) }}
+                                    </div>
+                                    <div class="col-md-5">
+                                        {{ Form::select('sec_category_id[]', [null=>''] + $categories, null, ['class' => 'form-control input-lg rounded']) }}
                                     </div>
                                 </div>
                                 @endif

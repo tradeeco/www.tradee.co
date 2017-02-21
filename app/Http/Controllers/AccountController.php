@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 use App\User;
 use App\Models\UserExperience;
 use App\Models\UserJobInterestedLocation;
@@ -78,12 +79,14 @@ class AccountController extends Controller
             }
             // user job interested area save process
             foreach ($request->get('area_suburb_id') as $key => $area_suburb_id) {
+                Log::debug($request->get('sec_category_id')[$key]);
                 if ($request->has('user_interested_location_id') && isset($request->get('user_interested_location_id')[$key])) {
                     $inlocation = UserJobInterestedLocation::find($request->get('user_interested_location_id')[$key]);
-                    $inlocation->update(array('area_suburb_id' => $area_suburb_id));
+                    $inlocation->update(array('area_suburb_id' => $area_suburb_id, 'category_id' => $request->get('sec_category_id')[$key]));
                 } else {
                     $inLocation = new UserJobInterestedLocation;
                     $inLocation->area_suburb_id = $area_suburb_id;
+                    $inLocation->category_id = $request->get('sec_category_id')[$key];
                     $inLocation->user_id = $user->id;
                     $inLocation->save();
                 }

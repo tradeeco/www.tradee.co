@@ -20,7 +20,6 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        Log::debug($request);
         if (Auth::attempt(['username' => $request->get('username'), 'password' => $request->get('password')])) {
             return Response::json(
                     Auth::user()

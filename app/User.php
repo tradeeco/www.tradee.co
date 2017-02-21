@@ -75,6 +75,7 @@ class User extends Authenticatable
         'file' => 'mimes:png,gif,jpeg,jpg,bmp',
         'short_bio.*' => 'max:1000',
         'category_id.*' => 'required',
+        'sec_category_id.*' => 'required',
         'length_id.*' => 'required',
         'area_suburb_id.*' => 'required',
     ];
@@ -94,6 +95,7 @@ class User extends Authenticatable
 
             foreach ($request->get('area_suburb_id') as $key => $val) {
                 $messages['area_suburb_id.' . $key . '.required'] = 'This field is required.';
+                $messages['sec_category_id.' . $key . '.required'] = 'This field is required.';
             }
         }
 

@@ -15,8 +15,11 @@ var Account = {
                             </div>\
                          </div>',
     LengthTemplate: '<div class="row margin-bottom-20"> \
-                        <div class="col-md-7"> \
+                        <div class="col-md-5"> \
                             <select class="form-control input-lg rounded" name="area_suburb_id[]">' + $('div.skill-wrap div.row:first select[name="area_suburb_id[]"]').html() + '</select> \
+                        </div> \
+                        <div class="col-md-5"> \
+                            <select class="form-control input-lg rounded" name="sec_category_id[]">' + $('div.skill-wrap div.row:first select[name="sec_category_id[]"]').html() + '</select> \
                         </div> \
                         <div class="col-md-2"> \
                         <a href="#" id="delete_interested_btn" class="btn btn-danger btn-sm rounded"><i class="fa fa-trash"></i></a> \
@@ -34,6 +37,7 @@ var Account = {
         this.addExpBtn.click(function (e) {
             e.preventDefault();
             $('div.experience-wrap div.row:last').after(Account.ExperienceTemplate);
+            $('div.experience-wrap div.row:last').find('select').find('option:selected').prop('selected', false);
             // var newExp = $('div.experience-wrap div.input-wrap:last');
             // newExp.find('input[type=text]:first').focus();
             return false;
@@ -42,6 +46,7 @@ var Account = {
         this.addInterestedBtn.click(function (e) {
             e.preventDefault();
             $('div.skill-wrap div.row:last').after(Account.LengthTemplate);
+            $('div.skill-wrap div.row:last').find('select').find('option:selected').prop('selected', false);
             // var newExp = $('div.experience-wrap div.input-wrap:last');
             // newExp.find('input[type=text]:first').focus();
             return false;

@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => 'cors'], function() {
     Route::post('/user/login', 'Api\UserController@login');
     Route::post('/user/register', 'Api\UserController@register');
+    Route::post('/jobs/categories', 'Api\JobController@getCategories');
+    Route::post('/jobs/locations', 'Api\JobController@getLocations');
 });
 //
 //Route::resource('/todo', 'TodoController');

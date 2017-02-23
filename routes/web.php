@@ -20,6 +20,9 @@ Route::get('/contact', 'WelcomeController@contact')->name('pages.contact');
 Route::post('/post_contact', 'WelcomeController@postContact')->name('pages.post_contact');
 Route::get('/story', 'WelcomeController@story')->name('pages.story');
 Route::get('/about_us', 'WelcomeController@aboutUs')->name('pages.about_us');
+Route::get('/pricing', function(){
+    return view('pages.pricing');
+})->name('pages.pricing');
 //Route::get('/partials/{category}/{action?}', function ($category, $action = 'index') {
 //    return view(join('.', ['partials', $category, $action]));
 //});
@@ -36,10 +39,18 @@ Route::get('/home', 'HomeController@index')->name('home.index');
 Route::post('/api/login', 'Auth\LoginController@ajaxLogin');
 
 Route::get('/jobs/watching', 'JobController@watching')->name('jobs.watching');
+Route::get('/jobs/interest', 'JobController@interest')->name('jobs.interest');
+Route::get('/jobs/shortlist', 'JobController@shortlist')->name('jobs.shortlist');
 
 Route::resource('/jobs', 'JobController');
 Route::post('/jobs/upload_photo', 'JobController@upload_photo')->name('jobs.upload_photo');
 Route::post('/jobs/delete_photo', 'JobController@delete_photo')->name('jobs.delete_photo');
+Route::post('/jobs/move_watching/{job_id}', 'JobController@moveWatching')->name('jobs.move_watching');
+Route::post('/jobs/delete_watching/{job_id}', 'JobController@deleteWatching')->name('jobs.delete_watching');
+Route::post('/jobs/move_interest/{job_id}', 'JobController@moveInterest')->name('jobs.move_interest');
+Route::post('/jobs/delete_interest/{job_id}', 'JobController@deleteInterest')->name('jobs.delete_interest');
+Route::post('/jobs/move_shortlist/{job_id}', 'JobController@moveShortlist')->name('jobs.move_shortlist');
+Route::post('/jobs/delete_shortlist/{job_id}', 'JobController@deleteShortlist')->name('jobs.delete_shortlist');
 
 Route::resource('/job_questions', 'JobQuestionController', ['only' => ['store', 'show']]);
 Route::resource('/job_questions.answers', 'JobAnswerController', ['only' => ['index', 'store']]);

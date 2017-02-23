@@ -10,7 +10,7 @@ class Job extends Model
     use Sluggable;
 
     protected $fillable = [
-        'title', 'description', 'user_id', 'area_suburb_id', 'category_id', 'slug'
+        'title', 'description', 'user_id', 'area_suburb_id', 'category_id', 'slug', 'watching', 'interested', 'shortlisted'
     ];
 
     /**
@@ -36,6 +36,21 @@ class Job extends Model
     public function scopeLocations($query, $name='')
     {
         return $query->join('area_suburbs', 'jobs.area_suburb_id', '=', 'area_suburbs.id')->where('area_suburbs.name', $name);
+    }
+
+    public function scopeWatching($query)
+    {
+        return $query->where('watching', true);
+    }
+
+    public function scopeInterest($query)
+    {
+        return $query->where('interested', true);
+    }
+
+    public function scopeShortlist($query)
+    {
+        return $query->where('shortlisted', true);
     }
 
     public function jobPhotos()

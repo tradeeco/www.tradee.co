@@ -1,6 +1,7 @@
 @extends('layout.frontend')
 @section('custom-styles')
-{{--    {!! Html::style('frontend/plugins/owl-carousel/owl-carousel/owl.carousel.css?'.time()) !!}--}}
+    {!! Html::style('frontend/css/pages/page_job.css?'.time()) !!}
+    {!! Html::style('frontend/css/pages/page_search_inner_tables.css?'.time()) !!}
 
 @stop
 @section('body')
@@ -8,24 +9,152 @@
         @include('partial/alert_message')
         <div class="tab-v2">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#watching" data-toggle="tab" aria-expanded="false">Watching</a></li>
-                <li><a href="#interested" data-toggle="tab" aria-expanded="false">(##) Interested</a></li>
-                <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="false">(##) Shortlisted</a></li>
-                <li class=""><a href="#messages-1" data-toggle="tab" aria-expanded="false">(##) Selected</a></li>
+                <li class="{{ getActionName(Route::getCurrentRoute()->getActionName()) == 'watching' ? 'active' : '' }}">
+                    <a href="{{ URL::route('jobs.watching') }}" aria-expanded="false">Watching</a></li>
+                <li class="{{ getActionName(Route::getCurrentRoute()->getActionName()) == 'interest' ? 'active' : '' }}">
+                    <a href="{{ URL::route('jobs.interest') }}" >Interested</a></li>
+                <li class="{{ getActionName(Route::getCurrentRoute()->getActionName()) == 'shortlist' ? 'active' : '' }}">
+                    <a href="{{ URL::route('jobs.shortlist') }}">Shortlisted</a></li>
+                <li class="" ><a href="javascript:void(0)">Previous jobs</a></li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane fade active in" id="watching">
-                    <h4>Heading Sample 1</h4>
-                    <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum <strong>ivamus imperdiet</strong> condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque <strong>fermentum vivamus</strong> imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac felis consectetur id. Donec eget orci metusvivamus imperdiet.</p>
+                <div class="tab-pane fade in {{ getActionName(Route::getCurrentRoute()->getActionName()) == 'watching' ? 'active' : '' }}" id="watching">
+                    <div class="table-search-v2">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>User Info</th>
+                                    <th class="hidden-sm">Job content</th>
+                                    <th>Status</th>
+
+
+                                    <th>Action</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($jobs as $job)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ URL::route('users.profile', $job->user->slug) }}">
+                                                <img class="rounded-x" src="{{ userImage($job->user) }}" alt="">
+                                                <span class="text-center">{{ $job->user->first_name }}</span>
+                                            </a>
+                                        </td>
+                                        <td class="job-title" style="width: 30%;">
+                                            <h3><a href="{{ URL::route('jobs.show', $job->slug) }}" data-id="{{$job->id}}">{{ $job->title }}</a></h3>
+                                            <p>{{ $job->category->name }}</p>
+                                            <p>{{ $job->areaSuburb->name }}</p>
+                                            <p>{{ str_limit($job->description, 50) }}</p>
+                                        </td>
+                                        <td>
+                                            <h3 class="color-main">Views: XXX</h3>
+                                            <h3 class="color-main">Date Posted: {{ date('F d, Y', strtotime($job->created_at)) }}</h3>
+                                            {{--Carbon\Carbon::parse($job->created_at)->format('d-m-Y i')--}}
+                                        </td>
+                                        <td>
+                                            <a href="#" class="btn btn-primary rounded text-uppercase white-color" id="move_interest">show interest</a>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="color-main" id="delete_watching">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="tab-pane fade in" id="profile-1">
-                    <img alt="" class="pull-left lft-img-margin img-width-200" src="assets/img/main/img17.jpg">
-                    <h4>Heading Sample 2</h4>
-                    <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, <strong>ac adipiscing nunc.</strong> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac <strong>interdum ullamcorper.</strong></p>
+                <div class="tab-pane fade in {{ getActionName(Route::getCurrentRoute()->getActionName()) == 'interest' ? 'active' : '' }}" id="profile-1">
+                    <div class="table-search-v2">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>User Info</th>
+                                    <th class="hidden-sm">Job content</th>
+                                    <th>Status</th>
+
+
+                                    <th>Action</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($jobs as $job)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ URL::route('users.profile', $job->user->slug) }}">
+                                                <img class="rounded-x" src="{{ userImage($job->user) }}" alt="">
+                                                <span class="text-center">{{ $job->user->first_name }}</span>
+                                            </a>
+                                        </td>
+                                        <td class="job-title" style="width: 30%;">
+                                            <h3><a href="{{ URL::route('jobs.show', $job->slug) }}" data-id="{{$job->id}}">{{ $job->title }}</a></h3>
+                                            <p>{{ $job->category->name }}</p>
+                                            <p>{{ $job->areaSuburb->name }}</p>
+                                            <p>{{ str_limit($job->description, 50) }}</p>
+                                        </td>
+                                        <td>
+                                            <h3 class="color-main">Views: XXX</h3>
+                                            <h3 class="color-main">Date Posted: {{ date('F d, Y', strtotime($job->created_at)) }}</h3>
+                                            {{--Carbon\Carbon::parse($job->created_at)->format('d-m-Y i')--}}
+                                        </td>
+                                        <td>
+                                            <a href="#" class="btn btn-primary rounded text-uppercase white-color" id="move_shortlist">show shortlist</a>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="color-main" id="delete_interest">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="tab-pane fade in" id="messages-1">
-                    <h4>Heading Sample 3</h4>
-                    <p><img alt="" class="pull-right rgt-img-margin img-width-200" src="assets/img/main/img21.jpg"> <strong>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id.</strong> Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
+                <div class="tab-pane fade in {{ getActionName(Route::getCurrentRoute()->getActionName()) == 'shortlist' ? 'active' : '' }}" id="messages-1">
+                    <div class="table-search-v2">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>User Info</th>
+                                    <th class="hidden-sm">Job content</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($jobs as $job)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ URL::route('users.profile', $job->user->slug) }}">
+                                                <img class="rounded-x" src="{{ userImage($job->user) }}" alt="">
+                                                <span class="text-center">{{ $job->user->first_name }}</span>
+                                            </a>
+                                        </td>
+                                        <td class="job-title" style="width: 30%;">
+                                            <h3><a href="{{ URL::route('jobs.show', $job->slug) }}" data-id="{{$job->id}}">{{ $job->title }}</a></h3>
+                                            <p>{{ $job->category->name }}</p>
+                                            <p>{{ $job->areaSuburb->name }}</p>
+                                            <p>{{ str_limit($job->description, 50) }}</p>
+                                        </td>
+                                        <td>
+                                            <h3 class="color-main">Views: XXX</h3>
+                                            <h3 class="color-main">Date Posted: {{ date('F d, Y', strtotime($job->created_at)) }}</h3>
+                                            {{--Carbon\Carbon::parse($job->created_at)->format('d-m-Y i')--}}
+                                        </td>
+                                        <td>
+                                            <a href="#" class="color-main" id="delete_shortlist">Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,5 +163,8 @@
 
 @section('custom-scripts')
 
-    {{--{!! Html::script('frontend/js/pages/job.js?'.time()) !!}--}}
+    {!! Html::script('frontend/js/pages/job.js?'.time()) !!}
+    <script>
+        Job.init();
+    </script>
 @endsection

@@ -74,7 +74,6 @@
         @show
     </div>
 </body>
-
     @section('scripts')
         <!-- JS Global Compulsory -->
         {!! Html::script('frontend/plugins/jquery/jquery.min.js') !!}

@@ -25,7 +25,7 @@
             <div class="row">
                 <h1 class="color-white margin-bottom-30">TRADEE</h1>
                 <h3 class="color-white margin-bottom-50">Our mission is to support every community in <br/> New Zealand in working together.</h3>
-                <h2 class="color-white text-center text-uppercase margin-top-15">VALUES</h2>
+                <h1 class="color-white text-center text-uppercase margin-top-15">VALUES</h1>
                 <div class="row">
                     <div class="col-md-4 content-boxes-v6 md-margin-bottom-50 padding-top-15">
                         <div class="image-block">

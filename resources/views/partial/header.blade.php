@@ -49,7 +49,7 @@
                                                             <li><a href="#">Instered</a></li>
                                                             <li><a href="#">Shortlisted</a></li>
                                                             <li><a href="#">Previous Jobs</a></li>
-                                                            <li><h3>Account Balance</h3></li>
+                                                            <li><h3>Account Balance: $0.00</h3></li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-md-6 equal-height-in">

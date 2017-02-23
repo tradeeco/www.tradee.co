@@ -51,7 +51,9 @@
                 <h3 class="label-color">{{ $job->category->name }}</h3>
                 <h3 class="label-color">{{ $job->areaSuburb->name }}</h3>
                 <p>{{ $job->description }}</p>
-                <a href="javascript:void(0)" class="btn btn-primary btn-lg rounded">Move to Watching</a>
+                @if (!$job->watching && $job->user != Auth::user())
+                    <a href="javascript:void(0)" class="btn btn-primary btn-lg rounded" id="move_watching">move to WATCHLIST</a>
+                @endif
             </div>
         </div>
         @if (Auth::check() && $job->user->id == Auth::user()->id)
@@ -130,42 +132,6 @@
     {!! Html::script('frontend/js/pages/job.js?'.time()) !!}
     <script>
         Job.init();
-        jQuery(document).ready(function($) {
-
-            $('#myCarousel').carousel({
-                interval: 5000
-            });
-
-            //Handles the carousel thumbnails
-            $('[id^=carousel-selector-]').click(function () {
-                var id_selector = $(this).attr("id");
-                try {
-                    var id = /-(\d+)$/.exec(id_selector)[1];
-                    console.log(id_selector, id);
-                    jQuery('#myCarousel').carousel(parseInt(id));
-                } catch (e) {
-                    console.log('Regex failed!', e);
-                }
-            });
-            // When the carousel slides, auto update the text
-            $('#myCarousel').on('slid.bs.carousel', function (e) {
-                var id = $('.item.active').data('slide-number');
-                $('#carousel-text').html($('#slide-content-'+id).html());
-            });
-
-            var owl1 = jQuery(".owl-slider-v2").owlCarousel({
-                itemsDesktop : [1600,3],
-                itemsDesktopSmall : [900,2],
-                itemsTablet: [600,2],
-                itemsMobile : [479,2],
-                slideSpeed: 1000
-            });
-            jQuery(".next-v2").click(function(){
-                owl1.trigger('owl.next');
-            });
-            jQuery(".prev-v2").click(function(){
-                owl1.trigger('owl.prev');
-            });
-        });
+        Job.initShow();
     </script>
 @endsection

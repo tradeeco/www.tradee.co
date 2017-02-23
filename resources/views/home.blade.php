@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                         {{ Form::label('description', 'Short Description') }}
-                                        <textarea type="text" class="form-control input-lg rounded" name="description" ></textarea>
+                                        {{ Form::textarea('description', old('description'), array('class' => 'input-lg form-control rounded', 'id' => 'description', 'required' => 'true', 'rows' => '4')) }}
                                         @if ($errors->has('description'))
                                             <span class="help-block">
                                             <strong>{{ $errors->first('description') }}</strong>
@@ -149,12 +149,12 @@
                     <img src="img/pricing-tradee.png" />
                 </div>
                 <h2 class="text-uppercase margin-bottom-25">TRADEE</h2>
-                <p>To search or view is free. You are only <br/> <b>charged per lead</b><br/> you get when you are interested in a job.</p>
+                <p>To find a job on TRADEE is <br/> <b>completely free.</b></p>
             </div>
         </div><!--/row-->
         <div class="row">
             <div class="col-md-12 text-center">
-                <a href="#" class="btn btn-primary rounded btn-lg" style="font-size: 16px;">Know more</a>
+                <a href="{{ URL::route('pages.pricing') }}" class="btn btn-primary rounded btn-lg" style="font-size: 16px;">know more</a>
             </div>
         </div>
     </div><!--/container-->

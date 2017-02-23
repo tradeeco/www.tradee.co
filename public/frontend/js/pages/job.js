@@ -1,11 +1,160 @@
 var Job = {
     addExpBtn: $('#add_exp_btn'),
+    moveWatching: $('a#move_watching'),
+    deleteWatching: $('a#delete_watching'),
+    moveInterest: $('a#move_interest'),
+    deleteInterest: $('a#delete_interest'),
+    moveShortlist: $('a#move_shortlist'),
+    deleteShortlist: $('a#delete_shortlist'),
+    SuccessTemplate: '<div class="alert alert-success alert-dismissibl fade in"> \
+                            <p>Success</p> \
+                        </div>',
     init: function() {
         this.bindUIActions();
     },
+    initShow: function(){
+        $('#myCarousel').carousel({
+            interval: 5000
+        });
+
+        //Handles the carousel thumbnails
+        $('[id^=carousel-selector-]').click(function () {
+            var id_selector = $(this).attr("id");
+            try {
+                var id = /-(\d+)$/.exec(id_selector)[1];
+                console.log(id_selector, id);
+                jQuery('#myCarousel').carousel(parseInt(id));
+            } catch (e) {
+                console.log('Regex failed!', e);
+            }
+        });
+        // When the carousel slides, auto update the text
+        $('#myCarousel').on('slid.bs.carousel', function (e) {
+            var id = $('.item.active').data('slide-number');
+            $('#carousel-text').html($('#slide-content-'+id).html());
+        });
+
+        var owl1 = jQuery(".owl-slider-v2").owlCarousel({
+            itemsDesktop : [1600,3],
+            itemsDesktopSmall : [900,2],
+            itemsTablet: [600,2],
+            itemsMobile : [479,2],
+            slideSpeed: 1000
+        });
+        jQuery(".next-v2").click(function(){
+            owl1.trigger('owl.next');
+        });
+        jQuery(".prev-v2").click(function(){
+            owl1.trigger('owl.prev');
+        });
+    },
     bindUIActions: function() {
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        var Job_Id = $('div#job_info').data('id');
 
+        this.moveWatching.click(function (e) {
+            var thisObj = $(this);
+            e.preventDefault();
+            var jqxhr = $.post( "/jobs/move_watching/" + Job_Id, { _token: CSRF_TOKEN })
+            .done(function() {
+                Job.moveWatching.fadeOut();
+                Job.moveWatching.parent().append($(Job.SuccessTemplate).hide().fadeIn(500).fadeOut(1500));
+                thisObj.closest('tr').fadeOut().remove();
+            })
+            .fail(function() {
+                alert( "error" );
+            });
+            // var newExp = $('div.experience-wrap div.input-wrap:last');
+            // newExp.find('input[type=text]:first').focus();
+            return false;
+        });
+
+        this.deleteWatching.click(function (e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var job_id = thisObj.closest('tr').find('td.job-title').find('a').data('id');
+            var jqxhr = $.post( "/jobs/delete_watching/" + job_id, { _token: CSRF_TOKEN })
+                .done(function() {
+                    thisObj.fadeOut();
+                    thisObj.closest('tr').fadeOut().remove();
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+            // var newExp = $('div.experience-wrap div.input-wrap:last');
+            // newExp.find('input[type=text]:first').focus();
+            return false;
+        });
+
+        this.moveInterest.click(function (e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var job_id = thisObj.closest('tr').find('td.job-title').find('a').data('id');
+            var jqxhr = $.post( "/jobs/move_interest/" + job_id, { _token: CSRF_TOKEN })
+                .done(function() {
+                    thisObj.fadeOut();
+                    thisObj.parent().append($(Job.SuccessTemplate).hide().fadeIn(500).fadeOut(1500));
+                    thisObj.closest('tr').fadeOut().remove();
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+            // var newExp = $('div.experience-wrap div.input-wrap:last');
+            // newExp.find('input[type=text]:first').focus();
+            return false;
+        });
+
+        this.deleteInterest.click(function (e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var job_id = thisObj.closest('tr').find('td.job-title').find('a').data('id');
+            var jqxhr = $.post( "/jobs/delete_interest/" + job_id, { _token: CSRF_TOKEN })
+                .done(function() {
+                    thisObj.fadeOut();
+                    thisObj.closest('tr').fadeOut().remove();
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+            // var newExp = $('div.experience-wrap div.input-wrap:last');
+            // newExp.find('input[type=text]:first').focus();
+            return false;
+        });
+
+        this.moveShortlist.click(function (e) {
+            var thisObj = $(this);
+            e.preventDefault();
+            var job_id = thisObj.closest('tr').find('td.job-title').find('a').data('id');
+            var jqxhr = $.post( "/jobs/move_shortlist/" + job_id, { _token: CSRF_TOKEN })
+                .done(function() {
+                    thisObj.fadeOut();
+                    thisObj.parent().append($(Job.SuccessTemplate).hide().fadeIn(500).fadeOut(1500));
+                    thisObj.closest('tr').fadeOut().remove();
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+            // var newExp = $('div.experience-wrap div.input-wrap:last');
+            // newExp.find('input[type=text]:first').focus();
+            return false;
+        });
+
+        this.deleteShortlist.click(function (e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var job_id = thisObj.closest('tr').find('td.job-title').find('a').data('id');
+            var jqxhr = $.post( "/jobs/delete_shortlist/" + job_id, { _token: CSRF_TOKEN })
+                .done(function() {
+                    thisObj.fadeOut();
+                    thisObj.closest('tr').fadeOut().remove();
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+            // var newExp = $('div.experience-wrap div.input-wrap:last');
+            // newExp.find('input[type=text]:first').focus();
+            return false;
+        });
         $(document).on('click', 'a#reply_question', function (e) {
             e.preventDefault();
             $(this).closest('div.media-body').find('form').fadeIn();

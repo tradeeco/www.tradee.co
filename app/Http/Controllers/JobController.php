@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -138,6 +137,98 @@ class JobController extends Controller
     public function watching()
     {
         $data['user'] = Auth::user();
+        $data['jobs'] = Job::watching()->get();
         return view('job.watching', $data);
     }
+
+    /*
+    * job interest page
+    */
+    public function interest()
+    {
+        $data['user'] = Auth::user();
+        $data['jobs'] = Job::interest()->get();
+        return view('job.watching', $data);
+    }
+
+    /*
+    * job shortlist page
+    */
+    public function shortlist()
+    {
+        $data['user'] = Auth::user();
+        $data['jobs'] = Job::shortlist()->get();
+        return view('job.watching', $data);
+    }
+
+    /*
+     * move general job to watching tagged job
+     */
+    public function moveWatching($jobId)
+    {
+        $job = Job::find($jobId);
+        $job->update(array('watching' => true, 'interested' => false, 'shortlisted' => false));
+        return Response::json(
+            ['result' => 'success']
+        , 200);
+    }
+    /*
+     * delete watching tag
+     */
+    public function deleteWatching($jobId)
+    {
+        $job = Job::find($jobId);
+        $job->update(array('watching' => false));
+        return Response::json(
+            ['result' => 'success']
+            , 200);
+    }
+    /*
+     * move watching job to interest tagged job
+     */
+    public function moveInterest($jobId)
+    {
+        $job = Job::find($jobId);
+        $job->update(array('watching' => false, 'interested' => true, 'shortlisted' => false));
+        return Response::json(
+            ['result' => 'success']
+            , 200);
+    }
+
+    /*
+    * delete interested tag
+    */
+    public function deleteInterest($jobId)
+    {
+        $job = Job::find($jobId);
+        $job->update(array('interested' => false));
+        return Response::json(
+            ['result' => 'success']
+            , 200);
+    }
+
+    /*
+    * move watching job to shortlisted tagged job
+    */
+    public function moveShortlist($jobId)
+    {
+        $job = Job::find($jobId);
+        $job->update(array('watching' => false, 'interested' => false, 'shortlisted' => true));
+        return Response::json(
+            ['result' => 'success']
+            , 200);
+    }
+
+    /*
+    * delete shortlisted tag
+    */
+    public function deleteShortlist($jobId)
+    {
+        $job = Job::find($jobId);
+        $job->update(array('shortlisted' => false));
+        return Response::json(
+            ['result' => 'success']
+            , 200);
+    }
+
 }

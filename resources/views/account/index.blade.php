@@ -29,7 +29,7 @@
                 <h3 class="margin-bottom-25">Account Balance</h3>
             </div>
             <div class="col-md-5">
-                <h4 class="label-color"> balance: <b>$XX.XX</b></h4>
+                <h4 class="label-color"> balance: <b>$0.00</b></h4>
                 <small>request account statement</small>
             </div>
             <div class="col-md-7">

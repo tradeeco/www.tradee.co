@@ -46,8 +46,8 @@
 
                                                             <li><h3>TRADEE</h3></li>
                                                             <li><a href="{{ URL::route('jobs.watching') }}">Watching</a></li>
-                                                            <li><a href="#">Instered</a></li>
-                                                            <li><a href="#">Shortlisted</a></li>
+                                                            <li><a href="{{ URL::route('jobs.interest') }}">Interested</a></li>
+                                                            <li><a href="{{ URL::route('jobs.shortlist') }}">Shortlisted</a></li>
                                                             <li><a href="#">Previous Jobs</a></li>
                                                             <li><h3>Account Balance: $0.00</h3></li>
                                                         </ul>

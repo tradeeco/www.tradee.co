@@ -8,7 +8,7 @@ var Home = {
         this.bindUIActions();
     },
     initUI: function() {
-        $('.chosen-select').chosen({width: "100%"});
+        $('.chosen-select, .chosen-select1').chosen({width: "100%"});
     },
     bindUIActions: function() {
 

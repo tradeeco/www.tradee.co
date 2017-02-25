@@ -50,18 +50,22 @@
 			<div class="sidebar-collapse">
 				<ul class="nav metismenu" id="side-menu">
 					<li class="nav-header">
-						<div class="dropdown profile-element"> <span>
-                        <img alt="image" class="img-circle" src="img/profile_small.jpg" />
-                         </span>
+						<div class="dropdown profile-element text-center">
+							<span>
+                        		<img alt="image" class="img-circle" src="/img/default-profile.jpg" style="width: 100px;"/>
+                         	</span>
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
-                         </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                        		<span class="clear">
+									<span class="block m-t-xs">
+										<strong class="font-bold">{{ full_name(Auth::guard('admin')->user()) }}</strong>
+                         			</span>
+									<span class="text-muted text-xs block">Admin User<b class="caret"></b></span>
+								</span>
+							</a>
 							<ul class="dropdown-menu animated fadeInRight m-t-xs">
-								<li><a href="profile.html">Profile</a></li>
-								<li><a href="contacts.html">Contacts</a></li>
-								<li><a href="mailbox.html">Mailbox</a></li>
+								<li><a href="javascript:void(0)">Profile</a></li>
 								<li class="divider"></li>
-								<li><a href="login.html">Logout</a></li>
+								<li><a href="javascript:void(0)">Logout</a></li>
 							</ul>
 						</div>
 						<div class="logo-element">
@@ -69,7 +73,10 @@
 						</div>
 					</li>
 					<li class="{{active_class($controller, 'DashboardController')}}">
-						<a href="{!! URL::route('admin.dashboards.index') !!}"><i class="fa fa-th-large"></i> Dashboards</a>
+						<a href="{!! URL::route('admin.dashboards.index') !!}"><i class="fa fa-th-large"></i> Dashboard</a>
+					</li>
+					<li class="{{active_class($controller, 'UserController')}}">
+						<a href="{!! URL::route('admin.users.index') !!}"><i class="fa fa-user"></i> User</a>
 					</li>
 					<li class="{{active_class($controller, 'CategoryController')}}">
 						<a href="{!! URL::route('admin.categories.index') !!}"><i class="fa fa-tags"></i> Category</a>

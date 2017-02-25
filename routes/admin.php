@@ -14,3 +14,4 @@ Route::get('/', 'Admin\DashboardController@index');
 Route::resource('/categories', 'Admin\CategoryController');
 Route::resource('/locations', 'Admin\LocationController');
 Route::resource('/dashboards', 'Admin\DashboardController');
+Route::resource('/users', 'Admin\UserController');

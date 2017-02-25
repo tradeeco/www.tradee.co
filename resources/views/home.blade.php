@@ -15,11 +15,11 @@
                     <div class="profile-body margin-bottom-20">
                         <div class="tab-v1">
                             <ul class="nav nav-justified nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#search_job" aria-expanded="false">SEARCH JOBS</a></li>
-                                <li><a data-toggle="tab" href="#post_job" aria-expanded="true">POST JOBS</a></li>
+                                <li class="{{ old('description') == null ? 'active' : '' }}"><a data-toggle="tab" href="#search_job" aria-expanded="false">SEARCH JOBS</a></li>
+                                <li class="{{ old('description') == null ? '' : 'active' }}"><a data-toggle="tab" href="#post_job" aria-expanded="true">POST JOBS</a></li>
                             </ul>
                             <div class="tab-content">
-                                <div id="search_job" class="panel-body tab-pane fade active in">
+                                <div id="search_job" class="panel-body tab-pane fade {{ old('description') == null ? 'active' : '' }} in">
                                     {!! Form::open(['url' => route('jobs.index'), 'id' => 'search_job', 'method' => 'GET']) !!}
                                     <div class="row">
                                         <div class="col-md-5">
@@ -34,7 +34,7 @@
                                     </div>
                                     {!! Form::close() !!}
                                 </div>
-                                <div id="post_job" class="panel-body tab-pane fade in">
+                                <div id="post_job" class="panel-body tab-pane fade {{ old('description') == null ? '' : 'active' }} in">
                                     @if (Auth::check())
                                     {!! Form::open(['url' => route('jobs.store'), 'class' => 'create-job', 'data-parsley-validate', 'id' => 'create_job']) !!}
                                     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -54,7 +54,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <label>Area / Suburb</label>
-                                                {{ Form::select('area_suburb_id', $locations1, null, ['class' => 'form-control input-lg rounded']) }}
+                                                {{ Form::select('area_suburb_id', $locations1, null, ['class' => 'form-control input-lg rounded chosen-select1']) }}
                                             </div>
                                         </div>
                                     </div>

@@ -49,3 +49,8 @@ function getTaggedRemoveButtonId($tag)
     else
         return 'delete_user_selected';
 }
+
+function full_name($object)
+{
+    return ucfirst($object->first_name) . ' ' . ucfirst($object->last_name);
+}

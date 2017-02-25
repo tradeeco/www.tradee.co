@@ -68,6 +68,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\TaggedJob');
     }
+
+    public function taggedUsers()
+    {
+        return $this->hasMany('App\Models\TaggedUser');
+    }
 //    public static function authenticate($username, $password)
 //    {
 //        $user = User::where('username', $username)->first();

@@ -2,7 +2,7 @@
 @section('custom-styles')
     {!! Html::style('frontend/plugins/owl-carousel/owl-carousel/owl.carousel.css?'.time()) !!}
     {!! Html::style('frontend/css/pages/profile.css?'.time()) !!}
-
+    {!! Html::style('frontend/css/pages/page_search_inner_tables.css?'.time()) !!}
 @stop
 @section('body')
     <div class="container content">
@@ -57,45 +57,62 @@
             </div>
         </div>
         @if (Auth::check() && $job->user->id == Auth::user()->id)
-        <div class="tab-v2">
+        <div class="tab-v2 margin-bottom-40">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="false">(##) Interested</a></li>
-                <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="false">(##) Shortlisted</a></li>
-                <li class=""><a href="#messages-1" data-toggle="tab" aria-expanded="false">(##) Selected</a></li>
+                <li class="active"><a href="#user_interested" data-toggle="tab" aria-expanded="false">(<span>{{ $inUsers->count() }}</span>) Interested</a></li>
+                <li class=""><a href="#user_shortlists" data-toggle="tab" aria-expanded="false">(<span>{{ $shUsersCount }}</span>) Shortlisted</a></li>
+                <li class=""><a href="#user_selected" data-toggle="tab" aria-expanded="false">(<span>{{ $seUsersCount }}</span>) Selected</a></li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane fade active in" id="home-1">
-                    <h4>Heading Sample 1</h4>
-                    <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum <strong>ivamus imperdiet</strong> condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque <strong>fermentum vivamus</strong> imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac felis consectetur id. Donec eget orci metusvivamus imperdiet.</p>
+                <div class="tab-pane fade active in" id="user_interested">
+                    <div class="table-search-v2">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>User Info</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($inUsers as $inUser)
+                                    <?php $user = $inUser->user ?>
+                                    @include('job/user_list_partial', ['user' => $user, 'tagUser' => $inUser, 'tag' => 0])
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="tab-pane fade in" id="profile-1">
-                    <img alt="" class="pull-left lft-img-margin img-width-200" src="assets/img/main/img17.jpg">
-                    <h4>Heading Sample 2</h4>
-                    <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, <strong>ac adipiscing nunc.</strong> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac <strong>interdum ullamcorper.</strong></p>
-                </div>
-                <div class="tab-pane fade in" id="messages-1">
+                <div class="tab-pane fade in" id="user_shortlists"></div>
+                <div class="tab-pane fade in" id="user_selected">
                     <h4>Heading Sample 3</h4>
                     <p><img alt="" class="pull-right rgt-img-margin img-width-200" src="assets/img/main/img21.jpg"> <strong>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id.</strong> Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
                 </div>
             </div>
         </div>
         @else
-        <div class="col-md-12">
-            <h2 class="label-color margin-bottom-30">Job by:</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="label-color margin-bottom-30">Job by:</h2>
+            </div>
         </div>
-        <div class="col-md-6 margin-bottom-40">
-            <div class="job-user profile">
-                <img src="{{ userImageSmall($job->user) }}" class="rounded-x pull-left margin-right-20" style="width: 150px; height: 150px;">
-                <div class="name-location">
-                    <h3 class="margin-bottom-15">{{ $job->user->first_name }}</h3>
-                    <h3 class="label-color margin-bottom-15">Rating - X X X X </h3>
-                    <p>{{ $job->user->userProfile->short_bio }}</p>
+        <div class="row">
+            <div class="col-md-6 margin-bottom-40">
+                <div class="job-user profile">
+                    <img src="{{ userImageSmall($job->user) }}" class="rounded-x pull-left margin-right-20" style="width: 150px; height: 150px;" data-user="{{ $job->user->id }}">
+                    <div class="name-location">
+                        <h3 class="margin-bottom-15">{{ $job->user->first_name }}</h3>
+                        <h3 class="label-color margin-bottom-15">Rating - X X X X </h3>
+                        <p>{{ $job->user->userProfile->short_bio }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
             <div class="col-md-6">
-                <a href="javascript:void(0)" class="btn btn-primary btn-lg rounded-x pull-right text-uppercase" style="width: 150px; height: 150px; font-size: 25px; padding: 45px 15px; line-height: 27px;"> Express<br/>Interest</a>
+                <a href="javascript:void(0)" class="btn btn-primary btn-lg rounded-x pull-right text-uppercase" id="express_interest" style="width: 150px; height: 150px; font-size: 25px; padding: 45px 15px; line-height: 27px;"> Express<br/>Interest</a>
             </div>
+        </div>
         @endif
         <div class="row margin-bottom-20">
             <div class="col-md-6">

@@ -75,7 +75,11 @@ Route::get('/account/add_funds3', function(){
 //})->where('undefinedRoute', '([A-z\d-\/_.]+)?');
 
 Route::get('users/{slug}', 'UserController@profile')->name('users.profile');
-
+Route::post('users/express_interest/{id}', 'UserController@expressInterest')->name('users.express_interest');
+Route::post('users/express_shortlist/{id}', 'UserController@expressShortlist')->name('users.express_shortlist');
+Route::post('users/express_select/{id}', 'UserController@expressSelect')->name('users.express_select');
+Route::get('users/tagged_users/{tag}', 'UserController@taggedUsers')->name('users.tagged_users');
+Route::post('users/delete_tagged/{id}/{tag}', 'UserController@deleteTagged')->name('users.delete_tagged');
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm');

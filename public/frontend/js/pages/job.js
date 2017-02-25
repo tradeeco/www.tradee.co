@@ -6,6 +6,10 @@ var Job = {
     deleteInterest: $('a#delete_interest'),
     moveShortlist: $('a#move_shortlist'),
     deleteShortlist: $('a#delete_shortlist'),
+    expressInterest: $('a#express_interest'),
+    userShortlistsTab: $('a[href="#user_shortlists"]'),
+    userSelectedTab: $('a[href="#user_selected"]'),
+    userInterestedTab: $('a[href="#user_interested"]'),
     SuccessTemplate: '<div class="alert alert-success alert-dismissibl fade in"> \
                             <p>Success</p> \
                         </div>',
@@ -155,6 +159,43 @@ var Job = {
             // newExp.find('input[type=text]:first').focus();
             return false;
         });
+
+        this.expressInterest.click(function (e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var userId = thisObj.closest('div.row').find('div.job-user').find('img').data('user');
+            var jqxhr = $.post( "/users/express_interest/" + userId, { _token: CSRF_TOKEN })
+                .done(function() {
+                    thisObj.fadeOut();
+                    thisObj.closest('div').append($(Job.SuccessTemplate).hide().fadeIn(500).fadeOut(1500));
+                    thisObj.remove();
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+            // var newExp = $('div.experience-wrap div.input-wrap:last');
+            // newExp.find('input[type=text]:first').focus();
+            return false;
+        });
+
+        this.userInterestedTab.click(function (e) {
+            //e.preventDefault();
+            $( "div#user_interested" ).load( "/users/tagged_users/0", function() {
+            });
+        });
+
+        this.userShortlistsTab.click(function (e) {
+            //e.preventDefault();
+            $( "div#user_shortlists" ).load( "/users/tagged_users/1", function() {
+            });
+        });
+
+        this.userSelectedTab.click(function (e) {
+            //e.preventDefault();
+            $( "div#user_selected" ).load( "/users/tagged_users/2", function() {
+            });
+        });
+
         $(document).on('click', 'a#reply_question', function (e) {
             e.preventDefault();
             $(this).closest('div.media-body').find('form').fadeIn();
@@ -164,6 +205,95 @@ var Job = {
             e.preventDefault();
             $(this).closest('form').fadeOut();
         });
+
+        $(document).on('click', 'a#express_shortlist', function (e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var userId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
+            var jqxhr = $.post( "/users/express_shortlist/" + userId, { _token: CSRF_TOKEN })
+                .done(function() {
+                    thisObj.closest('tr').fadeOut().remove();
+                    $('a[href="#user_shortlists"] span').text($('a[href="#user_shortlists"] span').text()*1 + 1);
+                    $('a[href="#user_interested"] span').text($('a[href="#user_interested"] span').text()*1 - 1);
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+            $(this).closest('div.media-body').find('form').fadeIn();
+        });
+
+        $(document).on('click', 'a#express_select', function (e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var userId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
+            var jqxhr = $.post( "/users/express_select/" + userId, { _token: CSRF_TOKEN })
+                .done(function() {
+                    thisObj.closest('tr').fadeOut().remove();
+                    $('a[href="#user_selected"] span').text($('a[href="#user_selected"] span').text()*1 + 1);
+                    $('a[href="#user_shortlists"] span').text($('a[href="#user_shortlists"] span').text()*1 - 1);
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+            $(this).closest('div.media-body').find('form').fadeIn();
+        });
+
+        $(document).on('click', 'a#delete_user_selected', function (e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var userId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
+            var jqxhr = $.post( "/users/delete_tagged/" + userId + '/2', { _token: CSRF_TOKEN })
+                .done(function() {
+                    thisObj.fadeOut();
+                    thisObj.closest('tr').fadeOut().remove();
+                    $('a[href="#user_selected"] span').text($('a[href="#user_selected"] span').text()*1 - 1);
+                    $('a[href="#user_shortlists"] span').text($('a[href="#user_shortlists"] span').text()*1 + 1);
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+            // var newExp = $('div.experience-wrap div.input-wrap:last');
+            // newExp.find('input[type=text]:first').focus();
+            return false;
+        });
+
+        $(document).on('click', 'a#delete_user_shortlisted', function (e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var userId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
+            var jqxhr = $.post( "/users/delete_tagged/" + userId + '/1', { _token: CSRF_TOKEN })
+                .done(function() {
+                    thisObj.fadeOut();
+                    thisObj.closest('tr').fadeOut().remove();
+                    $('a[href="#user_shortlists"] span').text($('a[href="#user_shortlists"] span').text()*1 - 1);
+                    $('a[href="#user_interested"] span').text($('a[href="#user_interested"] span').text()*1 + 1);
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+            // var newExp = $('div.experience-wrap div.input-wrap:last');
+            // newExp.find('input[type=text]:first').focus();
+            return false;
+        });
+
+        $(document).on('click', 'a#delete_user_interested', function (e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var userId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
+            var jqxhr = $.post( "/users/delete_tagged/" + userId + '/4', { _token: CSRF_TOKEN })
+                .done(function() {
+                    thisObj.fadeOut();
+                    thisObj.closest('tr').fadeOut().remove();
+                    $('a[href="#user_interested"] span').text($('a[href="#user_interested"] span').text()*1 - 1);
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+            // var newExp = $('div.experience-wrap div.input-wrap:last');
+            // newExp.find('input[type=text]:first').focus();
+            return false;
+        });
+
 
         $(document).on('submit', 'form.question-form', function(e) {
             e.preventDefault();

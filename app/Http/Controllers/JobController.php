@@ -98,8 +98,15 @@ class JobController extends Controller
      * Job Detail page by slug
      */
     public function show($slug) {
-        $data['job'] = Job::where('slug', $slug)->first();
+        if (Auth::check()) {
+            $user = Auth::user();
+            $data['taggedUsers'] = $taggedUsers = $user->taggedUsers;
+            $data['inUsers'] = $taggedUsers->where('tag', 0);
+            $data['shUsersCount'] = $taggedUsers->where('tag', 1)->count();
+            $data['seUsersCount'] = $taggedUsers->where('tag', 2)->count();
+        }
 
+        $data['job'] = Job::where('slug', $slug)->first();
         if ($alert = Session::get('alert')) {
             $data['alert'] = $alert;
         }

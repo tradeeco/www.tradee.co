@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use App\Models\Job;
 use App\Models\JobPhoto;
+use App\Models\TaggedJob;
 use App\Logic\JobPhotoRepository;
 use Illuminate\Support\Facades\DB;
 
@@ -136,8 +137,8 @@ class JobController extends Controller
      */
     public function watching()
     {
-        $data['user'] = Auth::user();
-        $data['jobs'] = Job::watching()->get();
+        $data['user'] = $user = Auth::user();
+        $data['taggedJobs'] = $user->taggedJobs->where('tag', 0);
         return view('job.watching', $data);
     }
 
@@ -146,8 +147,8 @@ class JobController extends Controller
     */
     public function interest()
     {
-        $data['user'] = Auth::user();
-        $data['jobs'] = Job::interest()->get();
+        $data['user'] = $user = Auth::user();
+        $data['taggedJobs'] = $user->taggedJobs->where('tag', 1);
         return view('job.watching', $data);
     }
 
@@ -156,8 +157,8 @@ class JobController extends Controller
     */
     public function shortlist()
     {
-        $data['user'] = Auth::user();
-        $data['jobs'] = Job::shortlist()->get();
+        $data['user'] = $user = Auth::user();
+        $data['taggedJobs'] = $user->taggedJobs->where('tag', 2);
         return view('job.watching', $data);
     }
 
@@ -166,8 +167,23 @@ class JobController extends Controller
      */
     public function moveWatching($jobId)
     {
-        $job = Job::find($jobId);
-        $job->update(array('watching' => true, 'interested' => false, 'shortlisted' => false));
+        if (count(Job::find($jobId)) == 0)
+            return Response::json(
+                ['result' => 'failed']
+                , 422);
+
+        $user = Auth::user();
+        $taggedJob = TaggedJob::where('job_id', $jobId)->where('user_id', $user->id)->where('tag', 0)->first();
+        if (count($taggedJob))
+            $taggedJob->update(array('tag' => 0));
+        else {
+            $taggedJob = new TaggedJob;
+            $taggedJob->user_id = $user->id;
+            $taggedJob->job_id = $jobId;
+            $taggedJob->tag = 0;
+            $taggedJob->save();
+        }
+
         return Response::json(
             ['result' => 'success']
         , 200);
@@ -175,10 +191,10 @@ class JobController extends Controller
     /*
      * delete watching tag
      */
-    public function deleteWatching($jobId)
+    public function deleteWatching($taggedJobId)
     {
-        $job = Job::find($jobId);
-        $job->update(array('watching' => false));
+        $job = TaggedJob::find($taggedJobId);
+        $job->update(array('tag' => 3));
         return Response::json(
             ['result' => 'success']
             , 200);
@@ -186,10 +202,23 @@ class JobController extends Controller
     /*
      * move watching job to interest tagged job
      */
-    public function moveInterest($jobId)
+    public function moveInterest($taggedJobId)
     {
-        $job = Job::find($jobId);
-        $job->update(array('watching' => false, 'interested' => true, 'shortlisted' => false));
+        $user = Auth::user();
+        $taggedJob = TaggedJob::find($taggedJobId);
+        if (count($taggedJob))
+            $taggedJob->update(array('tag' => 1));
+        else {
+//            $taggedJob = new TaggedJob;
+//            $taggedJob->user_id = $user->id;
+//            $taggedJob->job_id = $jobId;
+//            $taggedJob->tag = 1;
+//            $taggedJob->save();
+            return Response::json(
+                ['result' => 'failed']
+                , 422);
+        }
+
         return Response::json(
             ['result' => 'success']
             , 200);
@@ -198,10 +227,10 @@ class JobController extends Controller
     /*
     * delete interested tag
     */
-    public function deleteInterest($jobId)
+    public function deleteInterest($taggedJobId)
     {
-        $job = Job::find($jobId);
-        $job->update(array('interested' => false));
+        $job = TaggedJob::find($taggedJobId);
+        $job->update(array('tag' => 0));
         return Response::json(
             ['result' => 'success']
             , 200);
@@ -210,10 +239,23 @@ class JobController extends Controller
     /*
     * move watching job to shortlisted tagged job
     */
-    public function moveShortlist($jobId)
+    public function moveShortlist($taggedJobId)
     {
-        $job = Job::find($jobId);
-        $job->update(array('watching' => false, 'interested' => false, 'shortlisted' => true));
+        $user = Auth::user();
+        $taggedJob = TaggedJob::find($taggedJobId);
+        if (count($taggedJob))
+            $taggedJob->update(array('tag' => 2));
+        else {
+//            $taggedJob = new TaggedJob;
+//            $taggedJob->user_id = $user->id;
+//            $taggedJob->job_id = $jobId;
+//            $taggedJob->tag = 1;
+//            $taggedJob->save();
+            return Response::json(
+                ['result' => 'failed']
+                , 422);
+        }
+
         return Response::json(
             ['result' => 'success']
             , 200);
@@ -222,10 +264,10 @@ class JobController extends Controller
     /*
     * delete shortlisted tag
     */
-    public function deleteShortlist($jobId)
+    public function deleteShortlist($taggedJobId)
     {
-        $job = Job::find($jobId);
-        $job->update(array('shortlisted' => false));
+        $job = TaggedJob::find($taggedJobId);
+        $job->update(array('tag' => 1));
         return Response::json(
             ['result' => 'success']
             , 200);

@@ -34,7 +34,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($jobs as $job)
+                                @foreach ($taggedJobs as $taggedJob)
+                                    <?php $job = $taggedJob->job ?>
                                     <tr>
                                         <td>
                                             <a href="{{ URL::route('users.profile', $job->user->slug) }}">
@@ -43,7 +44,7 @@
                                             </a>
                                         </td>
                                         <td class="job-title" style="width: 30%;">
-                                            <h3><a href="{{ URL::route('jobs.show', $job->slug) }}" data-id="{{$job->id}}">{{ $job->title }}</a></h3>
+                                            <h3><a href="{{ URL::route('jobs.show', $job->slug) }}" data-id="{{$taggedJob->id}}">{{ $job->title }}</a></h3>
                                             <p>{{ $job->category->name }}</p>
                                             <p>{{ $job->areaSuburb->name }}</p>
                                             <p>{{ str_limit($job->description, 50) }}</p>
@@ -82,7 +83,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($jobs as $job)
+                                @foreach ($taggedJobs as $taggedJob)
+                                    <?php $job = $taggedJob->job ?>
                                     <tr>
                                         <td>
                                             <a href="{{ URL::route('users.profile', $job->user->slug) }}">
@@ -91,7 +93,7 @@
                                             </a>
                                         </td>
                                         <td class="job-title" style="width: 30%;">
-                                            <h3><a href="{{ URL::route('jobs.show', $job->slug) }}" data-id="{{$job->id}}">{{ $job->title }}</a></h3>
+                                            <h3><a href="{{ URL::route('jobs.show', $job->slug) }}" data-id="{{$taggedJob->id}}">{{ $job->title }}</a></h3>
                                             <p>{{ $job->category->name }}</p>
                                             <p>{{ $job->areaSuburb->name }}</p>
                                             <p>{{ str_limit($job->description, 50) }}</p>
@@ -127,7 +129,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($jobs as $job)
+                                @foreach ($taggedJobs as $taggedJob)
+                                    <?php $job = $taggedJob->job ?>
                                     <tr>
                                         <td>
                                             <a href="{{ URL::route('users.profile', $job->user->slug) }}">
@@ -136,7 +139,7 @@
                                             </a>
                                         </td>
                                         <td class="job-title" style="width: 30%;">
-                                            <h3><a href="{{ URL::route('jobs.show', $job->slug) }}" data-id="{{$job->id}}">{{ $job->title }}</a></h3>
+                                            <h3><a href="{{ URL::route('jobs.show', $job->slug) }}" data-id="{{$taggedJob->id}}">{{ $job->title }}</a></h3>
                                             <p>{{ $job->category->name }}</p>
                                             <p>{{ $job->areaSuburb->name }}</p>
                                             <p>{{ str_limit($job->description, 50) }}</p>

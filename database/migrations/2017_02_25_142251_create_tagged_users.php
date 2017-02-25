@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJobQuestions extends Migration
+class CreateTaggedUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,12 @@ class CreateJobQuestions extends Migration
     public function up()
     {
         //
-        Schema::create('job_questions', function(Blueprint $table)
+        Schema::create('tagged_users', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('job_id')->unsigned()->index();
-            $table->integer('user_id')->unisigned()->index();
-            $table->text('content');
+            $table->integer('user_id')->unsigned()->index();
+            $table->integer('tagged_user_id')->unsigned()->index();
+            $table->tinyInteger('tag')->unsigned()->default(0)->comment('0: interested, 1: shortlisted, 2: selected');
             $table->timestamps();
         });
     }
@@ -32,6 +32,5 @@ class CreateJobQuestions extends Migration
     public function down()
     {
         //
-        Schema::drop('job_questions');
     }
 }

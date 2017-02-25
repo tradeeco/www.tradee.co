@@ -53,6 +53,11 @@ class Job extends Model
         return $query->where('shortlisted', true);
     }
 
+    public function taggedJobs()
+    {
+        return $this->hasMany('App\Models\TaggedJob');
+    }
+
     public function jobPhotos()
     {
         return $this->hasMany('App\Models\JobPhoto');

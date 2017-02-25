@@ -32,5 +32,6 @@ class CreateJobAnswers extends Migration
     public function down()
     {
         //
+        Schema::drop('job_answers');
     }
 }

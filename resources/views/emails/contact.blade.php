@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <style>
-        <?php include(public_path().'/backend/css/bootstrap.css'); ?>
-    </style>
+    @include('emails/bootstrap_css');
 </head>
 <body>
 <h2>This is weekly analytics about the jobs</h2>

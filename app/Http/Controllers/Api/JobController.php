@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use App\Models\Job;
 use App\Logic\JobPhotoRepository;
+use Illuminate\Support\Facades\Config;
 
 class JobController extends Controller
 {
@@ -43,7 +44,7 @@ class JobController extends Controller
         Paginator::currentPageResolver(function () use ($currentPage) {
             return $currentPage;
         });
-        $jobs = Job::with('jobPhotos')->paginate(1);
+        $jobs = Job::with('jobPhotos')->paginate(Config::get('frontend.job_photo_path'));
 
         if ($categoryId == 0 && $locationId !=0) {
             $jobs = Job::with('jobPhotos')->where('area_suburb_id', $locationId)->paginate(1);
@@ -103,8 +104,6 @@ class JobController extends Controller
         $encodedImage = $request->get('image');
 
         $response = $this->image->uploadFromBase64Encoded($encodedImage);
-        return Response::json(
-            $response
-            , 200);
+        return $response;
     }
 }

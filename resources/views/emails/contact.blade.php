@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    @include('emails/bootstrap_css')
+    <style>
+    @include(public_path().'backend/css/bootstrap.min.css');
+    </style>
 </head>
 <body>
 <h2>This is weekly analytics about the jobs</h2>

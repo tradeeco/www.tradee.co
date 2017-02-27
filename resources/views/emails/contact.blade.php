@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <style>
-        @include(public_path().'/backend/css/bootstrap.css')
+        <?php include(public_path().'/backend/css/bootstrap.css'); ?>
     </style>
 </head>
 <body>

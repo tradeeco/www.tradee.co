@@ -70,7 +70,7 @@ class WelcomeController extends Controller {
                 ->withErrors($validator)
                 ->withInput();
         } else {
-
+            Mail::to('sokomheng89@gmail.com')->send(new Contact($request->all()));
         }
     }
 }

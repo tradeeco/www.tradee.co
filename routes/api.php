@@ -19,7 +19,8 @@ Route::group(['middleware' => 'cors'], function() {
     Route::post('/jobs/locations', 'Api\JobController@getLocations');
     Route::post('/jobs/{id}/{category_id}/{location_id}', 'Api\JobController@jobs');
     Route::post('/jobs/upload_photo', 'Api\JobController@uploadJobPhoto');
-    Route::resource('/jobs', 'Api\JobController', ['only' => ['show', 'store']]);
+    Route::post('/jobs/store', 'Api\JobController@store');
+    Route::get('/jobs/{id}', 'Api\JobController@show');
 });
 //
 //Route::resource('/todo', 'TodoController');

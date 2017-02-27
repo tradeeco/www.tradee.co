@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Models\Contact as ContactModel;
 
 class Contact extends Mailable
 {
@@ -16,9 +17,13 @@ class Contact extends Mailable
      *
      * @return void
      */
+
+    protected $contact;
+
     public function __construct()
     {
         //
+
     }
 
     /**

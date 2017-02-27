@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use App\Models\Job;
+use App\Models\JobPhoto;
 use App\Logic\JobPhotoRepository;
 use Illuminate\Support\Facades\Config;
 
@@ -44,17 +45,17 @@ class JobController extends Controller
         Paginator::currentPageResolver(function () use ($currentPage) {
             return $currentPage;
         });
-        $jobs = Job::with('jobPhotos')->paginate(Config::get('frontend.job_photo_path'));
+        $jobs = Job::with('jobPhotos')->orderBy('created_at', 'DESC')->paginate(Config::get('frontend.job_per_page'));
 
         if ($categoryId == 0 && $locationId !=0) {
-            $jobs = Job::with('jobPhotos')->where('area_suburb_id', $locationId)->paginate(1);
+            $jobs = Job::with('jobPhotos')->where('area_suburb_id', $locationId)->orderBy('created_at', 'DESC')->paginate(1);
         }
         if ($categoryId != 0 && $locationId ==0) {
-            $jobs = Job::with('jobPhotos')->where('category_id', $categoryId)->paginate(1);
+            $jobs = Job::with('jobPhotos')->where('category_id', $categoryId)->orderBy('created_at', 'DESC')->paginate(1);
         }
 
         if ($categoryId != 0 && $locationId !=0) {
-            $jobs = Job::with('jobPhotos')->where('category_id', $categoryId)->where('area_suburb_id', $locationId)->paginate(1);
+            $jobs = Job::with('jobPhotos')->where('category_id', $categoryId)->where('area_suburb_id', $locationId)->orderBy('created_at', 'DESC')->paginate(1);
         }
         return Response::json(
             $jobs

@@ -188,6 +188,7 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
         Themsaid\MailPreview\MailPreviewServiceProvider::class,
+        Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
     ],
 
     /*

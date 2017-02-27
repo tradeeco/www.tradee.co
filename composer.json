@@ -18,7 +18,8 @@
         "sammyk/laravel-facebook-sdk": "3.4.*",
         "guzzlehttp/guzzle": "^6.2",
         "barryvdh/laravel-cors": "^0.8",
-        "themsaid/laravel-mail-preview": "^1.2"
+        "themsaid/laravel-mail-preview": "^1.2",
+        "fedeisas/laravel-mail-css-inliner": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

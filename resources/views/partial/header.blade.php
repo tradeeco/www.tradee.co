@@ -55,7 +55,7 @@
                                                     <div class="col-md-6 equal-height-in">
                                                         <ul class="list-unstyled equal-height-list">
                                                             <li><h3>TRADER</h3></li>
-                                                            <li><a href="#">My Jobs</a></li>
+                                                            <li><a href="{{ URL::route('jobs.mine') }}">My Jobs</a></li>
                                                             <li><a href="#">Previous Jobs</a></li>
                                                         </ul>
                                                     </div>

@@ -41,6 +41,7 @@ Route::post('/api/login', 'Auth\LoginController@ajaxLogin');
 Route::get('/jobs/watching', 'JobController@watching')->name('jobs.watching');
 Route::get('/jobs/interest', 'JobController@interest')->name('jobs.interest');
 Route::get('/jobs/shortlist', 'JobController@shortlist')->name('jobs.shortlist');
+Route::get('/jobs/mine', 'JobController@mine')->name('jobs.mine');
 
 Route::resource('/jobs', 'JobController');
 Route::post('/jobs/upload_photo', 'JobController@upload_photo')->name('jobs.upload_photo');

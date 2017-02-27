@@ -15,4 +15,9 @@ class TaggedJob extends Model
     {
         return $this->belongsTo('App\Models\Job');
     }
+
+    public function scopeWatching()
+    {
+        return $this->where('tag', 0);
+    }
 }

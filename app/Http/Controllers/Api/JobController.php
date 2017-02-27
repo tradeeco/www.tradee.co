@@ -12,9 +12,17 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use App\Models\Job;
+use App\Logic\JobPhotoRepository;
 
 class JobController extends Controller
 {
+    protected $image;
+
+    public function __construct(JobPhotoRepository $jobPhotoRepository)
+    {
+        $this->image = $jobPhotoRepository;
+    }
+
     //
     public function getCategories()
     {
@@ -49,6 +57,54 @@ class JobController extends Controller
         }
         return Response::json(
             $jobs
+            , 200);
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), Job::$rules, Job::$messages);
+
+        if ($validator->fails()) {
+            return Response::json(
+                $validator->errors()
+                , 422);
+        } else {
+            $job = new Job;
+            $job->title = $request->get('title');
+            $job->description = $request->get('description');
+            $job->category_id = $request->get('category_id');
+            $job->area_suburb_id = $request->get('area_suburb_id');
+            $job->user_id = $request->get('user_id');
+            $job->save();
+
+            JobPhoto::whereIn('id', explode(',', $request->get('photo_ids')))->update(array('job_id' => $job->id));
+
+            $tempPhotos = JobPhoto::where('job_id', 0)->get();
+            foreach ($tempPhotos as $photo) {
+                $this->image->delete( $photo->id );
+            }
+
+            return Response::json(
+                $job
+                , 200);
+        }
+    }
+
+    public function show($id) {
+
+        $data['job'] = $job = Job::with('jobPhotos')->with('user')->with('user.userProfile')->find($id);
+
+        return Response::json(
+            $job
+            , 200);
+    }
+
+    public function uploadJobPhoto(Request $request) {
+        $encodedImage = $request->get('image');
+
+        $response = $this->image->uploadFromBase64Encoded($encodedImage);
+        return Response::json(
+            $response
             , 200);
     }
 }

@@ -38,10 +38,7 @@ class Job extends Model
         return $query->join('area_suburbs', 'jobs.area_suburb_id', '=', 'area_suburbs.id')->where('area_suburbs.name', $name);
     }
 
-    public function scopeWatching($query)
-    {
-        return $query->where('watching', true);
-    }
+
 
     public function scopeInterest($query)
     {
@@ -77,6 +74,7 @@ class Job extends Model
     {
         return $this->belongsTo('App\User');
     }
+
 
     public function jobQuestions()
     {

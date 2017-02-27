@@ -168,7 +168,15 @@ class JobController extends Controller
         $data['taggedJobs'] = $user->taggedJobs->where('tag', 2);
         return view('job.watching', $data);
     }
-
+    /*
+     * my job pages
+     */
+    public function mine()
+    {
+        $data['user'] = $user = Auth::user();
+        $data['jobs'] = $user->jobs;
+        return view('job.mine', $data);
+    }
     /*
      * move general job to watching tagged job
      */

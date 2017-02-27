@@ -62,6 +62,41 @@ class JobPhotoRepository
 
     }
 
+    public function uploadFromBase64Encoded($photo)
+    {
+//        $originalName = $photo->getClientOriginalName();
+//        $extension = $photo->getClientOriginalExtension();
+//        $originalNameWithoutExt = substr($originalName, 0, strlen($originalName) - strlen($extension) - 1);
+//
+//        $filename = $this->sanitize($originalNameWithoutExt);
+//        $allowed_filename = $this->createUniqueFilename( $filename, $extension );
+
+        $allowed_filename  = substr(sha1(mt_rand()), 0, 12);
+        $uploadSuccess1 = $this->original( $photo, $allowed_filename.'.jpg' );
+
+        $uploadSuccess2 = $this->icon( $photo, $allowed_filename.'.jpg' );
+
+        if( !$uploadSuccess1 || !$uploadSuccess2 ) {
+
+            return Response::json([
+                'error' => true,
+                'message' => 'Server error while uploading',
+                'code' => 500
+            ], 500);
+
+        }
+
+        $sessionJobPhoto = new JobPhoto;
+        $sessionJobPhoto->file_name      = $allowed_filename.'.jpg';
+        $sessionJobPhoto->original_name = $allowed_filename.'.jpg';
+        $sessionJobPhoto->job_id = 0;
+        $sessionJobPhoto->save();
+
+        return Response::json(
+            $sessionJobPhoto
+            , 200);
+    }
+
     public function createUniqueFilename( $filename, $extension )
     {
         $full_size_dir = Config::get('frontend.job_photo_path') . Config::get('frontend.full_size');

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    {!! Html::style('frontend/plugins/bootstrap/css/bootstrap.min.css') !!}
+    @include('emails/bootstrap_css')
 </head>
 <body>
 <h2>This is weekly analytics about the jobs</h2>

@@ -177,3 +177,6 @@
 .answer-form {
     display: none;
 }
+.user-table tbody tr td {
+    vertical-align: middle;
+}

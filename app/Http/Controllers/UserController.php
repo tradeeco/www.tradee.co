@@ -71,7 +71,7 @@ class UserController extends Controller
                 , 422);
 
         $currentUser = Auth::user();
-        $taggedUser = TaggedUser::where('user_id', $userId)->where('user_id', $currentUser->id)->where('tag', 0)->first();
+        $taggedUser = TaggedUser::where('tagged_user_id', $userId)->where('user_id', $currentUser->id)->where('tag', 0)->first();
         if (count($taggedUser))
             $taggedUser->update(array('tag' => 0));
         else {

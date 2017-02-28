@@ -26,19 +26,7 @@
                 <h5>ADD NEW CATEGORY</h5>
             </div>
             <div class="ibox-content">
-
-                <?php if (isset($alert)) { ?>
-                <div class="alert alert-<?php echo $alert['type'];?> alert-dismissibl fade in">
-                    <button type="button" class="close" data-dismiss="alert">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <p>
-                        <?php echo $alert['msg'];?>
-                    </p>
-                </div>
-                <?php } ?>
-
+                @include('partial/alert_message')
                 {{ Form::open(array('url' => 'admin/categories', 'class' => 'new-category-form')) }}
                     <div class="row m-b categories">
                         @if(Form::old('name'))

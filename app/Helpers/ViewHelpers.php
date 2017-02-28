@@ -14,7 +14,7 @@ function userImage($user) {
 function userImageSmall($user) {
     if (count($user->userProfile) && $user->userProfile->image_name != '')
         return Config::get('frontend.user_avatar_path').Config::get('frontend.icon_size').$user->userProfile->image_name;
-    else return 'img/default-profile.jpg';
+    else return '/img/default-profile.jpg';
 }
 
 function jobPhotoSrc($photo)

@@ -14,7 +14,7 @@
             <tbody>
             @foreach ($taggedUsers as $taUser)
                 <?php $user = $taUser->user ?>
-                @include('job/user_list_partial', ['user' => $user, 'tagUser' => $taUser, 'tag' => $tag])
+                @include('job/user_list_partial', ['user' => $taUser->tagUser, 'tagUser' => $taUser, 'tag' => $tag])
             @endforeach
             </tbody>
         </table>

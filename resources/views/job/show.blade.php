@@ -78,7 +78,7 @@
                                 <tbody>
                                 @foreach ($inUsers as $inUser)
                                     <?php $user = $inUser->user ?>
-                                    @include('job/user_list_partial', ['user' => $user, 'tagUser' => $inUser, 'tag' => 0])
+                                    @include('job/user_list_partial', ['user' => $inUser->tagUser, 'tagUser' => $inUser, 'tag' => 0])
                                 @endforeach
                                 </tbody>
                             </table>
@@ -86,10 +86,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade in" id="user_shortlists"></div>
-                <div class="tab-pane fade in" id="user_selected">
-                    <h4>Heading Sample 3</h4>
-                    <p><img alt="" class="pull-right rgt-img-margin img-width-200" src="assets/img/main/img21.jpg"> <strong>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id.</strong> Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
-                </div>
+                <div class="tab-pane fade in" id="user_selected"></div>
             </div>
         </div>
         @else

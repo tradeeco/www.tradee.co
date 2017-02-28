@@ -24,7 +24,10 @@ function jobPhotoSrc($photo)
 
 function jobPhotoSmallSrc($photo)
 {
-    return Config::get('frontend.job_photo_path').Config::get('frontend.icon_size').$photo->file_name;
+    if ($photo)
+        return Config::get('frontend.job_photo_path').Config::get('frontend.icon_size').$photo->file_name;
+    else
+        return '';
 }
 
 function getControllerName($fullPath)

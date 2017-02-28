@@ -15,4 +15,9 @@ class TaggedUser extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function tagUser()
+    {
+        return $this->belongsTo('App\User', 'tagged_user_id');
+    }
 }

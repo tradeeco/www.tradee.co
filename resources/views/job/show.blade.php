@@ -51,7 +51,7 @@
                 <h3 class="label-color">{{ $job->category->name }}</h3>
                 <h3 class="label-color">{{ $job->areaSuburb->name }}</h3>
                 <p>{{ $job->description }}</p>
-                @if (!$job->watching && $job->user != Auth::user())
+                @if (!$job->watching && $job->user != Auth::user() && Auth::check())
                     <a href="javascript:void(0)" class="btn btn-primary btn-lg rounded" id="move_watching">move to WATCHLIST</a>
                 @endif
             </div>
@@ -59,9 +59,9 @@
         @if (Auth::check() && $job->user->id == Auth::user()->id)
         <div class="tab-v2 margin-bottom-40">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#user_interested" data-toggle="tab" aria-expanded="false">(<span>{{ $inUsers->count() }}</span>) Interested</a></li>
-                <li class=""><a href="#user_shortlists" data-toggle="tab" aria-expanded="false">(<span>{{ $shUsersCount }}</span>) Shortlisted</a></li>
-                <li class=""><a href="#user_selected" data-toggle="tab" aria-expanded="false">(<span>{{ $seUsersCount }}</span>) Selected</a></li>
+                <li class="active"><a href="#user_interested" data-toggle="tab" aria-expanded="false">(<span>{{ $interestedJobUsers->count() }}</span>) Interested</a></li>
+                <li class=""><a href="#user_shortlists" data-toggle="tab" aria-expanded="false">(<span>{{ $shJobUsersCount }}</span>) Shortlisted</a></li>
+                <li class=""><a href="#user_selected" data-toggle="tab" aria-expanded="false">(<span>{{ $seJobUsersCount }}</span>) Selected</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="user_interested">
@@ -76,9 +76,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($inUsers as $inUser)
-                                    <?php $user = $inUser->user ?>
-                                    @include('job/user_list_partial', ['user' => $inUser->tagUser, 'tagUser' => $inUser, 'tag' => 0])
+                                @foreach ($interestedJobUsers as $jobUser)
+                                    <?php $user = $jobUser->user ?>
+                                    @include('job/user_list_partial', ['jobUser' => $jobUser, 'user' => $user, 'tag' => 1])
                                 @endforeach
                                 </tbody>
                             </table>
@@ -107,7 +107,19 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <a href="javascript:void(0)" class="btn btn-primary btn-lg rounded-x pull-right text-uppercase" id="express_interest" style="width: 150px; height: 150px; font-size: 25px; padding: 45px 15px; line-height: 27px;"> Express<br/>Interest</a>
+                @if ($expressInterested)
+                    <div class="job-user profile">
+                        <div class="name-location">
+                            <h3 class="margin-bottom-15">Contact Details</h3>
+                            <h4 class="label-color margin-bottom-15">Email: {{ $job->user->email }}</h4>
+                            <h4 class="label-color margin-bottom-15">Mobile: {{ $job->user->phone }}</h4>
+                        </div>
+                    </div>
+                @else
+                    @if (Auth::check())
+                        <a href="javascript:void(0)" class="btn btn-primary btn-lg rounded-x pull-right text-uppercase" id="express_interest" style="width: 150px; height: 150px; font-size: 25px; padding: 45px 15px; line-height: 27px;"> Express<br/>Interest</a>
+                    @endif
+                @endif
             </div>
         </div>
         @endif

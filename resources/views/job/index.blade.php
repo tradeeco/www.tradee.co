@@ -24,17 +24,17 @@
                     <div class="col-sm-4 md-margin-bottom-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-tag"></i></span>
-                            {{ Form::select('category', [''=>'Select Category'] + $categories, isset($getParams['category']) ? $getParams['category'] : null, ['class' => 'form-control']) }}
+                            {{ Form::select('category', [''=>'Category'] + $categories, isset($getParams['category']) ? $getParams['category'] : null, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="col-sm-4 md-margin-bottom-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                            {{ Form::select('location', [''=>'Select Location'] + $locations, isset($getParams['location']) ? $getParams['location'] : null, ['class' => 'form-control chosen-select']) }}
+                            {{ Form::select('location', [''=>'Area / Suburb'] + $locations, isset($getParams['location']) ? $getParams['location'] : null, ['class' => 'form-control chosen-select']) }}
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <button type="submit" class="btn-u btn-block btn-u-dark"> Search Job</button>
+                        <button type="submit" class="btn btn-block btn-primary"> Search Job</button>
                     </div>
                 </div>
             </div>
@@ -60,9 +60,12 @@
                       @foreach ($jobs as $job)
                         <tr>
                             <td>
-                                <a href="{{ URL::route('users.profile', $job->user->slug) }}">
-                                <img class="rounded-x" src="{{ userImage($job->user) }}" alt="">
-                                <span class="text-center">{{ $job->user->first_name }}</span>
+                                {{--<a href="{{ URL::route('users.profile', $job->user->slug) }}">--}}
+                                {{--<img class="rounded-x" src="{{ userImage($job->user) }}" alt="">--}}
+                                {{--<span class="text-center">{{ $job->user->first_name }}</span>--}}
+                                {{--</a>--}}
+                                <a href="{{ URL::route('jobs.show', $job->slug) }}">
+                                    <img class="full-width" style="width: 200px; height: 150px;" src="{{ jobPhotoSmallSrc($job->jobPhotos->first()) }}" alt="">
                                 </a>
                             </td>
                             <td class="td-width">

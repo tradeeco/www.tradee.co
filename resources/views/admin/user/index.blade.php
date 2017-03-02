@@ -51,8 +51,8 @@
                 <table class="table user-table">
                   <thead>
                     <tr>
-                        <th>User Info</th>
                         <th>Username</th>
+                        <th>User Info</th>
                         <th>Email</th>
                         <th>Created At</th>
                         <th>Posted Jobs</th>

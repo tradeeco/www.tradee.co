@@ -1,7 +1,7 @@
 var Job = {
     addExpBtn: $('#add_exp_btn'),
     moveWatching: $('a#move_watching'),
-    deleteWatching: $('a#delete_watching'),
+    deleteTagged: $('a#delete_tagged'),
     moveInterest: $('a#move_interest'),
     deleteInterest: $('a#delete_interest'),
     moveShortlist: $('a#move_shortlist'),
@@ -73,98 +73,39 @@ var Job = {
             return false;
         });
 
-        this.deleteWatching.click(function (e) {
+        this.deleteTagged.click(function (e) {
             e.preventDefault();
             var thisObj = $(this);
-            var job_id = thisObj.closest('tr').find('td.job-title').find('a').data('id');
-            var jqxhr = $.post( "/jobs/delete_watching/" + job_id, { _token: CSRF_TOKEN })
-                .done(function() {
-                    thisObj.fadeOut();
-                    thisObj.closest('tr').fadeOut().remove();
-                })
-                .fail(function() {
-                    alert( "error" );
-                });
+            var taggedJobId = thisObj.closest('tr').find('td.job-title').find('a').data('id');
+            deleteFromTagged(thisObj, taggedJobId);
             // var newExp = $('div.experience-wrap div.input-wrap:last');
             // newExp.find('input[type=text]:first').focus();
             return false;
         });
 
-        this.moveInterest.click(function (e) {
-            e.preventDefault();
-            var thisObj = $(this);
-            var job_id = thisObj.closest('tr').find('td.job-title').find('a').data('id');
-            var jqxhr = $.post( "/jobs/move_interest/" + job_id, { _token: CSRF_TOKEN })
-                .done(function() {
-                    thisObj.fadeOut();
-                    thisObj.parent().append($(Job.SuccessTemplate).hide().fadeIn(500).fadeOut(1500));
-                    thisObj.closest('tr').fadeOut().remove();
-                })
-                .fail(function() {
-                    alert( "error" );
-                });
-            // var newExp = $('div.experience-wrap div.input-wrap:last');
-            // newExp.find('input[type=text]:first').focus();
-            return false;
-        });
-
-        this.deleteInterest.click(function (e) {
-            e.preventDefault();
-            var thisObj = $(this);
-            var job_id = thisObj.closest('tr').find('td.job-title').find('a').data('id');
-            var jqxhr = $.post( "/jobs/delete_interest/" + job_id, { _token: CSRF_TOKEN })
-                .done(function() {
-                    thisObj.fadeOut();
-                    thisObj.closest('tr').fadeOut().remove();
-                })
-                .fail(function() {
-                    alert( "error" );
-                });
-            // var newExp = $('div.experience-wrap div.input-wrap:last');
-            // newExp.find('input[type=text]:first').focus();
-            return false;
-        });
-
-        this.moveShortlist.click(function (e) {
-            var thisObj = $(this);
-            e.preventDefault();
-            var job_id = thisObj.closest('tr').find('td.job-title').find('a').data('id');
-            var jqxhr = $.post( "/jobs/move_shortlist/" + job_id, { _token: CSRF_TOKEN })
-                .done(function() {
-                    thisObj.fadeOut();
-                    thisObj.parent().append($(Job.SuccessTemplate).hide().fadeIn(500).fadeOut(1500));
-                    thisObj.closest('tr').fadeOut().remove();
-                })
-                .fail(function() {
-                    alert( "error" );
-                });
-            // var newExp = $('div.experience-wrap div.input-wrap:last');
-            // newExp.find('input[type=text]:first').focus();
-            return false;
-        });
-
-        this.deleteShortlist.click(function (e) {
-            e.preventDefault();
-            var thisObj = $(this);
-            var job_id = thisObj.closest('tr').find('td.job-title').find('a').data('id');
-            var jqxhr = $.post( "/jobs/delete_shortlist/" + job_id, { _token: CSRF_TOKEN })
-                .done(function() {
-                    thisObj.fadeOut();
-                    thisObj.closest('tr').fadeOut().remove();
-                })
-                .fail(function() {
-                    alert( "error" );
-                });
-            // var newExp = $('div.experience-wrap div.input-wrap:last');
-            // newExp.find('input[type=text]:first').focus();
-            return false;
-        });
+        //this.moveInterest.click(function (e) {
+        //    e.preventDefault();
+        //    var thisObj = $(this);
+        //    var job_id = thisObj.closest('tr').find('td.job-title').find('a').data('id');
+        //    var jqxhr = $.post( "/jobs/move_interest/" + job_id, { _token: CSRF_TOKEN })
+        //        .done(function() {
+        //            thisObj.fadeOut();
+        //            thisObj.parent().append($(Job.SuccessTemplate).hide().fadeIn(500).fadeOut(1500));
+        //            thisObj.closest('tr').fadeOut().remove();
+        //        })
+        //        .fail(function() {
+        //            alert( "error" );
+        //        });
+        //    // var newExp = $('div.experience-wrap div.input-wrap:last');
+        //    // newExp.find('input[type=text]:first').focus();
+        //    return false;
+        //});
 
         this.expressInterest.click(function (e) {
             e.preventDefault();
             var thisObj = $(this);
-            var userId = thisObj.closest('div.row').find('div.job-user').find('img').data('user');
-            var jqxhr = $.post( "/users/express_interest/" + userId, { _token: CSRF_TOKEN })
+            //var userId = thisObj.closest('div.row').find('div.job-user').find('img').data('user');
+            var jqxhr = $.post( "/jobs/express_interest/" + Job_Id, { _token: CSRF_TOKEN })
                 .done(function() {
                     thisObj.fadeOut();
                     thisObj.closest('div').append($(Job.SuccessTemplate).hide().fadeIn(500).fadeOut(1500));
@@ -180,20 +121,17 @@ var Job = {
 
         this.userInterestedTab.click(function (e) {
             //e.preventDefault();
-            $( "div#user_interested" ).load( "/users/tagged_users/0", function() {
-            });
+            $( "div#user_interested" ).load( "/jobs/tagged_users/" + Job_Id + '/1', function() {});
         });
 
         this.userShortlistsTab.click(function (e) {
             //e.preventDefault();
-            $( "div#user_shortlists" ).load( "/users/tagged_users/1", function() {
-            });
+            $( "div#user_shortlists" ).load( "/jobs/tagged_users/" + Job_Id + '/2', function() {});
         });
 
         this.userSelectedTab.click(function (e) {
             //e.preventDefault();
-            $( "div#user_selected" ).load( "/users/tagged_users/2", function() {
-            });
+            $( "div#user_selected" ).load( "/jobs/tagged_users/" + Job_Id + '/3', function() {});
         });
 
         $(document).on('click', 'a#reply_question', function (e) {
@@ -209,8 +147,8 @@ var Job = {
         $(document).on('click', 'a#express_shortlist', function (e) {
             e.preventDefault();
             var thisObj = $(this);
-            var userId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
-            var jqxhr = $.post( "/users/express_shortlist/" + userId, { _token: CSRF_TOKEN })
+            var taggedJobId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
+            var jqxhr = $.post( "/jobs/express_shortlist/" + taggedJobId, { _token: CSRF_TOKEN })
                 .done(function() {
                     thisObj.closest('tr').fadeOut().remove();
                     $('a[href="#user_shortlists"] span').text($('a[href="#user_shortlists"] span').text()*1 + 1);
@@ -225,8 +163,8 @@ var Job = {
         $(document).on('click', 'a#express_select', function (e) {
             e.preventDefault();
             var thisObj = $(this);
-            var userId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
-            var jqxhr = $.post( "/users/express_select/" + userId, { _token: CSRF_TOKEN })
+            var taggedJobId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
+            var jqxhr = $.post( "/jobs/express_select/" + taggedJobId, { _token: CSRF_TOKEN })
                 .done(function() {
                     thisObj.closest('tr').fadeOut().remove();
                     $('a[href="#user_selected"] span').text($('a[href="#user_selected"] span').text()*1 + 1);
@@ -241,8 +179,8 @@ var Job = {
         $(document).on('click', 'a#delete_user_selected', function (e) {
             e.preventDefault();
             var thisObj = $(this);
-            var userId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
-            var jqxhr = $.post( "/users/delete_tagged/" + userId + '/2', { _token: CSRF_TOKEN })
+            var taggedJobId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
+            var jqxhr = $.post( "/jobs/delete_tagged/" + taggedJobId + '/3', { _token: CSRF_TOKEN })
                 .done(function() {
                     thisObj.fadeOut();
                     thisObj.closest('tr').fadeOut().remove();
@@ -260,8 +198,8 @@ var Job = {
         $(document).on('click', 'a#delete_user_shortlisted', function (e) {
             e.preventDefault();
             var thisObj = $(this);
-            var userId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
-            var jqxhr = $.post( "/users/delete_tagged/" + userId + '/1', { _token: CSRF_TOKEN })
+            var taggedJobId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
+            var jqxhr = $.post( "/jobs/delete_tagged/" + taggedJobId + '/2', { _token: CSRF_TOKEN })
                 .done(function() {
                     thisObj.fadeOut();
                     thisObj.closest('tr').fadeOut().remove();
@@ -279,8 +217,15 @@ var Job = {
         $(document).on('click', 'a#delete_user_interested', function (e) {
             e.preventDefault();
             var thisObj = $(this);
-            var userId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
-            var jqxhr = $.post( "/users/delete_tagged/" + userId + '/4', { _token: CSRF_TOKEN })
+            var taggedJobId = thisObj.closest('tr').find('td:first').find('img').data('user_tag');
+            deleteFromTagged(thisObj, taggedJobId);
+            // var newExp = $('div.experience-wrap div.input-wrap:last');
+            // newExp.find('input[type=text]:first').focus();
+            return false;
+        });
+
+        function deleteFromTagged(thisObj, taggedJobId) {
+            var jqxhr = $.post( "/jobs/delete_tagged/" + taggedJobId + '/1', { _token: CSRF_TOKEN })
                 .done(function() {
                     thisObj.fadeOut();
                     thisObj.closest('tr').fadeOut().remove();
@@ -289,11 +234,7 @@ var Job = {
                 .fail(function() {
                     alert( "error" );
                 });
-            // var newExp = $('div.experience-wrap div.input-wrap:last');
-            // newExp.find('input[type=text]:first').focus();
-            return false;
-        });
-
+        }
 
         $(document).on('submit', 'form.question-form', function(e) {
             e.preventDefault();

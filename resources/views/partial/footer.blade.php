@@ -17,7 +17,7 @@
                                 <a href="{{ URL::route('pages.about_us') }}">About Us</a>
                             </li>
                             <li>
-                                <a href="#">Team</a>
+                                <a href="{{ URL::route('pages.team') }}">Team</a>
                             </li>
                             <li>
                                 <a href="#">FAQ's</a>
@@ -26,7 +26,7 @@
                                 <a href="#">Reviews</a>
                             </li>
                             <li>
-                                <a href="#">Pricing</a>
+                                <a href="{{ URL::route('pages.pricing') }}">Pricing</a>
                             </li>
                             <li>
                                 <a href="#">Terms & Conditions</a>

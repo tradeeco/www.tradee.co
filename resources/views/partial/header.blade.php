@@ -29,6 +29,11 @@
                                 How It Works
                             </a>
                         </li>
+                        <li class="dropdown">
+                            <a href="{!! URL::to('/contact') !!}">
+                                Contact
+                            </a>
+                        </li>
                         <!-- Home -->
                         @if (Auth::check())
                             <li class="dropdown mega-menu">
@@ -77,11 +82,6 @@
                                 </a>
                             </li>
                         @else
-                            <li class="dropdown">
-                                <a href="{!! URL::to('/contact') !!}">
-                                    Contact
-                                </a>
-                            </li>
                             <li>
                                 <a href="javascript:void(0);"  id="sign_in">
                                     Sign In

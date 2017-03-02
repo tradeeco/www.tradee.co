@@ -23,10 +23,10 @@
                                     {!! Form::open(['url' => route('jobs.index'), 'id' => 'search_job', 'method' => 'GET']) !!}
                                     <div class="row">
                                         <div class="col-md-5">
-                                            {{ Form::select('category', ['' => 'Select Category'] + $categories, null, ['class' => 'form-control input-lg rounded']) }}
+                                            {{ Form::select('category', ['' => 'Category'] + $categories, null, ['class' => 'form-control input-lg rounded']) }}
                                         </div>
                                         <div class="col-md-5 padding-left-5">
-                                            {{ Form::select('location', ['' => 'Select Location'] + $locations, null, ['class' => 'form-control input-lg rounded chosen-select']) }}
+                                            {{ Form::select('location', ['' => 'Area / Suburb'] + $locations, null, ['class' => 'form-control input-lg rounded chosen-select']) }}
                                         </div>
                                         <div class="col-md-2" style="padding-left: 0">
                                             <button type="submit" class="btn btn-primary rounded btn-lg btn-block">Search</button>

@@ -6,15 +6,15 @@
                 <th>User Info</th>
                 <th>Status</th>
                 <th>Action</th>
-                @if ($tag < 2)
+                @if ($tag < 3)
                     <th></th>
                 @endif
             </tr>
             </thead>
             <tbody>
-            @foreach ($taggedUsers as $taUser)
-                <?php $user = $taUser->user ?>
-                @include('job/user_list_partial', ['user' => $taUser->tagUser, 'tagUser' => $taUser, 'tag' => $tag])
+            @foreach ($taggedJobUsers as $taJob)
+                <?php $user = $taJob->user ?>
+                @include('job/user_list_partial', ['jobUser' => $taJob, 'user' => $user, 'tag' => $tag])
             @endforeach
             </tbody>
         </table>

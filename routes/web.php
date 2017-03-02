@@ -20,6 +20,9 @@ Route::get('/contact', 'WelcomeController@contact')->name('pages.contact');
 Route::post('/post_contact', 'WelcomeController@postContact')->name('pages.post_contact');
 Route::get('/story', 'WelcomeController@story')->name('pages.story');
 Route::get('/about_us', 'WelcomeController@aboutUs')->name('pages.about_us');
+Route::get('/our-team', function(){
+    return view('pages.pricing');
+})->name('pages.team');
 Route::get('/pricing', function(){
     return view('pages.pricing');
 })->name('pages.pricing');
@@ -47,11 +50,12 @@ Route::resource('/jobs', 'JobController');
 Route::post('/jobs/upload_photo', 'JobController@upload_photo')->name('jobs.upload_photo');
 Route::post('/jobs/delete_photo', 'JobController@delete_photo')->name('jobs.delete_photo');
 Route::post('/jobs/move_watching/{job_id}', 'JobController@moveWatching')->name('jobs.move_watching');
-Route::post('/jobs/delete_watching/{job_id}', 'JobController@deleteWatching')->name('jobs.delete_watching');
-Route::post('/jobs/move_interest/{job_id}', 'JobController@moveInterest')->name('jobs.move_interest');
-Route::post('/jobs/delete_interest/{job_id}', 'JobController@deleteInterest')->name('jobs.delete_interest');
-Route::post('/jobs/move_shortlist/{job_id}', 'JobController@moveShortlist')->name('jobs.move_shortlist');
-Route::post('/jobs/delete_shortlist/{job_id}', 'JobController@deleteShortlist')->name('jobs.delete_shortlist');
+
+Route::post('/jobs/express_interest/{id}', 'JobController@expressInterest')->name('jobs.express_interest');
+Route::post('/jobs/express_shortlist/{id}', 'JobController@expressShortlist')->name('jobs.express_shortlist');
+Route::post('/jobs/express_select/{id}', 'JobController@expressSelect')->name('jobs.express_select');
+Route::get('/jobs/tagged_users/{id}/{tag}', 'JobController@taggedUsers')->name('jobs.tagged_users');
+Route::post('/jobs/delete_tagged/{id}/{tag}', 'JobController@deleteTagged')->name('users.delete_tagged');
 
 Route::resource('/job_questions', 'JobQuestionController', ['only' => ['store', 'show']]);
 Route::resource('/job_questions.answers', 'JobAnswerController', ['only' => ['index', 'store']]);
@@ -76,11 +80,7 @@ Route::get('/account/add_funds3', function(){
 //})->where('undefinedRoute', '([A-z\d-\/_.]+)?');
 
 Route::get('users/{slug}', 'UserController@profile')->name('users.profile');
-Route::post('users/express_interest/{id}', 'UserController@expressInterest')->name('users.express_interest');
-Route::post('users/express_shortlist/{id}', 'UserController@expressShortlist')->name('users.express_shortlist');
-Route::post('users/express_select/{id}', 'UserController@expressSelect')->name('users.express_select');
-Route::get('users/tagged_users/{tag}', 'UserController@taggedUsers')->name('users.tagged_users');
-Route::post('users/delete_tagged/{id}/{tag}', 'UserController@deleteTagged')->name('users.delete_tagged');
+
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm');

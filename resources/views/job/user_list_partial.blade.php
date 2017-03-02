@@ -1,7 +1,7 @@
 <tr>
     <td>
         <a href="{{ URL::route('users.profile', $user->slug) }}">
-            <img class="rounded-x" src="{{ userImageSmall($user) }}" alt="" data-user_tag="{{$tagUser->id}}">
+            <img class="rounded-x" src="{{ userImageSmall($user) }}" alt="" data-user_tag="{{$jobUser->id}}">
             <span class="text-center">{{ $user->first_name }}</span>
         </a>
     </td>
@@ -18,11 +18,11 @@
         <h3 class="color-main">Registered: {{ date('F d, Y', strtotime($user->created_at)) }}</h3>
         {{--Carbon\Carbon::parse($job->created_at)->format('d-m-Y i')--}}
     </td>
-    @if ($tag < 2)
+    @if ($tag < 3)
     <td>
-        @if ($tag == 0)
+        @if ($tag == 1)
             <a href="#" class="btn btn-primary rounded text-uppercase white-color" id="express_shortlist">SHORTLIST</a>
-        @elseif ($tag == 1)
+        @elseif ($tag == 2)
             <a href="#" class="btn btn-primary rounded text-uppercase white-color" id="express_select">SELECTED</a>
         @endif
     </td>

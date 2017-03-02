@@ -50,9 +50,9 @@ function getActionName($fullPath)
 // only for remove tagged user button
 function getTaggedRemoveButtonId($tag)
 {
-    if ($tag == 0)
+    if ($tag == 1)
         return 'delete_user_interested';
-    elseif ($tag == 1)
+    elseif ($tag == 2)
         return 'delete_user_shortlisted';
     else
         return 'delete_user_selected';

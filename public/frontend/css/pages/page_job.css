@@ -4,7 +4,7 @@
 	/*overflow: hidden;*/
 	position: relative;
 	min-height: 300px;
-	background: url(../../img/bg/11.jpg) no-repeat;
+	background: url(/img/home-bg.jpg) no-repeat;
   background-size: cover;
   background-position: center center;
 	padding-top: 60px;
@@ -34,10 +34,10 @@
 .job-img .job-img-inputs {
 	left: 0;
 	right: 0;
-	bottom: -7px;
+	bottom: 0px;
 	padding: 20px 0;
 	position: absolute;
-	background: rgba(0,0,0,0.9);
+	background: rgba(225,225,225,0.9);
 }
 
 /*Job-Content

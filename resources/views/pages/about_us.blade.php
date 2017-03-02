@@ -61,7 +61,7 @@
                     <h2 class="title-v2 color-main margin-bottom-50">Team</h2>
                     <p class="margin-bottom-30">In order to acheive great things,<br/> you need great people.</p>
                     <div class="margin-bottom-50">
-                        <button class="btn btn-primary btn-lg rounded">meet the team</button>
+                        <a href="{{ URL::route('pages.team') }}" class="btn btn-primary btn-lg rounded">meet the team</a>
                     </div>
                     <div class="row">
                         <div class="col-md-9">

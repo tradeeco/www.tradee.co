@@ -24,11 +24,9 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>User Info</th>
                                     <th class="hidden-sm">Job content</th>
+                                    <th></th>
                                     <th>Status</th>
-
-
                                     <th>Action</th>
                                     <th></th>
                                 </tr>
@@ -38,9 +36,8 @@
                                     <?php $job = $taggedJob->job ?>
                                     <tr>
                                         <td>
-                                            <a href="{{ URL::route('users.profile', $job->user->slug) }}">
-                                                <img class="rounded-x" src="{{ userImage($job->user) }}" alt="">
-                                                <span class="text-center">{{ $job->user->first_name }}</span>
+                                            <a href="{{ URL::route('jobs.show', $job->slug) }}">
+                                                <img class="full-width" style="width: 200px; height: 150px;" src="{{ jobPhotoSmallSrc($job->jobPhotos->first()) }}" alt="">
                                             </a>
                                         </td>
                                         <td class="job-title" style="width: 30%;">
@@ -58,7 +55,7 @@
                                             <a href="#" class="btn btn-primary rounded text-uppercase white-color" id="move_interest">show interest</a>
                                         </td>
                                         <td>
-                                            <a href="#" class="color-main" id="delete_watching">Delete</a>
+                                            <a href="#" class="color-main" id="delete_tagged">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -73,13 +70,10 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>User Info</th>
                                     <th class="hidden-sm">Job content</th>
-                                    <th>Status</th>
-
-
-                                    <th>Action</th>
                                     <th></th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -87,9 +81,8 @@
                                     <?php $job = $taggedJob->job ?>
                                     <tr>
                                         <td>
-                                            <a href="{{ URL::route('users.profile', $job->user->slug) }}">
-                                                <img class="rounded-x" src="{{ userImage($job->user) }}" alt="">
-                                                <span class="text-center">{{ $job->user->first_name }}</span>
+                                            <a href="{{ URL::route('jobs.show', $job->slug) }}">
+                                                <img class="full-width" style="width: 200px; height: 150px;" src="{{ jobPhotoSmallSrc($job->jobPhotos->first()) }}" alt="">
                                             </a>
                                         </td>
                                         <td class="job-title" style="width: 30%;">
@@ -104,10 +97,7 @@
                                             {{--Carbon\Carbon::parse($job->created_at)->format('d-m-Y i')--}}
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-primary rounded text-uppercase white-color" id="move_shortlist">show shortlist</a>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="color-main" id="delete_interest">Delete</a>
+                                            <a href="#" class="btn btn-primary rounded" id="delete_tagged">Remove Interest</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -133,9 +123,8 @@
                                     <?php $job = $taggedJob->job ?>
                                     <tr>
                                         <td>
-                                            <a href="{{ URL::route('users.profile', $job->user->slug) }}">
-                                                <img class="rounded-x" src="{{ userImage($job->user) }}" alt="">
-                                                <span class="text-center">{{ $job->user->first_name }}</span>
+                                            <a href="{{ URL::route('jobs.show', $job->slug) }}">
+                                                <img class="full-width" style="width: 200px; height: 150px;" src="{{ jobPhotoSmallSrc($job->jobPhotos->first()) }}" alt="">
                                             </a>
                                         </td>
                                         <td class="job-title" style="width: 30%;">
@@ -150,7 +139,7 @@
                                             {{--Carbon\Carbon::parse($job->created_at)->format('d-m-Y i')--}}
                                         </td>
                                         <td>
-                                            <a href="#" class="color-main" id="delete_shortlist">Delete</a>
+                                            <a href="#" class="btn btn-primary rounded text-uppercase" id="delete_tagged">Remove Yourself</a>
                                         </td>
                                     </tr>
                                 @endforeach

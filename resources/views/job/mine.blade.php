@@ -32,7 +32,7 @@
                                 @foreach ($jobs as $job)
                                     <tr>
                                         <td>
-                                            <a href="{{ URL::route('users.profile', $job->user->slug) }}">
+                                            <a href="{{ URL::route('jobs.show', $job->slug) }}">
                                                 <img class="full-width" style="width: 200px; height: 150px;" src="{{ jobPhotoSmallSrc($job->jobPhotos->first()) }}" alt="">
                                             </a>
                                         </td>

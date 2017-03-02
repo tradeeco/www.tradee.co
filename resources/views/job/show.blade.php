@@ -33,7 +33,7 @@
                         <div class="owl-slider-v2">
                             @foreach ($job->jobPhotos as $key => $photo)
                             <div class="item">
-                                <img src="{{ jobPhotoSrc($photo) }}" style="height: 120px" class="full-width" id="carousel-selector-{{ $key }}"></div>
+                                <img src="{{ jobPhotoSmallSrc($photo) }}" style="height: 120px" class="full-width" id="carousel-selector-{{ $key }}"></div>
                             @endforeach
 
                         </div>

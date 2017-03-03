@@ -4,7 +4,7 @@
             <div class="row">
                 <!-- About -->
                 <div class="col-md-6 md-margin-bottom-40">
-                    <a href="index-2.html"><img id="logo-footer" class="footer-logo" src="img/logo.png" alt=""></a>
+                    <a href="{!! URL::to('/') !!}"><img id="logo-footer" class="footer-logo" src="img/logo.png" alt=""></a>
                 </div><!--/col-md-3-->
                 <!-- End About -->
 

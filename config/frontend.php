@@ -5,7 +5,7 @@ return [
     'icon_size'   => env('UPLOAD_ICON_SIZE'),
     'job_photo_path' => env('JOB_PHOTO_PATH'),
     'user_avatar_path' => env('USER_AVATAR_PATH'),
-    'job_per_page' => '15',
+    'job_per_page' => env('JOB_PER_PAGE'),
     'lengths' => [
         '' => '',
         '1' => '1 year',

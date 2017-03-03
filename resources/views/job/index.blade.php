@@ -38,21 +38,32 @@
                     </div>
                 </div>
             </div>
+            {{ Form::text('sort', isset($getParams['sort']) ? $getParams['sort'] : null, ['class' => 'hide']) }}
             {!! Form::close() !!}
         </div>
     </div>
-
     <div class="container">
-        <div class="table-search-v2 panel panel-dark">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-globe"></i> Job Search Results</h3>
+        <div class="table-search-v2 panel panel-main">
+            <div class="panel-heading bg-color-main">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h3 class="panel-title"><i class="fa fa-globe"></i> Sort</h3>
+                    </div>
+                    <div class="col-sm-3">
+                        {!! Form::open(['url' => route('jobs.index'), 'id' => 'sort_job', 'method' => 'GET']) !!}
+                            {{ Form::select('sort', ['created_DESC'=>'Latest post', 'created_ASC' => 'Old post'], isset($getParams['sort']) ? $getParams['sort'] : null, ['class' => 'form-control rounded']) }}
+                            {{ Form::text('category', isset($getParams['category']) ? $getParams['category'] : null, ['class' => 'hide']) }}
+                            {{ Form::text('location', isset($getParams['location']) ? $getParams['location'] : null, ['class' => 'hide']) }}
+                        {!! Form::close() !!}
+                    </div>
+                </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered table-striped">
+                <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>User Info</th>
                         <th class="hidden-sm">Job content</th>
+                        <th></th>
                         <th>Status</th>
                     </tr>
                     </thead>
@@ -97,6 +108,12 @@
     <script>
         $(function () {
             $('.chosen-select').chosen({width: "100%"});
-        })
+        });
+        $(document).on('change', 'form#sort_job select', function (e) {
+            var category = $('select[name=category]').val();
+            var location = $('select[name=location]').val();
+            var formObj = $(this).parent();
+            $(this).parent().submit();
+        });
     </script>
 @endsection

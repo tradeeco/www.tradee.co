@@ -28,15 +28,15 @@ class Job extends Model
     }
 
 
-    public function scopeCategories($query, $name='')
-    {
-        return $query->join('categories', 'jobs.category_id', '=', 'categories.id')->where('categories.name', $name);
-    }
-
-    public function scopeLocations($query, $name='')
-    {
-        return $query->join('area_suburbs', 'jobs.area_suburb_id', '=', 'area_suburbs.id')->where('area_suburbs.name', $name);
-    }
+//    public function scopeCategories($query, $name='')
+//    {
+//        return $query->where('categories.name', $name);
+//    }
+//
+//    public function scopeLocations($query, $name='')
+//    {
+//        return $query->where('area_suburbs.name', $name);
+//    }
 
 
 

@@ -30,6 +30,12 @@
     background-color: #c7422d;
     border-color: #db4d67;
 }
+.panel-main {
+    border-color: #f27549;
+}
+.panel-main .panel-heading {
+    background-color: #f27549;
+}
 .sign-in-wrap {
     display: none;
     position: absolute;

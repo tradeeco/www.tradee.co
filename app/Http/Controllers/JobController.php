@@ -35,23 +35,30 @@ class JobController extends Controller
         $data['categories'] = DB::table('categories')->orderBy('name')->pluck('name', 'name')->all();
         $data['locations'] = DB::table('area_suburbs')->orderBy('name')->pluck('name', 'name')->all();
 
-        $jobs = Job::paginate(Config::get('frontend.job_per_page'));
+        $query = Job::join('categories', 'jobs.category_id', '=', 'categories.id')
+            ->join('area_suburbs', 'jobs.area_suburb_id', '=', 'area_suburbs.id')
+            ->select('jobs.*');
+//        $jobs = Job::paginate(Config::get('frontend.job_per_page'));
         $getParams = [];
 
         if (isset($request)) {
-          if ($request->has('category') && !$request->has('location')) {
-              $jobs = Job::categories($request->get('category'))->paginate(Config::get('frontend.job_per_page'));
-              $getParams['category'] = $request->get('category');
-          }
-          if ($request->has('location') && !$request->has('category')) {
-              $jobs = Job::locations($request->get('location'))->paginate(Config::get('frontend.job_per_page'));
-              $getParams['location'] = $request->get('location');
-          }
+            if ($request->has('category') && $request->get('category') != '') {
+                $query = $query->where('categories.name', $request->get('category'));
+                $getParams['category'] = $request->get('category');
+            }
+            if ($request->has('location') && $request->get('location') != '') {
+                $query = $query->where('area_suburbs.name', $request->get('location'));
+                $getParams['location'] = $request->get('location');
+            }
 
-          if ($request->has('location') && $request->has('category')) {
-              $jobs = Job::categories($request->get('category'))->locations($request->get('location'))->paginate(Config::get('frontend.job_per_page'));
-              $getParams['location'] = $request->get('location'); $getParams['category'] = $request->get('category');
-          }
+            if ($request->has('sort') && $request->get('sort') != '') {
+                if ($request->get('sort') == 'created_DESC')
+                    $query = $query->orderBy('jobs.created_at', 'DESC');
+                elseif ($request->get('sort') == 'created_ASC')
+                    $query = $query->orderBy('jobs.created_at', 'ASC');
+                $getParams['sort'] = $request->get('sort');
+            }
+
         }
 
 //
@@ -59,6 +66,7 @@ class JobController extends Controller
 //            $data['alert'] = $alert;
 //        }
 //
+        $jobs = $query->paginate(Config::get('frontend.job_per_page'));
         $data['jobs'] = $jobs;
         $data['getParams'] = $getParams;
         return view('job.index', $data);

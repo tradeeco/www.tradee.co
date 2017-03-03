@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use App\Models\Job;
 use App\Models\JobPhoto;
+use App\Models\TaggedJob;
 use App\Logic\JobPhotoRepository;
 use Illuminate\Support\Facades\Config;
 
@@ -106,5 +107,79 @@ class JobController extends Controller
 
         $response = $this->image->uploadFromBase64Encoded($encodedImage);
         return $response;
+    }
+
+    /*
+   * Tradee express interest to one job
+   */
+
+    public function expressInterest($id)
+    {
+        if (count(Job::find($id)) == 0)
+            return Response::json(
+                ['result' => 'failed']
+                , 422);
+
+        $user = Auth::user();
+        $taggedJob = TaggedJob::where('job_id', $id)->where('user_id', $user->id)->first();
+        if (count($taggedJob))
+            $taggedJob->update(array('tag' => 1));
+        else {
+            $taggedJob = new TaggedJob;
+            $taggedJob->user_id = $user->id;
+            $taggedJob->job_id = $id;
+            $taggedJob->tag = 1;
+            $taggedJob->save();
+        }
+
+        return Response::json(
+            ['result' => 'success']
+            , 200);
+    }
+    /*
+    * move user from interest to shortlist for one job by job owner
+    */
+    public function expressShortlist($id) {
+        $taggedJob = TaggedJob::find($id);
+        if (count($taggedJob))
+            $taggedJob->update(array('tag' => 2));
+        else {
+//            $taggedJob = new TaggedJob;
+//            $taggedJob->user_id = $user->id;
+//            $taggedJob->job_id = $jobId;
+//            $taggedJob->tag = 2;
+//            $taggedJob->save();
+            return Response::json(
+                ['result' => 'failed']
+                , 422);
+        }
+
+        return Response::json(
+            ['result' => 'success']
+            , 200);
+    }
+
+    /*
+    * move user from shortlist to selected for one job by job owner
+    */
+    public function expressSelect($id)
+    {
+        $taggedJob = TaggedJob::find($id);
+        if (count($taggedJob))
+            $taggedJob->update(array('tag' => 3));
+        else {
+//            $taggedJob = new TaggedJob;
+//            $taggedJob->user_id = $user->id;
+//            $taggedJob->job_id = $jobId;
+//            $taggedJob->tag = 2;
+//            $taggedJob->save();
+            return Response::json(
+                ['result' => 'failed']
+                , 422);
+        }
+
+        return Response::json(
+            ['result' => 'success']
+            , 200);
     }
 }

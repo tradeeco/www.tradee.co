@@ -101,6 +101,7 @@
 	height: 70px;
 	margin: 0 auto;
 	display: block;
+	border: 1px solid #f27549;
 }
 
 .table-search-v2 .user-names span,

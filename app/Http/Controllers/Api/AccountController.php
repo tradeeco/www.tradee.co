@@ -19,7 +19,7 @@ class AccountController extends Controller
 
     public function edit($id)
     {
-        $data['user'] = $user = User::with('userProfile')->find($id);
+        $data['user'] = $user = User::with('userProfile', 'userExperiences', 'userJobInterestedLocations')->find($id);
         $data['categories'] = DB::table('categories')->orderBy('name')->get();
         $data['locations'] = DB::table('area_suburbs')->orderBy('name')->get();
         $data['lengths'] = Config::get('frontend.lengths');

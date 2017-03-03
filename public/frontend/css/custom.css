@@ -2,6 +2,19 @@
 .bg-color-main {
     background-color: #f27549;
 }
+.header-button {
+    color: #fff;
+    background: #eb4d34;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+@media (min-width: 992px) {
+    .header-button {
+        font-weight: 500;
+        font-size: 27px;
+        padding: 12px 20px;
+    }
+}
 .m-t-94 {
     margin-top: 94px;
 }

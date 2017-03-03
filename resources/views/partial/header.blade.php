@@ -78,7 +78,7 @@
                             <li>
                                 <a href="{!! URL::to('/logout') !!}" onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();" class="button">
-                                    <button class="btn btn-warning rounded">Sign Out</button>
+                                    <button class="btn rounded header-button">Sign Out</button>
                                 </a>
                             </li>
                         @else
@@ -106,7 +106,7 @@
                             </li>
                             <li class="dropdown">
                                 <a href="{!! URL::to('/register') !!}" class="button">
-                                    <button class="btn btn-warning rounded">Sign Up</button>
+                                    <button class="btn header-button rounded">Sign Up</button>
                                 </a>
                             </li>
                     @endif

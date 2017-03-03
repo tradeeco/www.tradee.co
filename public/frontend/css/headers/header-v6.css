@@ -499,7 +499,7 @@
 	}
 
 	.header-v6 .navbar-nav > li > a:hover {
-		color: #72c02c;
+		color: #fff;
 	}
 
 	.header-v6 .navbar-nav > .open > a,
@@ -1652,5 +1652,10 @@
 @media (max-width: 991px) {
 	.header-v6 .sliding-panel__btn .icon-bar {
 		background: #555;
+	}
+	.header-button {
+		font-weight: 400;
+		font-size: 19px;
+		padding: 10px 15px;
 	}
 }

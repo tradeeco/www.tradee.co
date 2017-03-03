@@ -69,7 +69,7 @@ Route::get('/account/add_funds1', function(){
     return view('account.add_funds1');
 })->name('account.add_funds1');
 Route::get('/account/add_funds2', function(){
-    return view('account.add_funds2');
+    return view('account.add_funds3');
 })->name('account.add_funds2');
 Route::get('/account/add_funds3', function(){
     return view('account.add_funds3');

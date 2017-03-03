@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Welcome;
 
 class RegisterController extends Controller
 {
@@ -83,6 +85,7 @@ class RegisterController extends Controller
             'area_suburb_id' => $data['area_suburb_id']
         ]);
         $user->userProfile()->create([]);
+        Mail::send(new Welcome($user));
         return $user;
     }
 

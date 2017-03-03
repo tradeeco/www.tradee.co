@@ -1444,14 +1444,13 @@
 		padding: 15px;
 	}
 	.header-fixed .header-v6.header-classic-white .navbar-nav > li > a.button button {
-		color: #fff;
-		font-weight: 500;
-		font-size: 27px;
-		padding: 12px 20px;
-		background: #eb4d34;
-		border-color: #db4d67;
-		text-transform: uppercase;
-		letter-spacing: 2px;
+		/*color: #fff;*/
+		/*font-weight: 500;*/
+		/*font-size: 27px;*/
+		/*padding: 12px 20px;*/
+		/*background: #eb4d34;*/
+		/*text-transform: uppercase;*/
+		/*letter-spacing: 2px;*/
 	}
 	.header-fixed .header-v6.header-classic-white.header-fixed-shrink .navbar-nav > li > a {
 		padding: 20px;

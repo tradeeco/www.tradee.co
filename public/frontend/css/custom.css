@@ -7,6 +7,7 @@
     background: #eb4d34;
     text-transform: uppercase;
     letter-spacing: 2px;
+    border-color: #eb4d34;
 }
 @media (min-width: 992px) {
     .header-button {
@@ -28,7 +29,7 @@
 .btn-primary {
     background: #eb4d34;
     color: #fff;
-    border-color: #db4d67;
+    border-color: #eb4d34;
 }
 .btn-primary:hover,
 .btn-primary:focus,

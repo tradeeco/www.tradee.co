@@ -18,11 +18,12 @@ class Contact extends Mailable
      * @return void
      */
 
-    protected $contact;
+    public $contact;
 
-    public function __construct()
+    public function __construct(ContactModel $contact)
     {
         //
+        $this->contact = $contact;
 
     }
 
@@ -33,7 +34,8 @@ class Contact extends Mailable
      */
     public function build()
     {
-        return $this->from('example@example.com')
-            ->view('emails.contact');
+        return $this->to('sokomheng89@gmail.com')
+            ->subject($this->contact->subject)
+            ->view('emails.member.contact');
     }
 }

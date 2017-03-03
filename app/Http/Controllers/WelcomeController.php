@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Contact;
+use App\Models\Contact as ContactModel;
+use Illuminate\Support\Facades\Session;
 
 class WelcomeController extends Controller {
 
@@ -38,8 +40,12 @@ class WelcomeController extends Controller {
 	 */
 	public function contact()
 	{
-        Mail::to('sokomheng89@gmail.com')->send(new Contact());
-		return view('pages.contact');
+        $data = [];
+        if ($alert = Session::get('alert')) {
+            $data['alert'] = $alert;
+        }
+
+		return view('pages.contact', $data);
 	}
 
 	public function story()
@@ -55,7 +61,7 @@ class WelcomeController extends Controller {
     {
         $rules = [
             'name' => 'required|min:2|max:25',
-            'email' => 'required|max:25',
+            'email' => 'required|max:50|email',
             'subject' => 'required|max:25',
             'message' => 'required|max:1000',
         ];
@@ -70,7 +76,19 @@ class WelcomeController extends Controller {
                 ->withErrors($validator)
                 ->withInput();
         } else {
-            Mail::to('sokomheng89@gmail.com')->send(new Contact($request->all()));
+            $contact = new ContactModel;
+            $contact->subject = $request->get('subject');
+            $contact->name = $request->get('name');
+            $contact->email = $request->get('email');
+            $contact->message = $request->get('message');
+
+            Mail::send(new Contact($contact));
+
+            $alert['msg'] = 'Contact request has been created successfully';
+            $alert['type'] = 'success';
+
+            return Redirect::route('pages.contact')->with('alert', $alert);
+
         }
     }
 }

@@ -33,6 +33,7 @@
     </section>
     <section>
         <div class="content-sm container text-center">
+            @include('partial/alert_message')
             <h3>Cant wait? We will contact you!</h3>
             <h4 class="margin-bottom-40"><b>Send us a message below.</b></h4>
             {!! Form::open(['url' => route('pages.post_contact'), 'class' => 'sky-form contact-style', 'id' => 'contact_form',]) !!}

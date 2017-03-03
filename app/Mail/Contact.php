@@ -34,7 +34,7 @@ class Contact extends Mailable
      */
     public function build()
     {
-        return $this->to('sokomheng89@gmail.com')
+        return $this->to('admin@tradee.co')
             ->subject($this->contact->subject)
             ->view('emails.member.contact');
     }

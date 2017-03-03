@@ -11,7 +11,7 @@ Subject: {{ $contact->subject }}
 </h5>
 <h5>Name: {{ $contact->name }}</h5>
 <h5>Email: {{ $contact->email }}</h5>
-<h5>Message</h5>
+<h5>Message:</h5>
 <P>
     {{ $contact->message }}
 </P>

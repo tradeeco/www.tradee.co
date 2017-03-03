@@ -31,13 +31,13 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group  text-center">
         <button type="submit" class="btn btn-primary btn-lg rounded btn-block">
             Login
         </button>
 
-        {{--<a class="btn btn-link" href="{{ url('/password/reset') }}">--}}
-        {{--Forgot Your Password?--}}
-        {{--</a>--}}
+        <a class="btn btn-link color-white" href="{{ url('/password/reset') }}">
+        Forgot Your Password?
+        </a>
     </div>
 </form>

@@ -88,8 +88,8 @@
                             </div>
                             @if ($errors->has('message'))
                                 <em class="invalid">
-                                </em>
                                 {{ $errors->first('message') }}
+                                </em>
                             @endif
                         </div>
                     </div>

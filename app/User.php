@@ -102,7 +102,7 @@ class User extends Authenticatable
     public static function initAccountValidation($request)
     {
         $messages = [];
-        if (isset($request)) {
+        if (isset($request) && $request->has('category_id') && $request->has('area_suburb_id')) {
             foreach ($request->get('category_id') as $key => $val) {
                 $messages['category_id.' . $key . '.required'] = 'This field is required.';
                 $messages['length_id.' . $key . '.required'] = 'This field is required.';

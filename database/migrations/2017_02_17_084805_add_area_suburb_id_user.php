@@ -15,7 +15,7 @@ class AddAreaSuburbIdUser extends Migration
     {
         //
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('area_suburb_id')->unsigned()->index();
+            $table->integer('area_suburb_id')->unsigned()->default(0)->index();
         });
     }
 

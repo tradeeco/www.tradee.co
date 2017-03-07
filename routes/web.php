@@ -58,6 +58,7 @@ Route::post('/jobs/move_watching/{job_id}', 'JobController@moveWatching')->name(
 Route::post('/jobs/express_interest/{id}', 'JobController@expressInterest')->name('jobs.express_interest');
 Route::post('/jobs/express_shortlist/{id}', 'JobController@expressShortlist')->name('jobs.express_shortlist');
 Route::post('/jobs/express_select/{id}', 'JobController@expressSelect')->name('jobs.express_select');
+Route::post('/jobs/close_listing/{id}', 'JobController@closeListing')->name('jobs.close_listing');
 Route::get('/jobs/tagged_users/{id}/{tag}', 'JobController@taggedUsers')->name('jobs.tagged_users');
 Route::post('/jobs/delete_tagged/{id}/{tag}', 'JobController@deleteTagged')->name('users.delete_tagged');
 

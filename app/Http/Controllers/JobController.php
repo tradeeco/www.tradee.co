@@ -298,6 +298,30 @@ class JobController extends Controller
             ['result' => 'success']
             , 200);
     }
+
+    /*
+     * move job to previous job
+     */
+    public function closeListing($id)
+    {
+        $taggedJob = TaggedJob::find($id);
+        if (count($taggedJob))
+            $taggedJob->update(array('tag' => 3));
+        else {
+//            $taggedJob = new TaggedJob;
+//            $taggedJob->user_id = $user->id;
+//            $taggedJob->job_id = $jobId;
+//            $taggedJob->tag = 2;
+//            $taggedJob->save();
+            return Response::json(
+                ['result' => 'failed']
+                , 422);
+        }
+
+        return Response::json(
+            ['result' => 'success']
+            , 200);
+    }
     /*
      * load tagged user by tag id under tagged tabs on job detail page
      */

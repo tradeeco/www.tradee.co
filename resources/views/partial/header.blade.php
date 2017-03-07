@@ -61,7 +61,7 @@
                                                         <ul class="list-unstyled equal-height-list">
                                                             <li><h3>TRADER</h3></li>
                                                             <li><a href="{{ URL::route('jobs.mine') }}">My Jobs</a></li>
-                                                            <li><a href="#">Previous Jobs</a></li>
+                                                            <li><a href="{{ URL::route('jobs.previous') }}">Previous Jobs</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>

@@ -45,7 +45,7 @@ class SocialController extends Controller
 
         $socialUser = null;
 
-        if (!$user->email) {
+        if (!$user->email || $user->email == '') {
             $email = 'missing' . str_random(10);
         } else
             $email = $user->email;
@@ -76,7 +76,7 @@ class SocialController extends Controller
                 if (count($name) >= 2) {
                     $newSocialUser->last_name = $name[1];
                 }
-                
+
                 $usernameArray = explode('@', $user->email);
 
                 $newSocialUser->username = $usernameArray[0];

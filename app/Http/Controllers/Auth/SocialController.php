@@ -77,7 +77,7 @@ class SocialController extends Controller
                     $newSocialUser->last_name = $name[1];
                 }
 
-                $usernameArray = explode('@', $user->email);
+                $usernameArray = explode('@', $email);
 
                 $newSocialUser->username = $usernameArray[0];
 

@@ -78,7 +78,7 @@ class SocialController extends Controller
                 }
 
                 $usernameArray = explode('@', $email);
-
+                var_dump($usernameArray);
                 $newSocialUser->username = $usernameArray[0];
 
                 $newSocialUser->password = bcrypt(str_random(16));

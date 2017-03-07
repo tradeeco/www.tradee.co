@@ -76,6 +76,10 @@ class SocialController extends Controller
                 if (count($name) >= 2) {
                     $newSocialUser->last_name = $name[1];
                 }
+                
+                $usernameArray = explode('@', $user->email);
+
+                $newSocialUser->username = $usernameArray[0];
 
                 $newSocialUser->password = bcrypt(str_random(16));
                 $newSocialUser->remember_token = str_random(64);

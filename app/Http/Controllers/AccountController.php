@@ -64,31 +64,35 @@ class AccountController extends Controller
                 ->withInput();
         } else {
             // User Experience save process
-            foreach ($request->get('category_id') as $key => $category_id) {
-                $lengthId = $request->get('length_id')[$key];
-                if ($request->has('experience_id') && isset($request->get('experience_id')[$key])) {
-                    $experience = UserExperience::find($request->get('experience_id')[$key]);
-                    $experience->update(array('category_id' => $category_id, 'length_id' => $lengthId));
-                } else {
-                    $userExperience = new UserExperience;
-                    $userExperience->category_id = $category_id;
-                    $userExperience->length_id = $lengthId;
-                    $userExperience->user_id = $user->id;
-                    $userExperience->save();
+            if ($request->has('category_id')) {
+                foreach ($request->get('category_id') as $key => $category_id) {
+                    $lengthId = $request->get('length_id')[$key];
+                    if ($request->has('experience_id') && isset($request->get('experience_id')[$key])) {
+                        $experience = UserExperience::find($request->get('experience_id')[$key]);
+                        $experience->update(array('category_id' => $category_id, 'length_id' => $lengthId));
+                    } else {
+                        $userExperience = new UserExperience;
+                        $userExperience->category_id = $category_id;
+                        $userExperience->length_id = $lengthId;
+                        $userExperience->user_id = $user->id;
+                        $userExperience->save();
+                    }
                 }
             }
             // user job interested area save process
-            foreach ($request->get('area_suburb_id') as $key => $area_suburb_id) {
-                Log::debug($request->get('sec_category_id')[$key]);
-                if ($request->has('user_interested_location_id') && isset($request->get('user_interested_location_id')[$key])) {
-                    $inlocation = UserJobInterestedLocation::find($request->get('user_interested_location_id')[$key]);
-                    $inlocation->update(array('area_suburb_id' => $area_suburb_id, 'category_id' => $request->get('sec_category_id')[$key]));
-                } else {
-                    $inLocation = new UserJobInterestedLocation;
-                    $inLocation->area_suburb_id = $area_suburb_id;
-                    $inLocation->category_id = $request->get('sec_category_id')[$key];
-                    $inLocation->user_id = $user->id;
-                    $inLocation->save();
+            if ($request->has('area_suburb_id')) {
+                foreach ($request->get('area_suburb_id') as $key => $area_suburb_id) {
+                    Log::debug($request->get('sec_category_id')[$key]);
+                    if ($request->has('user_interested_location_id') && isset($request->get('user_interested_location_id')[$key])) {
+                        $inlocation = UserJobInterestedLocation::find($request->get('user_interested_location_id')[$key]);
+                        $inlocation->update(array('area_suburb_id' => $area_suburb_id, 'category_id' => $request->get('sec_category_id')[$key]));
+                    } else {
+                        $inLocation = new UserJobInterestedLocation;
+                        $inLocation->area_suburb_id = $area_suburb_id;
+                        $inLocation->category_id = $request->get('sec_category_id')[$key];
+                        $inLocation->user_id = $user->id;
+                        $inLocation->save();
+                    }
                 }
             }
 

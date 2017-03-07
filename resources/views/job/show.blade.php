@@ -100,14 +100,14 @@
                 <div class="job-user profile">
                     <img src="{{ userImageSmall($job->user) }}" class="rounded-x pull-left margin-right-20" style="width: 150px; height: 150px;" data-user="{{ $job->user->id }}">
                     <div class="name-location">
-                        <h3 class="margin-bottom-15">{{ $job->user->first_name }}</h3>
+                        <a href="{{ URL::route('users.profile', $job->user->slug) }}"><h3 class="margin-bottom-15">{{ $job->user->first_name }}</h3></a>
                         <h3 class="label-color margin-bottom-15">Rating - X X X X </h3>
                         <p>{{ $job->user->userProfile->short_bio }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                @if ($expressInterested)
+                @if ($expressShortlisted)
                     <div class="job-user profile">
                         <div class="name-location">
                             <h3 class="margin-bottom-15">Contact Details</h3>

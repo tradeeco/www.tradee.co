@@ -29,7 +29,7 @@
             <div class="col-md-12">
                 <h3 class="margin-bottom-15">Interests of {{ $user->first_name }}</h3>
                 @foreach ($user->userJobInterestedLocations as $inLocation)
-                    <button class="margin-right-20 btn btn-primary btn-lg rounded">{{ $inLocation->areaSuburb->name }}</button>
+                    <button class="margin-right-20 btn btn-primary btn-lg rounded">{{ $inLocation->category->name }}</button>
                 @endforeach
             </div>
         </div>

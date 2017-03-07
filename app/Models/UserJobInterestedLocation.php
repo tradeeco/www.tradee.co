@@ -13,4 +13,9 @@ class UserJobInterestedLocation extends Model
     {
         return $this->belongsTo('App\Models\AreaSuburb');
     }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
 }

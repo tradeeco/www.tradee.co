@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'Alex.c.m.vaz@gmail.com',
+        'address' => 'alex@tradee.co',
         'name' => 'Tradee Support Team',
     ],
 

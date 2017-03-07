@@ -119,6 +119,10 @@ class User extends Authenticatable
 
     }
 
+    public function socialLogin() {
+        return $this->hasOne('App\Models\SocialLogin');
+    }
+
     public static $contactRules = [
         'first_name' => 'required:max:25',
         'last_name' => 'max:25',

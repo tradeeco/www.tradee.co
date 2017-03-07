@@ -108,11 +108,11 @@ class JobController extends Controller
     public function show($slug) {
         $data['job'] = $job = Job::where('slug', $slug)->first();
         $expressInterested = false;
-
+        $expressWatching = false;
         if (Auth::check()) {
             $user = Auth::user();
-            $data['taggedUsers'] = $taggedUsers = $user->taggedUsers;
-            $data['inUsers'] = $taggedUsers->where('tag', 0);
+//            $data['taggedUsers'] = $taggedUsers = $user->taggedUsers;
+//            $data['inUsers'] = $taggedUsers->where('tag', 0);
             if ($job->user_id == $user->id) {
                 $data['interestedJobUsers'] = $interestedJobUsers = TaggedJob::where('job_id', $job->id)->where('tag', 1)->get();
                 $data['shJobUsersCount'] = TaggedJob::where('job_id', $job->id)->where('tag', 2)->count();
@@ -120,10 +120,14 @@ class JobController extends Controller
             } else {
                 if (TaggedJob::where('job_id', $job->id)->where('user_id', $user->id)->where('tag', '>', '0')->count() > 0)
                     $expressInterested = true;
+                if (TaggedJob::where('job_id', $job->id)->where('user_id', $user->id)->where('tag', '>', '-1')->count() > 0)
+                    $expressWatching = true;
+
             }
         }
 
         $data['expressInterested'] = $expressInterested;
+        $data['expressWatching'] = $expressWatching;
         if ($alert = Session::get('alert')) {
             $data['alert'] = $alert;
         }

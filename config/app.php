@@ -189,6 +189,7 @@ return [
         Barryvdh\Cors\ServiceProvider::class,
         Themsaid\MailPreview\MailPreviewServiceProvider::class,
         Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -241,6 +242,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 

@@ -51,7 +51,7 @@
                 <h3 class="label-color">{{ $job->category->name }}</h3>
                 <h3 class="label-color">{{ $job->areaSuburb->name }}</h3>
                 <p>{{ $job->description }}</p>
-                @if (!$job->watching && $job->user != Auth::user() && Auth::check())
+                @if (!$expressWatching && $job->user != Auth::user() && Auth::check())
                     <a href="javascript:void(0)" class="btn btn-primary btn-lg rounded" id="move_watching">move to WATCHLIST</a>
                 @endif
             </div>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
+use App\User;
 use App\Models\Job;
 use App\Models\JobPhoto;
 use App\Models\TaggedJob;
@@ -110,17 +111,46 @@ class JobController extends Controller
     }
 
     /*
+     * move general job to watching tagged job
+     */
+    public function moveWatching(Request $request)
+    {
+        $jobId = $request->get('job_id');
+        if (count(Job::find($jobId)) == 0)
+            return Response::json(
+                ['result' => 'failed']
+                , 422);
+
+        $user = User::find($request->get('user_id'));
+        $taggedJob = TaggedJob::where('job_id', $jobId)->where('user_id', $user->id)->where('tag', 0)->first();
+        if (count($taggedJob))
+            $taggedJob->update(array('tag' => 0));
+        else {
+            $taggedJob = new TaggedJob;
+            $taggedJob->user_id = $user->id;
+            $taggedJob->job_id = $jobId;
+            $taggedJob->tag = 0;
+            $taggedJob->save();
+        }
+
+        return Response::json(
+            ['result' => 'success']
+            , 200);
+    }
+
+    /*
    * Tradee express interest to one job
    */
 
-    public function expressInterest($id)
+    public function expressInterest(Request $request)
     {
+        $id = $request->get('job_id');
         if (count(Job::find($id)) == 0)
             return Response::json(
                 ['result' => 'failed']
                 , 422);
 
-        $user = Auth::user();
+        $user = User::find($request->get('user_id'));
         $taggedJob = TaggedJob::where('job_id', $id)->where('user_id', $user->id)->first();
         if (count($taggedJob))
             $taggedJob->update(array('tag' => 1));

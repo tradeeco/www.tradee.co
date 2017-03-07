@@ -65,9 +65,45 @@ class UserAvatarRepository
 
     }
 
+    public function uploadFromBase64Encoded($photo, $user)
+    {
+//        $originalName = $photo->getClientOriginalName();
+//        $extension = $photo->getClientOriginalExtension();
+//        $originalNameWithoutExt = substr($originalName, 0, strlen($originalName) - strlen($extension) - 1);
+//
+//        $filename = $this->sanitize($originalNameWithoutExt);
+//        $allowed_filename = $this->createUniqueFilename( $filename, $extension );
+
+        $allowed_filename  = substr(sha1(mt_rand()), 0, 12);
+        $uploadSuccess1 = $this->original( $photo, $allowed_filename.'.jpg' );
+
+        $uploadSuccess2 = $this->icon( $photo, $allowed_filename.'.jpg' );
+
+        if( !$uploadSuccess1 || !$uploadSuccess2 ) {
+
+//            return Response::json([
+//                'error' => true,
+//                'message' => 'Server error while uploading',
+//                'code' => 500
+//            ], 500);
+            return false;
+
+        }
+
+        if (count($user->userProfile))
+            $sessionUserProfile = $user->userProfile;
+        else
+            $sessionUserProfile = new UserProfile(['user_id' => $user->id]);
+        $sessionUserProfile->image_name      = $allowed_filename.'.jpg';
+        $sessionUserProfile->origin_image_name = $allowed_filename.'.jpg';
+        $sessionUserProfile->save();
+
+        return $sessionUserProfile;
+    }
+
     public function createUniqueFilename( $filename, $extension )
     {
-        $full_size_dir =  Config::get('frontend.user_avatar_path') . Config::get('frontend.full_size');
+        $full_size_dir =  public_path() . Config::get('frontend.user_avatar_path') . Config::get('frontend.full_size');
         $full_image_path = $full_size_dir . $filename . '.' . $extension;
 
         if ( File::exists( $full_image_path ) )
@@ -86,7 +122,7 @@ class UserAvatarRepository
     public function original( $photo, $filename )
     {
         $manager = new ImageManager();
-        $full_path =  Config::get('frontend.user_avatar_path');
+        $full_path =  public_path() . Config::get('frontend.user_avatar_path');
         $image = $manager->make( $photo )->save($full_path . Config::get('frontend.full_size') . $filename );
 
         return $image;
@@ -98,7 +134,7 @@ class UserAvatarRepository
     public function icon( $photo, $filename )
     {
         $manager = new ImageManager();
-        $full_path =  Config::get('frontend.user_avatar_path');
+        $full_path =  public_path() . Config::get('frontend.user_avatar_path');
         $image = $manager->make( $photo )->resize(200, null, function ($constraint) {
             $constraint->aspectRatio();
         })
@@ -113,8 +149,8 @@ class UserAvatarRepository
     public function delete( $fileId)
     {
 
-        $full_size_dir =  Config::get('frontend.user_avatar_path') . Config::get('frontend.full_size');
-        $icon_size_dir =  Config::get('frontend.user_avatar_path') . Config::get('frontend.icon_size');
+        $full_size_dir =  public_path() . Config::get('frontend.user_avatar_path') . Config::get('frontend.full_size');
+        $icon_size_dir =  public_path() . Config::get('frontend.user_avatar_path') . Config::get('frontend.icon_size');
 
         $sessionImage = UserProfile::where('id', $fileId)->first();
 
@@ -154,8 +190,8 @@ class UserAvatarRepository
 
     public function removeFile($sessionImage)
     {
-        $full_size_dir =  Config::get('frontend.user_avatar_path') . Config::get('frontend.full_size');
-        $icon_size_dir =  Config::get('frontend.user_avatar_path') . Config::get('frontend.icon_size');
+        $full_size_dir =  public_path() . Config::get('frontend.user_avatar_path') . Config::get('frontend.full_size');
+        $icon_size_dir =  public_path() . Config::get('frontend.user_avatar_path') . Config::get('frontend.icon_size');
 
         $full_path1 = $full_size_dir . $sessionImage->file_name;
         $full_path2 = $icon_size_dir . $sessionImage->file_name;

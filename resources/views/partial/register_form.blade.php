@@ -2,11 +2,11 @@
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-5 margin-top-40">
-            <a href="#" class="btn btn-block btn-facebook-inversed rounded btn-u-lg margin-bottom-20" style="font-size: 15px;">
+            <a href="{{ URL::to('/social/redirect/facebook') }}" class="btn btn-block btn-facebook-inversed rounded btn-u-lg margin-bottom-20" style="font-size: 15px;">
                 <i class="fa fa-facebook"></i>
                 Sign-up with Facebook
             </a>
-            <a href="#" class="btn btn-block btn-googleplus-inversed rounded btn-u-lg margin-bottom-20" style="font-size: 15px;">
+            <a href="{{ URL::to('/social/redirect/google') }}" class="btn btn-block btn-googleplus-inversed rounded btn-u-lg margin-bottom-20" style="font-size: 15px;">
                 <i class="fa fa-google-plus"></i>
                 Sign-up with Google+
             </a>

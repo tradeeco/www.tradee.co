@@ -195,9 +195,20 @@ class JobController extends Controller
     public function mine()
     {
         $data['user'] = $user = Auth::user();
-        $data['jobs'] = $user->jobs;
+        $data['jobs'] = $user->jobs->where('status', 'active');
         return view('job.mine', $data);
     }
+
+    /*
+     * my job pages
+     */
+    public function previous()
+    {
+        $data['user'] = $user = Auth::user();
+        $data['jobs'] = $user->jobs->where('status', 'closed');
+        return view('job.mine', $data);
+    }
+
     /*
      * move general job to watching tagged job
      */
@@ -304,10 +315,11 @@ class JobController extends Controller
      */
     public function closeListing($id)
     {
-        $taggedJob = TaggedJob::find($id);
-        if (count($taggedJob))
-            $taggedJob->update(array('tag' => 3));
-        else {
+        $job = Job::find($id);
+        if (count($job)) {
+            $job->update(array('status' => 'closed'));
+            $job->taggedJobs()->update(array('tag' => 4));
+        } else {
 //            $taggedJob = new TaggedJob;
 //            $taggedJob->user_id = $user->id;
 //            $taggedJob->job_id = $jobId;

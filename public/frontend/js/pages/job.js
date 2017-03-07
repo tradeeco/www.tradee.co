@@ -3,6 +3,7 @@ var Job = {
     moveWatching: $('a#move_watching'),
     deleteTagged: $('a#delete_tagged'),
     expressInterest: $('a#express_interest'),
+    closeListing: $('a#close_listing'),
     userShortlistsTab: $('a[href="#user_shortlists"]'),
     userSelectedTab: $('a[href="#user_selected"]'),
     userInterestedTab: $('a[href="#user_interested"]'),
@@ -106,6 +107,24 @@ var Job = {
                     thisObj.fadeOut();
                     thisObj.closest('div').append($(Job.SuccessTemplate).hide().fadeIn(500).fadeOut(1500));
                     thisObj.remove();
+                })
+                .fail(function() {
+                    alert( "error" );
+                });
+            // var newExp = $('div.experience-wrap div.input-wrap:last');
+            // newExp.find('input[type=text]:first').focus();
+            return false;
+        });
+
+        this.closeListing.click(function (e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var jobId = thisObj.closest('tr').find('td.job-title').find('a').data('id');
+            alert(jobId);
+            var jqxhr = $.post( "/jobs/close_listing/" + jobId, { _token: CSRF_TOKEN })
+                .done(function() {
+                    thisObj.fadeOut();
+                    thisObj.closest('tr').fadeOut().remove();
                 })
                 .fail(function() {
                     alert( "error" );

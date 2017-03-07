@@ -10,7 +10,7 @@ class Job extends Model
     use Sluggable;
 
     protected $fillable = [
-        'title', 'description', 'user_id', 'area_suburb_id', 'category_id', 'slug', 'watching', 'interested', 'shortlisted'
+        'title', 'description', 'user_id', 'area_suburb_id', 'category_id', 'slug', 'watching', 'interested', 'shortlisted', 'status'
     ];
 
     /**

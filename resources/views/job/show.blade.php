@@ -116,7 +116,7 @@
                         </div>
                     </div>
                 @else
-                    @if (Auth::check())
+                    @if (Auth::check() && $expressInterested)
                         <a href="javascript:void(0)" class="btn btn-primary btn-lg rounded-x pull-right text-uppercase" id="express_interest" style="width: 150px; height: 150px; font-size: 25px; padding: 45px 15px; line-height: 27px;"> Express<br/>Interest</a>
                     @endif
                 @endif

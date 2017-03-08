@@ -47,18 +47,18 @@ class JobController extends Controller
         Paginator::currentPageResolver(function () use ($currentPage) {
             return $currentPage;
         });
-        $jobs = Job::with('jobPhotos')->orderBy('created_at', 'DESC')->paginate(Config::get('frontend.job_per_page'));
+//        $jobs = Job::with('jobPhotos')->orderBy('created_at', 'DESC')->paginate(Config::get('frontend.job_per_page'));
+        $jobs = Job::with('jobPhotos');
 
-        if ($categoryId == 0 && $locationId !=0) {
-            $jobs = Job::with('jobPhotos')->where('area_suburb_id', $locationId)->orderBy('created_at', 'DESC')->paginate(1);
+        if ($locationId !=0) {
+            $jobs = $jobs->where('area_suburb_id', $locationId);
         }
-        if ($categoryId != 0 && $locationId ==0) {
-            $jobs = Job::with('jobPhotos')->where('category_id', $categoryId)->orderBy('created_at', 'DESC')->paginate(1);
+        if ($categoryId != 0) {
+            $jobs = $jobs->where('category_id', $categoryId);
         }
 
-        if ($categoryId != 0 && $locationId !=0) {
-            $jobs = Job::with('jobPhotos')->where('category_id', $categoryId)->where('area_suburb_id', $locationId)->orderBy('created_at', 'DESC')->paginate(1);
-        }
+        $jobs = $jobs->orderBy('created_at', 'DESC')->paginate(Config::get('frontend.job_per_page'));
+
         return Response::json(
             $jobs
             , 200);
@@ -96,7 +96,7 @@ class JobController extends Controller
 
     public function show($id) {
 
-        $data['job'] = $job = Job::with('jobPhotos')->with('user')->with('user.userProfile')->find($id);
+        $data['job'] = $job = Job::with('jobPhotos', 'taggedJobs')->with('user')->with('user.userProfile')->find($id);
 
         return Response::json(
             $job

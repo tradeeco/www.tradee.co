@@ -109,6 +109,7 @@ class JobController extends Controller
         $data['job'] = $job = Job::where('slug', $slug)->first();
         $expressShortlisted = false;
         $expressWatching = false;
+        $expressInterested = false;
         if (Auth::check()) {
             $user = Auth::user();
 //            $data['taggedUsers'] = $taggedUsers = $user->taggedUsers;
@@ -122,12 +123,15 @@ class JobController extends Controller
                     $expressShortlisted = true;
                 if (TaggedJob::where('job_id', $job->id)->where('user_id', $user->id)->where('tag', '>', '-1')->count() > 0)
                     $expressWatching = true;
+                if (TaggedJob::where('job_id', $job->id)->where('user_id', $user->id)->where('tag', '>', '0')->count() > 0)
+                    $expressInterested = true;
 
             }
         }
 
         $data['expressShortlisted'] = $expressShortlisted;
         $data['expressWatching'] = $expressWatching;
+        $data['expressInterested'] = $expressInterested;
         if ($alert = Session::get('alert')) {
             $data['alert'] = $alert;
         }

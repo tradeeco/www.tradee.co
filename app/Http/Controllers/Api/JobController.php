@@ -94,12 +94,15 @@ class JobController extends Controller
         }
     }
 
-    public function show($id) {
+    public function show($job_id, $user_id) {
 
-        $data['job'] = $job = Job::with('jobPhotos', 'taggedJobs')->with('user')->with('user.userProfile')->find($id);
+        $data['job'] = $job = Job::with('jobPhotos', 'taggedJobs')->with('user')->with('user.userProfile')->find($job_id);
+        $taggedJob = [];
+        if ($user_id != 0)
+            $taggedJob = TaggedJob::where('job_id', $job_id)->where('user_id', $user_id)->first();
 
         return Response::json(
-            $job
+            ['job'=>$job, 'taggedJob'=> $taggedJob]
             , 200);
     }
 
@@ -210,6 +213,78 @@ class JobController extends Controller
 
         return Response::json(
             ['result' => 'success']
+            , 200);
+    }
+
+    /*
+     * my jobs
+     */
+    public function mine($id)
+    {
+        $data['user'] = $user = User::find($id);
+        $jobs = Job::with('user', 'jobPhotos', 'taggedJobs')->where('status', 'active')->where('user_id', $id)->get();
+        return Response::json(
+            $jobs
+            , 200);
+    }
+
+    /*
+     * previous jobs
+     */
+    public function previous($id)
+    {
+        $jobs = Job::with('user', 'jobPhotos', 'taggedJobs')->where('status', 'closed')->where('user_id', $id)->get();
+        return Response::json(
+            $jobs
+            , 200);
+    }
+
+    /*
+     * move job to previous job
+     */
+    public function closeListing($id)
+    {
+        $job = Job::find($id);
+        if (count($job)) {
+            $job->update(array('status' => 'closed'));
+            $job->taggedJobs()->update(array('tag' => 4));
+        } else {
+//            $taggedJob = new TaggedJob;
+//            $taggedJob->user_id = $user->id;
+//            $taggedJob->job_id = $jobId;
+//            $taggedJob->tag = 2;
+//            $taggedJob->save();
+            return Response::json(
+                ['result' => 'failed']
+                , 422);
+        }
+
+        return Response::json(
+            ['result' => 'success']
+            , 200);
+    }
+
+    public function watching($id)
+    {
+        $jobs = TaggedJob::with('job', 'job.jobPhotos')->where('tag', 0)->where('user_id', $id)->get();
+        return Response::json(
+            $jobs
+            , 200);
+    }
+
+    public function interest($id)
+    {
+        $jobs = TaggedJob::with('job', 'job.jobPhotos')->where('tag', 1)->where('user_id', $id)->get();
+        return Response::json(
+            $jobs
+            , 200);
+    }
+
+    public function shortlist($id)
+    {
+        $jobs = TaggedJob::with('job', 'job.jobPhotos')->where('tag', 2)->where('user_id', $id)->get();
+        return Response::json(
+            $jobs
             , 200);
     }
 }

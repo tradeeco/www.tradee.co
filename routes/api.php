@@ -25,7 +25,14 @@ Route::group(['middleware' => 'cors'], function() {
     Route::post('/jobs/{id}/{category_id}/{location_id}', 'Api\JobController@jobs');
     Route::post('/jobs/upload_photo', 'Api\JobController@uploadJobPhoto');
     Route::post('/jobs/store', 'Api\JobController@store');
-    Route::get('/jobs/{id}', 'Api\JobController@show');
+    Route::get('/jobs/{job_id}/{user_id} ', 'Api\JobController@show');
+
+    Route::get('/jobs/mine/{id}', 'Api\JobController@mine');
+    Route::get('/jobs/previous/{id}', 'Api\JobController@previous');
+    Route::get('/jobs/watching/{id}', 'Api\JobController@watching');
+    Route::get('/jobs/interested/{id}', 'Api\JobController@interest');
+    Route::get('/jobs/shortlisted/{id}', 'Api\JobController@shortlist');
+    Route::post('/jobs/close_listing/{id}', 'Api\JobController@closeListing');
 
     Route::post('/jobs/move_watching', 'Api\JobController@moveWatching');
     Route::post('/jobs/express_interest', 'Api\JobController@expressInterest');

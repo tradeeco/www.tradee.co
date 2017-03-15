@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ use App\Models\TaggedJob;
 use App\Logic\JobPhotoRepository;
 use Illuminate\Support\Facades\DB;
 
-class JobController extends Controller
+class JobController extends BaseJobController
 {
     protected $image;
 
@@ -99,6 +100,8 @@ class JobController extends Controller
                 $this->image->delete( $photo->id );
             }
 
+            // store to notifications table
+            $this->storeJobToNotification($job, 0);
             return Redirect::route('jobs.show', $job->slug)->with('alert', $alert);
         }
     }
@@ -262,10 +265,11 @@ class JobController extends Controller
             $taggedJob->tag = 1;
             $taggedJob->save();
         }
+        $this->storeInterestToNotification($user, $taggedJob->job);
 
-        return Response::json(
-            ['result' => 'success']
-            , 200);
+//        return Response::json(
+//            ['result' => 'success']
+//            , 200);
     }
     /*
     * move user from interest to shortlist for one job by job owner
@@ -370,17 +374,6 @@ class JobController extends Controller
                 , 200);
         }
 
-    }
-    /*
-     * delete watching tag
-     */
-    public function deleteWatching($taggedJobId)
-    {
-        $job = TaggedJob::find($taggedJobId);
-        $job->update(array('tag' => 3));
-        return Response::json(
-            ['result' => 'success']
-            , 200);
     }
 
     /*

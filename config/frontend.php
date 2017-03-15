@@ -18,6 +18,8 @@ return [
         '8' => '8 years',
         '9' => '9 years',
         '10' => '10+ years',
-    ]
+    ],
+    'ionic_profile' => env('IONIC_PROFILE'),
+    'ionic_api_token' => env('IONIC_API_TOKEN'),
 ];
 

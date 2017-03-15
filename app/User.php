@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserExperience');
     }
 
+    public function userDevices()
+    {
+        return $this->hasMany('App\Models\UserDevice');
+    }
+
     public function userJobInterestedLocations()
     {
         return $this->hasMany('App\Models\UserJobInterestedLocation');

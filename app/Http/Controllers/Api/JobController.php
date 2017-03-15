@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\BaseJobController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +18,7 @@ use App\Models\TaggedJob;
 use App\Logic\JobPhotoRepository;
 use Illuminate\Support\Facades\Config;
 
-class JobController extends Controller
+class JobController extends BaseJobController
 {
     protected $image;
 
@@ -87,6 +87,9 @@ class JobController extends Controller
             foreach ($tempPhotos as $photo) {
                 $this->image->delete( $photo->id );
             }
+
+            $this->storeJobToNotification($job, 0);
+
 
             return Response::json(
                 $job
@@ -164,6 +167,7 @@ class JobController extends Controller
             $taggedJob->tag = 1;
             $taggedJob->save();
         }
+        $this->storeInterestToNotification($user, $taggedJob->job);
 
         return Response::json(
             ['result' => 'success']
@@ -287,4 +291,5 @@ class JobController extends Controller
             $jobs
             , 200);
     }
+
 }

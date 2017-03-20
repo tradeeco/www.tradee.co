@@ -38,7 +38,7 @@ class JobController extends BaseJobController
 
         $query = Job::join('categories', 'jobs.category_id', '=', 'categories.id')
             ->join('area_suburbs', 'jobs.area_suburb_id', '=', 'area_suburbs.id')
-            ->select('jobs.*');
+            ->select('jobs.*')->where('status', 'active');
 //        $jobs = Job::paginate(Config::get('frontend.job_per_page'));
         $getParams = [];
 
@@ -67,7 +67,7 @@ class JobController extends BaseJobController
 //            $data['alert'] = $alert;
 //        }
 //
-        $jobs = $query->paginate(Config::get('frontend.job_per_page'));
+        $jobs = $query->orderBy('created_at', 'DESC')->paginate(Config::get('frontend.job_per_page'));
         $data['jobs'] = $jobs;
         $data['getParams'] = $getParams;
         return view('job.index', $data);
